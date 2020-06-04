@@ -1,0 +1,2 @@
+class PracticeDiary < ApplicationRecord
+end
