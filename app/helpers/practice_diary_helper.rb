@@ -1,0 +1,2 @@
+module PracticeDiaryHelper
+end

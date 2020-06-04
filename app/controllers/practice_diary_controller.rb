@@ -1,0 +1,2 @@
+class PracticeDiaryController < ApplicationController
+end
