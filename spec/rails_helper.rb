@@ -61,4 +61,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  
+  # bin/rspecでFactoryBotの生成に失敗するため、以下記載
+  config.before(:all) do
+    FactoryBot.reload
+  end
 end
