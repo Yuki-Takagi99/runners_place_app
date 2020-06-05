@@ -27,7 +27,7 @@
   </div>
   <div class="form-group">
     <%= f.label :走行時間 %>
-    <%= f.time_select :practice_time, class: 'form-control' %>
+    <%= f.time_select :practice_time, include_seconds: true, prompt: true, class: 'form-control' %>
   </div>
   <div class="form-group">
       <%= f.submit %>
