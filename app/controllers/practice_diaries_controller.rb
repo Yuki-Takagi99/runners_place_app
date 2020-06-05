@@ -1,5 +1,7 @@
 class PracticeDiariesController < ApplicationController
 	before_action :set_practice_diary, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate_user!
+
 	def index
 		@practice_diaries = PracticeDiary.all
 	end
