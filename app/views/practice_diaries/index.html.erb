@@ -1,0 +1,26 @@
+<h1>練習記録一覧画面</h1>
+
+<%= link_to "練習記録をつける", new_practice_diary_path %>
+
+<table>
+	<thead>
+		<tr>
+			<th>練習日</th>
+			<th>タイトル</th>
+			<th>詳細</th>
+			<th>走行距離</th>
+			<th>走行時間</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @practice_diaries.each do |practice_diary| %>
+			<tr>
+				<td><%= practice_diary.practice_date %></td>
+				<td><%= link_to practice_diary.practice_title, practice_diary_path(practice_diary) %></td>
+				<td><%= practice_diary.practice_content %></td>
+				<td><%= practice_diary.practice_distance %>km</td>
+				<td><%= practice_diary.set_practice_time %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
