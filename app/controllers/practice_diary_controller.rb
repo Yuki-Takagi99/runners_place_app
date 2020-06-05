@@ -1,2 +1,0 @@
-class PracticeDiaryController < ApplicationController
-end

@@ -1,0 +1,28 @@
+<h1>練習記録詳細画面</h1>
+
+<%= link_to "練習記録一覧", practice_diaries_path %>
+
+<table>
+	<tbody>
+		<tr>
+			<th>練習日</th>
+			<td><%= @practice_diary.practice_date %></td>
+		</tr>
+		<tr>
+			<th>タイトル</th>
+			<td><%= @practice_diary.practice_title %></td>
+		</tr>
+		<tr>
+			<th>詳細</th>
+			<td><%= @practice_diary.practice_content %></td>
+		</tr>
+		<tr>
+			<th>走行距離</th>
+			<td><%= @practice_diary.practice_distance %>km</td>
+		</tr>
+		<tr>
+			<th>走行時間</th>
+			<td><%= @practice_diary.practice_time %></td>
+		</tr>
+	</tbody>
+</table>

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PracticeDiaryControllerTest < ActionDispatch::IntegrationTest
+class PracticeDiariesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
