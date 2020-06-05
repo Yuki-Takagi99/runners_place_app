@@ -1,5 +1,5 @@
 class PracticeDiariesController < ApplicationController
-	before_action :set_practice_diary, only: [:show, :edit, :update]
+	before_action :set_practice_diary, only: [:show, :edit, :update, :destroy]
 	def index
 		@practice_diaries = PracticeDiary.all
 	end
@@ -23,7 +23,7 @@ class PracticeDiariesController < ApplicationController
 
 	def edit
 	end
-	
+
 	def update
 		if @practice_diary.update(practice_diary_params)
 			redirect_to practice_diary_path, notice: "練習記録を編集しました！"
@@ -32,7 +32,11 @@ class PracticeDiariesController < ApplicationController
 			render :edit
 		end
 	end
-	
+
+	def destroy
+		@practice_diary.destroy
+		redirect_to practice_diaries_path, notice: "練習記録を削除しました！"
+	end
 
 	private
 	def practice_diary_params
