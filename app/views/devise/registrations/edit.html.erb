@@ -4,8 +4,23 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%= f.label :user_name %><br />
+    <%= f.text_field :user_name, autofocus: true  %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :自己紹介 %><br />
+    <%= f.text_area :self_introduction, autofocus: true  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :目標 %><br />
+    <%= f.text_area :target, autofocus: true  %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
