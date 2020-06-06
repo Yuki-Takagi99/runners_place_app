@@ -8,5 +8,10 @@ class ApplicationController < ActionController::Base
 		added_attrs = [ :user_name, :self_introduction, :target]
 		devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
 		devise_parameter_sanitizer.permit :account_update, keys: added_attrs
-  end
+	end
+	
+	# アカウント登録後、練習日記一覧画面に遷移
+	def after_sign_in_path_for(resource)
+		practice_diaries_path
+	end
 end
