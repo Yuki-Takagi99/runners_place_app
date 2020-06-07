@@ -11,7 +11,7 @@ class PracticeDiariesController < ApplicationController
 	end
 
 	def create
-		@practice_diary = PracticeDiary.new(practice_diary_params)
+		@practice_diary = current_user.practice_diaries.build(practice_diary_params)
 		if @practice_diary.save
 			redirect_to @practice_diary, notice: "練習記録を作成しました!"
 		else

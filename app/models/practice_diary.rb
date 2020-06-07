@@ -3,6 +3,7 @@ class PracticeDiary < ApplicationRecord
 	validates :practice_content, presence: true
 	validates :practice_distance, presence: true
 	validates :practice_time, presence: true
+	belongs_to :user
 
 	# 練習時間表示の成型
 	def set_practice_time
