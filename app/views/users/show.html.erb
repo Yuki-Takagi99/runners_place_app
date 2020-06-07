@@ -1,5 +1,12 @@
 <h1><%= @user.user_name %>のプロフィール</h1>
 
+<h2>プロフィール画像</h2>
+<% if @user.image? %>
+	<image src=<%= @user.image %> class = "icon_image">
+<% else %>
+	<image src="/assets/running_icon.png" class = "icon_image">
+<% end %>
+
 <h2>自己紹介</h2>
 <%= @user.self_introduction %>
 
