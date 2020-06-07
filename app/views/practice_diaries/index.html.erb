@@ -16,7 +16,7 @@
 	<tbody>
 		<% @practice_diaries.each do |practice_diary| %>
 			<tr>
-				<td><%= practice_diary.user.user_name %></td>
+				<td><%= link_to practice_diary.user.user_name, user_path(practice_diary.user)  %></td>
 				<td><%= practice_diary.practice_date %></td>
 				<td><%= link_to practice_diary.practice_title, practice_diary_path(practice_diary) %></td>
 				<td><%= practice_diary.practice_content %></td>
