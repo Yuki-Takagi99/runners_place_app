@@ -14,4 +14,6 @@
 <%= @user.target %>
 
 <br>
-<%= link_to "編集", edit_user_registration_path %>
+<% if current_user.id == @user.id %>
+	<%= link_to "編集", edit_user_registration_path(current_user.id) %>
+<% end %>
