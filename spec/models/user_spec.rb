@@ -1,5 +1,50 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @user = create(:user)
+  end
+
+  describe 'バリデーションテスト' do
+    it '名前、メールアドレス、パスワードがある場合、有効であること' do
+      expect(@user).to be_valid
+    end
+
+    it '名前がない場合、無効であること' do
+      @user.user_name = nil
+      expect(@user).not_to be_valid
+    end
+
+    it 'メールアドレスがない場合、無効であること' do
+      @user.email = nil
+      expect(@user).not_to be_valid
+    end
+
+    it 'パスワードがない場合、無効であること' do
+      @user.password = nil
+      expect(@user).not_to be_valid
+    end
+
+    it '31文字以上の名前の場合、無効であること' do
+      @user.user_name = 'a' * 31
+      expect(@user).not_to be_valid
+    end
+
+    it '256文字以上のメールアドレスの場合、無効であること' do
+      @user.email = "#{'a' * 250}@a.com"
+      expect(@user).not_to be_valid
+    end
+
+    it '重複したメールアドレスの場合、無効であること' do
+      @user2 = create(:user_2)
+      @user3 = create(:user_3)
+      @user3.email = "unique@example.com"
+      expect(@user3).not_to be_valid
+    end
+
+    it '6文字未満のパスワードを入力した場合、無効であること' do
+      @user.password = 1 * 5
+      expect(@user).not_to be_valid
+    end
+  end
 end

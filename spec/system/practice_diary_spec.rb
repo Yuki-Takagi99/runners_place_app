@@ -1,5 +1,11 @@
 require 'rails_helper'
 RSpec.describe "練習記録管理機能", type: :system do
+
+	before do
+		@user = create(:user)
+		@practice_diary = create(:practice_diary, user: @user)
+	end
+
 	describe '練習記録一覧画面' do
 		context '練習記録を作成した場合' do
 			it '作成した練習記録が表示されること' do
