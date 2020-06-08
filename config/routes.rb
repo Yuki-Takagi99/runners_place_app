@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   }
   resources :users, only: [:show]
   resources :practice_diaries
+  resources :practice_favorites, only: [:create, :destroy]
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
