@@ -10,6 +10,15 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <%= link_to "練習日記を書く", new_practice_diary_path %>
+      <%= link_to "練習記録一覧", practice_diaries_path %>
+      <%= link_to "ユーザープロフィール", user_path(id: current_user.id) %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "新規登録", new_user_registration_path %>
+      <%= link_to "ログイン", new_user_session_path %>
+    <% end %>
     <% flash.each do |key, value| %>
       <p class="alert alert-<%= key %>">
         <%= value %>

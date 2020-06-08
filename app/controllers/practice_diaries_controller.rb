@@ -1,5 +1,7 @@
 class PracticeDiariesController < ApplicationController
 	before_action :set_practice_diary, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate_user!
+
 	def index
 		@practice_diaries = PracticeDiary.all
 	end
@@ -9,7 +11,7 @@ class PracticeDiariesController < ApplicationController
 	end
 
 	def create
-		@practice_diary = PracticeDiary.new(practice_diary_params)
+		@practice_diary = current_user.practice_diaries.build(practice_diary_params)
 		if @practice_diary.save
 			redirect_to @practice_diary, notice: "練習記録を作成しました!"
 		else
