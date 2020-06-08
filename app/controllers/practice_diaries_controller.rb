@@ -21,6 +21,7 @@ class PracticeDiariesController < ApplicationController
 	end
 
 	def show
+		@favorite = current_user.practice_favorites.find_by(practice_diary_id: @practice_diary.id)
 	end
 
 	def edit

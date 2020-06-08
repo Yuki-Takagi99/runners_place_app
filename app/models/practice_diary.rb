@@ -4,7 +4,9 @@ class PracticeDiary < ApplicationRecord
 	validates :practice_distance, presence: true
 	validates :practice_time, presence: true
 	belongs_to :user
-
+	# お気に入り機能のアソシエーション
+	has_many :practice_favorites, dependent: :destroy
+	has_many :favorite_users, through: :practice_favorites, source: :user
 	# 練習時間表示の成型
 	def set_practice_time
 		practice_time.strftime("%-H時間%M分%S秒")
