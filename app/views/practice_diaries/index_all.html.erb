@@ -1,26 +1,19 @@
 <h1>みんなの練習記録</h1>
 
-<table>
-	<thead>
-		<tr>
-			<th>投稿ユーザ</th>
-			<th>練習日</th>
-			<th>タイトル</th>
-			<th>詳細</th>
-			<th>走行距離</th>
-			<th>走行時間</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @practice_diaries.each do |practice_diary| %>
-			<tr>
-				<td><%= link_to practice_diary.user.user_name, user_path(practice_diary.user)  %></td>
-				<td><%= practice_diary.practice_date %></td>
-				<td><%= link_to practice_diary.practice_title, practice_diary_path(practice_diary) %></td>
-				<td><%= practice_diary.practice_content %></td>
-				<td><%= practice_diary.practice_distance %>km</td>
-				<td><%= practice_diary.set_practice_time %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+<% @practice_diaries.each do |practice_diary| %>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<%= practice_diary.set_practice_date %>
+	</div>
+	<div class="panel-body">
+		<ul>
+			<li>ユーザー名：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></li>
+			<li>タイトル：<%= practice_diary.practice_title %></li>
+			<li>詳細：<%= practice_diary.practice_content %></li>
+			<li>走行距離：<%= practice_diary.practice_distance %>km</li>
+			<li>走行時間：<%= practice_diary.set_practice_time %></li>
+			<%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
+		</ul>
+	</div>
+</div>
+<% end %>

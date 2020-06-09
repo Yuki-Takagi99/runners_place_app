@@ -7,9 +7,15 @@ class PracticeDiary < ApplicationRecord
 	# お気に入り機能のアソシエーション
 	has_many :practice_favorites, dependent: :destroy
 	has_many :favorite_users, through: :practice_favorites, source: :user
+	
 	# 練習時間表示の成型
 	def set_practice_time
 		practice_time.strftime("%-H時間%M分%S秒")
+	end
+
+	# 練習日表示の成型
+	def set_practice_date
+		practice_date.strftime("%Y年%m月%d日")
 	end
 
 	# 当月の走行距離を取得
