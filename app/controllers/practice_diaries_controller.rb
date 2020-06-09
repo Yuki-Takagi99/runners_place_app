@@ -3,7 +3,12 @@ class PracticeDiariesController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@practice_diaries = PracticeDiary.all
+		@practice_diaries = PracticeDiary.where(user_id: current_user.id)
+	end
+
+	def index_all
+		# ログインしているユーザ以外の練習記録を取得
+		@practice_diaries = PracticeDiary.where.not(user_id: current_user.id)
 	end
 
 	def new

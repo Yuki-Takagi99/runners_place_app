@@ -1,5 +1,8 @@
 {
   "name": "runners_place_app",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "3",
+    "jquery": "^3.5.1"
+  }
 }
