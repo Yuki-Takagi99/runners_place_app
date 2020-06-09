@@ -1,5 +1,16 @@
 <h1><%= current_user.user_name %>さんの練習記録一覧</h1>
 
+<%= month_calendar(attribute: :practice_date, events: @practice_diaries)  do |date, practice_diaries| %>
+  <%= date %>
+
+  <% practice_diaries.each do |practice_diary| %>
+    <div>
+      <%= link_to practice_diary.practice_title, practice_diary %>
+			<%= practice_diary.practice_distance %> km
+    </div>
+  <% end %>
+<% end %>
+
 <table>
 	<thead>
 		<tr>
