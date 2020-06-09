@@ -19,13 +19,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href= <% practice_diaries_path %>>RUNNER'S PLACE</a>
+          <a class="navbar-brand">RUNNER'S PLACE</a>
         </div>
         <div class="collapse navbar-collapse" id="navbarEexample">
           <ul class="nav navbar-nav">
           <% if user_signed_in? %>
-            <li><%= link_to "練習日記を書く", new_practice_diary_path %></li>
-            <li><%= link_to "練習記録一覧", practice_diaries_path %></li>
+            <li><%= link_to "練習記録を書く", new_practice_diary_path %></li>
+            <li><%= link_to "練習記録を見る", practice_diaries_path %></li>
+            <li><%= link_to "みんなの練習記録", index_all_practice_diaries_path %></li>
             <li><%= link_to "ユーザープロフィール", user_path(id: current_user.id) %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           </ul>

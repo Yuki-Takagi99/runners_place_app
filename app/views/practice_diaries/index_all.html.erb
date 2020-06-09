@@ -1,0 +1,26 @@
+<h1>みんなの練習記録</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>投稿ユーザ</th>
+			<th>練習日</th>
+			<th>タイトル</th>
+			<th>詳細</th>
+			<th>走行距離</th>
+			<th>走行時間</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @practice_diaries.each do |practice_diary| %>
+			<tr>
+				<td><%= link_to practice_diary.user.user_name, user_path(practice_diary.user)  %></td>
+				<td><%= practice_diary.practice_date %></td>
+				<td><%= link_to practice_diary.practice_title, practice_diary_path(practice_diary) %></td>
+				<td><%= practice_diary.practice_content %></td>
+				<td><%= practice_diary.practice_distance %>km</td>
+				<td><%= practice_diary.set_practice_time %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
