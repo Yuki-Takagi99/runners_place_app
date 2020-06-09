@@ -6,27 +6,27 @@
 <table>
 	<tbody>
 		<tr>
-			<th>投稿ユーザ</th>
+			<th><%= User.human_attribute_name(:user_name) %></th>
 			<td><%= @practice_diary.user.user_name %></td>
 		</tr>
 		<tr>
-			<th>練習日</th>
+			<th><%= PracticeDiary.human_attribute_name(:practice_date) %></th>
 			<td><%= @practice_diary.set_practice_date %></td>
 		</tr>
 		<tr>
-			<th>タイトル</th>
+			<th><%= PracticeDiary.human_attribute_name(:practice_title) %></th>
 			<td><%= @practice_diary.practice_title %></td>
 		</tr>
 		<tr>
-			<th>詳細</th>
+			<th><%= PracticeDiary.human_attribute_name(:practice_content) %></th>
 			<td><%= @practice_diary.practice_content %></td>
 		</tr>
 		<tr>
-			<th>走行距離</th>
+			<th><%= PracticeDiary.human_attribute_name(:practice_distance) %></th>
 			<td><%= @practice_diary.practice_distance %>km</td>
 		</tr>
 		<tr>
-			<th>走行時間</th>
+			<th><%= PracticeDiary.human_attribute_name(:practice_time) %></th>
 			<td><%= @practice_diary.set_practice_time %></td>
 		</tr>
 	</tbody>

@@ -48,11 +48,11 @@
 	</div>
 	<div class="panel-body">
 		<ul>
-			<li>ユーザー名：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></li>
-			<li>タイトル：<%= practice_diary.practice_title %></li>
-			<li>詳細：<%= practice_diary.practice_content %></li>
-			<li>走行距離：<%= practice_diary.practice_distance %>km</li>
-			<li>走行時間：<%= practice_diary.set_practice_time %></li>
+			<li><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></li>
+			<li><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= practice_diary.practice_title %></li>
+			<li><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= practice_diary.practice_content %></li>
+			<li><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= practice_diary.practice_distance %>km</li>
+			<li><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= practice_diary.set_practice_time %></li>
 			<%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
 		</ul>
 	</div>
