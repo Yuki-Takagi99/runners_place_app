@@ -4,21 +4,40 @@
     <title>RunnersPlaceApp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <%= link_to "練習日記を書く", new_practice_diary_path %>
-      <%= link_to "練習記録一覧", practice_diaries_path %>
-      <%= link_to "ユーザープロフィール", user_path(id: current_user.id) %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "新規登録", new_user_registration_path %>
-      <%= link_to "ログイン", new_user_session_path %>
-    <% end %>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href= <% practice_diaries_path %>>RUNNER'S PLACE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarEexample">
+          <ul class="nav navbar-nav">
+          <% if user_signed_in? %>
+            <li><%= link_to "練習日記を書く", new_practice_diary_path %></li>
+            <li><%= link_to "練習記録一覧", practice_diaries_path %></li>
+            <li><%= link_to "ユーザープロフィール", user_path(id: current_user.id) %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          </ul>
+            <p class="navbar-text navbar-right">ようこそ、<%= current_user.user_name %>さん。目標達成に向けて頑張りましょう。</p>
+          <% else %>
+            <li><%= link_to "新規登録", new_user_registration_path %></li>
+            <li><%= link_to "ログイン", new_user_session_path %></li>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
     <% flash.each do |key, value| %>
       <p class="alert alert-<%= key %>">
         <%= value %>
