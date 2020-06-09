@@ -1,5 +1,29 @@
 <h1><%= current_user.user_name %>さんの練習記録一覧</h1>
 
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		今月の走行距離は<%= @practice_diaries.this_month_distance %>kmです！
+	</div>
+	<div class="panel-body">
+		<% if current_user.image? %>
+			<image src=<%= current_user.image %> class = "icon_image">
+		<% else %>
+			<image src="/assets/running_icon.png" class = "icon_image">
+		<% end %>
+
+		<ul class="list-group">
+			<li class="list-group-item">ユーザー名：<%= link_to current_user.user_name, user_path(current_user) %></li>
+			<li class="list-group-item">
+				目標：
+				<% if current_user.target == "" %>
+					<%= "まだ目標はありません。" %>
+				<% else %>
+					<%= current_user.target %>
+				<% end %></li>
+		</ul>
+	</div>
+</div>
+
 <%= month_calendar(attribute: :practice_date, events: @practice_diaries)  do |date, practice_diaries| %>
   <%= date %>
 

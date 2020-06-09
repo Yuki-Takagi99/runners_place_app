@@ -11,4 +11,8 @@ class PracticeDiary < ApplicationRecord
 	def set_practice_time
 		practice_time.strftime("%-H時間%M分%S秒")
 	end
+
+	# 当月の走行距離を取得
+	scope :this_month_distance, -> { where(practice_date: Time.current.all_month).sum(:practice_distance) }
+
 end
