@@ -10,23 +10,23 @@
       </div>
   <% end %>
   <div class="form-group">
-    <%= f.label :practice_date, "練習日" %><br>
+    <%= f.label :practice_date %><br>
     <%= raw sprintf(f.date_select( :practice_date, class: 'form-control', use_month_numbers: true, date_separator: '%s'), '年 ', '月 ') + '日'%>
   </div>
   <div class="form-group">
-    <%= f.label :practice_title, "タイトル" %>
+    <%= f.label :practice_title %>
     <%= f.text_field :practice_title, class: 'form-control', placeholder: "タイトルを入力してください。" %>
   </div>
   <div class="form-group">
-    <%= f.label :practice_content, "詳細" %>
+    <%= f.label :practice_content %>
     <%= f.text_area :practice_content, class: 'form-control', placeholder: "練習の詳細内容を入力してください。" %>
   </div>
   <div class="form-group">
-    <%= f.label :practice_distance, "走行距離" %>
+    <%= f.label :practice_distance %>
     <%= f.number_field :practice_distance, step: '0.1', class: 'form-control', placeholder: "走行距離を入力してください。" %> km
   </div>
   <div class="form-group">
-    <%= f.label :practice_time, "走行時間" %><br>
+    <%= f.label :practice_time %><br>
     <%= f.time_select :practice_time, include_seconds: true, prompt: true, class: 'form-control' %>
   </div>
   <div class="form-group">

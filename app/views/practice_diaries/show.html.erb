@@ -1,33 +1,32 @@
 <h1>練習記録詳細画面</h1>
 
-<%= link_to "練習記録一覧", practice_diaries_path %>
 <%= link_to "編集する", edit_practice_diary_path(@practice_diary) %>
 <%= link_to "削除する", practice_diary_path(@practice_diary), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' } %>
 
 <table>
 	<tbody>
 		<tr>
-			<th>投稿ユーザ</th>
+			<th><%= User.human_attribute_name(:user_name) %></th>
 			<td><%= @practice_diary.user.user_name %></td>
 		</tr>
 		<tr>
-			<th>練習日</th>
-			<td><%= @practice_diary.practice_date %></td>
+			<th><%= PracticeDiary.human_attribute_name(:practice_date) %></th>
+			<td><%= @practice_diary.set_practice_date %></td>
 		</tr>
 		<tr>
-			<th>タイトル</th>
+			<th><%= PracticeDiary.human_attribute_name(:practice_title) %></th>
 			<td><%= @practice_diary.practice_title %></td>
 		</tr>
 		<tr>
-			<th>詳細</th>
+			<th><%= PracticeDiary.human_attribute_name(:practice_content) %></th>
 			<td><%= @practice_diary.practice_content %></td>
 		</tr>
 		<tr>
-			<th>走行距離</th>
+			<th><%= PracticeDiary.human_attribute_name(:practice_distance) %></th>
 			<td><%= @practice_diary.practice_distance %>km</td>
 		</tr>
 		<tr>
-			<th>走行時間</th>
+			<th><%= PracticeDiary.human_attribute_name(:practice_time) %></th>
 			<td><%= @practice_diary.set_practice_time %></td>
 		</tr>
 	</tbody>
@@ -35,8 +34,12 @@
 
 <% unless @practice_diary.user_id == current_user.id %>
   <% if @favorite.present? %>
-    <%= link_to 'お気に入り解除する', practice_favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+    <%= link_to practice_favorite_path(id: @favorite.id), method: :delete do %>
+			<span class="btn btn-danger glyphicon glyphicon-star-empty">いいね！を解除</span>
+		<% end %>
   <% else %>
-    <%= link_to 'お気に入りする', practice_favorites_path(practice_diary_id: @practice_diary.id), method: :post, class: 'btn btn-primary' %>
+    <%= link_to practice_favorites_path(practice_diary_id: @practice_diary.id), method: :post do %>
+			<span class="btn btn-primary glyphicon glyphicon-star">いいね！</span>
+		<% end %>
   <% end %>
 <% end %>
