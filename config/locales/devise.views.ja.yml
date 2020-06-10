@@ -26,6 +26,10 @@ ja:
         unlock_token: ロック解除用トークン
         updated_at: 更新日
         user_name: ユーザー名
+        image: プロフィール画像
+        self_introduction: 自己紹介
+        target: 目標
+        admin: 管理者フラグ
     models:
       user: ユーザ
   devise:
