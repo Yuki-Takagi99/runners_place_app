@@ -53,13 +53,11 @@
 			<li><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= practice_diary.practice_content %></li>
 			<li><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= practice_diary.practice_distance %>km</li>
 			<li><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= practice_diary.set_practice_time %></li>
-			<li>
-				<div id="practice_favorites_buttons_<%= practice_diary.id %>">
-        	<%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: practice_diary} %>
-      	</div>
-			</li>
-			<%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
+			<div id="practice_favorites_buttons_<%= practice_diary.id %>">
+        <%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: practice_diary} %>
+      </div>
 		</ul>
+			<%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
 	</div>
 </div>
 <% end %>
