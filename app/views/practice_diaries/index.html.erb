@@ -1,8 +1,6 @@
-<h1><%= current_user.user_name %>さんの練習記録</h1>
-
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		今月の走行距離は<%= @practice_diaries.this_month_distance %>kmです！
+		今月の走行距離は<strong><%= @practice_diaries.this_month_distance %>km</strong>です！
 	</div>
 	<div class="row">
 		<div class="panel-body">
@@ -10,30 +8,32 @@
 				<% if current_user.image? %>
 					<image src=<%= current_user.image %> class = "icon_image">
 				<% else %>
-					<image src="/assets/running_icon.png" class = "icon_image">
+					<image src="/assets/default_icon.png" class = "icon_image">
 				<% end %>
 			</div>
 
 			<div class="col-md-8">
 				<ul class="list-group">
 					<li class="list-group-item">
-						ユーザー名：<%= simple_format link_to current_user.user_name, user_path(current_user) %>
+						<strong><%= User.human_attribute_name(:user_name) %>：<%= link_to current_user.user_name, user_path(current_user) %></strong>
 					</li>
 					<li class="list-group-item">
-						自己紹介：
+						<strong><%= User.human_attribute_name(:self_introduction) %>：
 						<% if current_user.self_introduction == "" %>
 							<%= "まだ自己紹介はありません。" %>
 						<% else %>
 							<%= simple_format current_user.self_introduction %>
 						<% end %>
+						</strong>
 					</li>
 					<li class="list-group-item">
-						目標：
+						<strong><%= User.human_attribute_name(:target) %>：
 						<% if current_user.target == "" %>
 							<%= "まだ目標はありません。" %>
 						<% else %>
 							<%= simple_format current_user.target %>
 						<% end %>
+						</strong>
 					</li>
 				</ul>
 			</div>

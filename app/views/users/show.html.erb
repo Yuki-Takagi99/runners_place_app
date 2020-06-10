@@ -1,17 +1,45 @@
-<h1><%= @user.user_name %>さんのプロフィール</h1>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<strong><%= @user.user_name %>さんのプロフィール</strong>
+	</div>
+	<div class="row">
+		<div class="panel-body">
+			<div class="col-md-4">
+				<% if @user.image? %>
+					<image src=<%= @user.image %> class = "icon_image">
+				<% else %>
+					<image src="/assets/default_icon.png" class = "icon_image">
+				<% end %>
+			</div>
 
-<h2>プロフィール画像</h2>
-<% if @user.image? %>
-	<image src=<%= @user.image %> class = "icon_image">
-<% else %>
-	<image src="/assets/running_icon.png" class = "icon_image">
-<% end %>
-
-<h2>自己紹介</h2>
-<%= @user.self_introduction %>
-
-<h2>目標</h2>
-<%= @user.target %>
+			<div class="col-md-8">
+				<ul class="list-group">
+					<li class="list-group-item">
+						<strong><%= User.human_attribute_name(:user_name) %>：<%= @user.user_name %></strong>
+					</li>
+					<li class="list-group-item">
+						<strong><%= User.human_attribute_name(:self_introduction) %>：
+						<% if @user.self_introduction == "" %>
+							<%= "まだ自己紹介はありません。" %>
+						<% else %>
+							<%= simple_format @user.self_introduction %>
+						<% end %>
+						</strong>
+					</li>
+					<li class="list-group-item">
+						<strong><%= User.human_attribute_name(:target) %>：
+						<% if @user.target == "" %>
+							<%= "まだ目標はありません。" %>
+						<% else %>
+							<%= simple_format @user.target %>
+						<% end %>
+						</strong>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
 
 <br>
 <% if current_user.id == @user.id %>

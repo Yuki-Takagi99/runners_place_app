@@ -24,6 +24,6 @@ class PracticeDiary < ApplicationRecord
 	end
 
 	# 当月の走行距離を取得
-	scope :this_month_distance, -> { where(practice_date: Time.current.all_month).sum(:practice_distance) }
+	scope :this_month_distance, -> { where(practice_date: Time.current.all_month).sum(:practice_distance).round(2) }
 
 end
