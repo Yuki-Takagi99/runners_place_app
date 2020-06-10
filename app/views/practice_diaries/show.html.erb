@@ -3,35 +3,20 @@
 <%= link_to "編集する", edit_practice_diary_path(@practice_diary) %>
 <%= link_to "削除する", practice_diary_path(@practice_diary), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' } %>
 
-<table>
-	<tbody>
-		<tr>
-			<th><%= User.human_attribute_name(:user_name) %></th>
-			<td><%= @practice_diary.user.user_name %></td>
-		</tr>
-		<tr>
-			<th><%= PracticeDiary.human_attribute_name(:practice_date) %></th>
-			<td><%= @practice_diary.set_practice_date %></td>
-		</tr>
-		<tr>
-			<th><%= PracticeDiary.human_attribute_name(:practice_title) %></th>
-			<td><%= @practice_diary.practice_title %></td>
-		</tr>
-		<tr>
-			<th><%= PracticeDiary.human_attribute_name(:practice_content) %></th>
-			<td><%= @practice_diary.practice_content %></td>
-		</tr>
-		<tr>
-			<th><%= PracticeDiary.human_attribute_name(:practice_distance) %></th>
-			<td><%= @practice_diary.practice_distance %>km</td>
-		</tr>
-		<tr>
-			<th><%= PracticeDiary.human_attribute_name(:practice_time) %></th>
-			<td><%= @practice_diary.set_practice_time %></td>
-		</tr>
-	</tbody>
-</table>
-
-<div id="practice_favorites_buttons_<%= @practice_diary.id %>">
-  <%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: @practice_diary} %>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<%= @practice_diary.set_practice_date %>
+	</div>
+	<div class="panel-body">
+		<ul>
+			<li><%= User.human_attribute_name(:user_name) %>：<%= link_to @practice_diary.user.user_name, user_path(@practice_diary.user) %></li>
+			<li><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= @practice_diary.practice_title %></li>
+			<li><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= @practice_diary.practice_content %></li>
+			<li><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= @practice_diary.practice_distance %>km</li>
+			<li><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= @practice_diary.set_practice_time %></li>
+			<div id="practice_favorites_buttons_<%= @practice_diary.id %>">
+        <%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: @practice_diary} %>
+      </div>
+		</ul>
+	</div>
 </div>
