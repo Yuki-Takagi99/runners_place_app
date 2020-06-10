@@ -18,6 +18,11 @@ class PracticeDiary < ApplicationRecord
 		practice_date.strftime("%Y年%m月%d日")
 	end
 
+	# いいね！しているかどうかを判断
+	def favorited_by?(user)
+		practice_favorites.where(user_id: user.id).exists?
+	end
+
 	# 当月の走行距離を取得
 	scope :this_month_distance, -> { where(practice_date: Time.current.all_month).sum(:practice_distance) }
 

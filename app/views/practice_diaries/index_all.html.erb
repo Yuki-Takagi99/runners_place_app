@@ -12,6 +12,16 @@
 			<li>詳細：<%= practice_diary.practice_content %></li>
 			<li>走行距離：<%= practice_diary.practice_distance %>km</li>
 			<li>走行時間：<%= practice_diary.set_practice_time %></li>
+			<li>
+				<% if practice_diary.user_id != current_user.id %>
+					<% if practice_diary.favorited_by?(current_user) %> 
+						<p><span>いいね！解除: </span><%=link_to practice_diary.practice_favorites.count, practice_diary_practice_favorites_path(practice_diary.id), method: :delete %></p>
+					<% else %>
+						<p><span>いいね！登録: </span><%=link_to practice_diary.practice_favorites.count, practice_diary_practice_favorites_path(practice_diary.id), method: :post %></p>
+					<% end %>
+				<% else %>
+					<p><span>いいね！された数: </span><%= practice_diary.practice_favorites.count %></p>
+				<% end %></li>
 			<%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
 		</ul>
 	</div>

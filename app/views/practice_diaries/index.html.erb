@@ -53,7 +53,17 @@
 			<li><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= practice_diary.practice_content %></li>
 			<li><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= practice_diary.practice_distance %>km</li>
 			<li><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= practice_diary.set_practice_time %></li>
-			<%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
+			<li>
+				<% if practice_diary.user_id != current_user.id %>
+					<% if practice_diary.favorited_by?(current_user) %> 
+						<p><span>いいね！解除: </span><%=link_to practice_diary.practice_favorites.count, practice_diary_practice_favorites_path(practice_diary.id), method: :delete %></p>
+					<% else %>
+						<p><span>いいね！登録: </span><%=link_to practice_diary.practice_favorites.count, practice_diary_practice_favorites_path(practice_diary.id), method: :post %></p>
+					<% end %>
+				<% else %>
+					<p><span>いいね！された数: </span><%= practice_diary.practice_favorites.count %></p>
+				<% end %></li>
+				<%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
 		</ul>
 	</div>
 </div>
