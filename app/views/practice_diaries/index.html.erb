@@ -32,7 +32,7 @@
 
   <% practice_diaries.each do |practice_diary| %>
     <div>
-			<span class="glyphicon glyphicon-fire"></span>
+			<span class="glyphicon glyphicon-fire fire-icon"></span>
       <%= link_to practice_diary.practice_title, practice_diary %>
 			<%= practice_diary.practice_distance %> km
     </div>
@@ -56,8 +56,8 @@
 			<div id="practice_favorites_buttons_<%= practice_diary.id %>">
         <%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: practice_diary} %>
       </div>
-		</ul>
 			<%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
+		</ul>
 	</div>
 </div>
 <% end %>
