@@ -5,7 +5,7 @@ class PracticeCommentsController < ApplicationController
 
     respond_to do |format|
       if @practice_diary.save
-        format.html { redirect_to practice_diary_path(@practice_diary)}
+        format.js { render :index }
       else
         format.html { redirect_to practice_diary_path(@practice_diary), notice: 'コメントが投稿できませんでした' }
       end
