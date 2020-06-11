@@ -10,7 +10,7 @@
       <div class="panel panel-primary">
         <li>
           <div class="panel-heading">
-            <p><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_comment.user.user_name, user_path(practice_comment.user_id) %></p>
+            <p><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_comment.user.user_name, user_path(practice_comment.user_id) %>さん</p>
           </div>
           <div class="panel-body">
             <div class="practice_comment-content" id ="this_comment_<%= practice_comment.id %>"></div>
