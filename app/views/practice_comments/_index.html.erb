@@ -1,13 +1,27 @@
+<% if practice_comments.present? %>
+  <h4 class="text-center">　<%= practice_comments.count %>件のコメントがあります！</h4>
+<% else %>
+  <h4 class="text-center">まだコメントはありません！</h4>
+<% end %>
+
 <ul>
   <% practice_comments.each do |practice_comment| %>
-    <% if practice_comment.id.present? %>
-      <li>
-        <div class="practice_comment-content" id ="this_comment_<%= practice_comment.id %>"></div>
-        <p><%= practice_comment.practice_comment_content %></p>
-        <p>投稿者：<%= practice_comment.user.user_name %></p>
-        <p><%= link_to "コメント編集", edit_practice_diary_practice_comment_path(practice_diary, practice_comment), remote: true %></p>
-        <p><%= link_to "コメント削除", practice_diary_practice_comment_path(practice_comment.practice_diary_id, practice_comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?"} %></p>
-      </li>
-    <% end %>
+    <div class="panel panel-primary">
+      <% if practice_comment.id.present? %>
+        <li>
+          <div class="panel-heading">
+            <p><%= User.human_attribute_name(:user_name) %>：<%= practice_comment.user.user_name %></p>
+          </div>
+          <div class="panel-body">
+            <div class="practice_comment-content" id ="this_comment_<%= practice_comment.id %>"></div>
+            <p><%= simple_format practice_comment.practice_comment_content %></p>
+            <p><%= link_to "コメント編集", edit_practice_diary_practice_comment_path(practice_diary, practice_comment), remote: true %> | <%= link_to "コメント削除", practice_diary_practice_comment_path(practice_comment.practice_diary_id, practice_comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?"} %></p>
+          </div>
+          <div class="panel-footer">
+            <p>更新日時：<%= l practice_comment.updated_at, format: :default %></p>
+          </div>
+        </li>
+      <% end %>
+    </div>
   <% end %>
 </ul>

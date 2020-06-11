@@ -21,14 +21,26 @@
 	</div>
 </div>
 
-<div class="container">
-  <p id="notice"><%= notice %></p>
-  <p>コメント一覧</p>
-  <!-- このcomments_areaというHTMLのidを取得して、そのdivの部分だけを更新する -->
-  <div id="comments_area">
-    <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
-    <%= render partial: 'practice_comments/index', locals: { practice_comments: @practice_comments, practice_diary: @practice_diary } %>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+  <% flash.each do |key, value| %>
+      <p class="alert alert-<%= key %>">
+        <%= value %>
+      </p>
+  <% end %>
+  <ul>
+    <li>
+      <h3 class="text-center">みんなのコメント</h3>
+    </li>
+    <li>
+      <div id="comments_area">
+        <%= render partial: 'practice_comments/index', locals: { practice_comments: @practice_comments, practice_diary: @practice_diary } %>
+      </div>
+    </li>
+    <li>
+      <%= render partial: 'practice_comments/form', locals: { practice_comment: @practice_comment, practice_diary: @practice_diary } %>
+    </li>
+  </ul>
+    </div>
   </div>
-  <!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
-  <%= render partial: 'practice_comments/form', locals: { practice_comment: @practice_comment, practice_diary: @practice_diary } %>
-</div>

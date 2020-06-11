@@ -9,7 +9,7 @@ class PracticeCommentsController < ApplicationController
       if @practice_diary.save
         format.js { render :index }
       else
-        format.html { redirect_to practice_diary_path(@practice_diary), notice: 'コメントが投稿できませんでした' }
+        format.html { redirect_to practice_diary_path(@practice_diary), danger: 'コメントが投稿できませんでした' }
       end
     end
   end
@@ -29,7 +29,7 @@ class PracticeCommentsController < ApplicationController
         flash.now[:notice] = 'コメントが編集されました'
         format.js { render :index }
       else
-        flash.now[:notice] = 'コメントの編集に失敗しました'
+        flash.now[:danger] = 'コメントの編集に失敗しました'
         format.js { render :edit_error }
       end
     end
@@ -39,7 +39,7 @@ class PracticeCommentsController < ApplicationController
     @practice_comment = PracticeComment.find(params[:id])
     @practice_comment.destroy
     respond_to do |format|
-      flash.now[:notice] = 'コメントが削除されました'
+      flash.now[:info] = 'コメントが削除されました'
       format.js { render :index }
     end
   end

@@ -1,6 +1,6 @@
 <%= form_with(model: [practice_diary, practice_comment]) do |form| %>
   <% if practice_comment.errors.any? %>
-    <div class="error_explanation">
+    <div id="error_explanation">
       <h2><%= pluralize(practice_comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
       <ul>
       <% practice_comment.errors.full_messages.each do |message| %>
@@ -10,8 +10,8 @@
     </div>
   <% end %>
   <div class="field">
+    <%= form.label 'コメント編集' %><br>
     <%= form.text_area :practice_comment_content, id: "practice_comment_content_#{practice_diary.id}" %>
-    <%= form.label :practice_comment_content %>
   </div>
   <div class="actions">
     <%= form.submit %>
