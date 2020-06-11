@@ -33,8 +33,15 @@ class PracticeCommentsController < ApplicationController
       end
     end
   end
-  
-  
+
+  def destroy
+    @practice_comment = PracticeComment.find(params[:id])
+    @practice_comment.destroy
+    respond_to do |format|
+      flash.now[:notice] = 'コメントが削除されました'
+      format.js { render :index }
+    end
+  end
 
   private
   def practice_comment_params

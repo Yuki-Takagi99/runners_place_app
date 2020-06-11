@@ -31,6 +31,4 @@
   </div>
   <!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
   <%= render partial: 'practice_comments/form', locals: { practice_comment: @practice_comment, practice_diary: @practice_diary } %>
-  <%= link_to '編集', edit_practice_diary_path(@practice_diary) %> |
-  <%= link_to '戻る', practice_diaries_path %>
 </div>
