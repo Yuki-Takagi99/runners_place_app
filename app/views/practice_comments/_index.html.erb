@@ -2,7 +2,9 @@
   <% practice_comments.each do |practice_comment| %>
     <% if practice_comment.id.present? %>
       <li>
+        <div class="practice_comment-content" id ="this_comment_<%= practice_comment.id %>"></div>
         <p><%= practice_comment.practice_comment_content %></p>
+        <p><%= link_to "コメント編集", edit_practice_diary_practice_comment_path(practice_diary, practice_comment), remote: true %></p>
       </li>
     <% end %>
   <% end %>
