@@ -3,6 +3,7 @@ class PracticeCommentsController < ApplicationController
   def create
     @practice_diary = PracticeDiary.find(params[:practice_diary_id])
     @practice_comment = @practice_diary.practice_comments.build(practice_comment_params)
+    @practice_comment.user_id = current_user.id
 
     respond_to do |format|
       if @practice_diary.save

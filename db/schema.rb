@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_002556) do
+ActiveRecord::Schema.define(version: 2020_06_11_055735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,9 @@ ActiveRecord::Schema.define(version: 2020_06_11_002556) do
     t.bigint "practice_diary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["practice_diary_id"], name: "index_practice_comments_on_practice_diary_id"
+    t.index ["user_id"], name: "index_practice_comments_on_user_id"
   end
 
   create_table "practice_diaries", force: :cascade do |t|
@@ -63,6 +65,7 @@ ActiveRecord::Schema.define(version: 2020_06_11_002556) do
   end
 
   add_foreign_key "practice_comments", "practice_diaries"
+  add_foreign_key "practice_comments", "users"
   add_foreign_key "practice_diaries", "users"
   add_foreign_key "practice_favorites", "practice_diaries"
   add_foreign_key "practice_favorites", "users"

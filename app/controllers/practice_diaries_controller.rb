@@ -26,7 +26,7 @@ class PracticeDiariesController < ApplicationController
 	end
 
 	def show
-		@practice_comments = @practice_diary.practice_comments
+		@practice_comments = @practice_diary.practice_comments.order(created_at: "ASC")
 		@practice_comment = @practice_diary.practice_comments.build
 	end
 
