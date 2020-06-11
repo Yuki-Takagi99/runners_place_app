@@ -3,9 +3,9 @@
     <div id="error_explanation">
       <h2><%= pluralize(practice_comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
       <ul>
-      <% practice_comment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% practice_comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>

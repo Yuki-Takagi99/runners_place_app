@@ -9,11 +9,18 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= form.label :practice_comment_content %>
-    <%= form.text_area :practice_comment_content %>
-  </div>
-  <div class="actions">
-    <%= form.submit %>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <p>コメントを投稿する</p>
+    </div>
+    <div class="panel-body">
+      <div class="field">
+        <%= form.label :practice_comment_content %>
+        <%= form.text_area :practice_comment_content %>
+      </div>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    </div>
   </div>
 <% end %>

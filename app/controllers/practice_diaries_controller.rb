@@ -3,12 +3,12 @@ class PracticeDiariesController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@practice_diaries = PracticeDiary.where(user_id: current_user.id)
+		@practice_diaries = PracticeDiary.where(user_id: current_user.id).order(practice_date: :desc)
 	end
 
 	def index_all
 		# ログインしているユーザ以外の練習記録を取得
-		@practice_diaries = PracticeDiary.where.not(user_id: current_user.id)
+		@practice_diaries = PracticeDiary.where.not(user_id: current_user.id).order(practice_date: :desc)
 	end
 
 	def new
@@ -26,7 +26,7 @@ class PracticeDiariesController < ApplicationController
 	end
 
 	def show
-		@practice_comments = @practice_diary.practice_comments.order(created_at: :desc)
+		@practice_comments = @practice_diary.practice_comments
 		@practice_comment = @practice_diary.practice_comments.build
 	end
 
