@@ -7,6 +7,9 @@ class PracticeDiary < ApplicationRecord
 	# お気に入り機能のアソシエーション
 	has_many :practice_favorites, dependent: :destroy
 	has_many :favorite_users, through: :practice_favorites, source: :user
+
+	# コメント機能のアソシエーション
+	has_many :practice_comments, dependent: :destroy
 	
 	# 練習時間表示の成型
 	def set_practice_time

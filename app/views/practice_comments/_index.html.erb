@@ -1,0 +1,9 @@
+<ul>
+  <% practice_comments.each do |practice_comment| %>
+    <% if practice_comment.id.present? %>
+      <li>
+        <p><%= practice_comment.practice_comment_content %></p>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
