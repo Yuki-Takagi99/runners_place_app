@@ -35,27 +35,29 @@
 						<% end %>
 						</strong>
 					</li>
+					<li class="list-group-item">
+						<strong>
+							<div class="follower">
+								<%= link_to followers_user_path(@user) do %>
+									フォローされている人数：<%= @user.followers.count %>人
+								<% end %>
+							</div>
+							<div class="following">
+								<%= link_to following_user_path(@user) do %>
+									フォローしている人数：<%= @user.following.count %>人
+								<% end %>
+							</div>
+						</strong>
+					</li>
 				</ul>
+				<div>
+						<%= render "follow_form" %>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<br>
 <% if current_user.id == @user.id %>
 	<%= link_to "編集", edit_user_registration_path(current_user.id) %>
 <% end %>
-
-<div class="follower">
-	<%= link_to followers_user_path(@user) do %>
-  	<h5 style="color: black;">フォロワー：<%= @user.followers.count %>人</h5>
-	<% end %>
-</div>
-<div class="follow">
-	<%= link_to following_user_path(@user) do %>
-	  <h5 style="color: black;">フォロー：<%= @user.following.count %>人</h5>
-	<% end %>
-</div>
-<div>
-		<%= render "follow_form" %>
-</div>
