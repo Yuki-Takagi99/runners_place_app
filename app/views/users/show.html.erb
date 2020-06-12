@@ -45,3 +45,17 @@
 <% if current_user.id == @user.id %>
 	<%= link_to "編集", edit_user_registration_path(current_user.id) %>
 <% end %>
+
+<div class="follower">
+	<%= link_to followers_user_path(@user) do %>
+  	<h5 style="color: black;">フォロワー：<%= @user.followers.count %>人</h5>
+	<% end %>
+</div>
+<div class="follow">
+	<%= link_to following_user_path(@user) do %>
+	  <h5 style="color: black;">フォロー：<%= @user.following.count %>人</h5>
+	<% end %>
+</div>
+<div>
+		<%= render "follow_form" %>
+</div>

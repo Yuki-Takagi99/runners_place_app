@@ -1,0 +1,24 @@
+<h2><%= @user.user_name %>さんがフォローしているユーザ</h2>
+
+<% if @user.following.present? %>
+  <% @user.following.each do |user| %>
+    <table class="table table-bordered table-hover table-responsive">
+      <thead>
+        <tr class="info">
+          <th><%= User.human_attribute_name(:user_name) %></th>
+          <th><%= User.human_attribute_name(:self_introduction) %></th>
+          <th><%= User.human_attribute_name(:target) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= link_to user.user_name.truncate(24), user_path(user) %></td>
+          <td><%= user.self_introduction.truncate(24) %></td>
+          <td><%= user.target.truncate(24) %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+<% else %>
+  <h3>フォローしているユーザがいません！</h3>
+<% end %>
