@@ -1,60 +1,77 @@
-<h1><%= current_user.user_name %>さんの練習記録</h1>
-
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		今月の走行距離は<%= @practice_diaries.this_month_distance %>kmです！
+		今月の走行距離は<strong><%= @practice_diaries.this_month_distance %>km</strong>です！
 	</div>
-	<div class="panel-body">
-		<% if current_user.image? %>
-			<image src=<%= current_user.image %> class = "icon_image">
-		<% else %>
-			<image src="/assets/running_icon.png" class = "icon_image">
-		<% end %>
-
-		<ul class="list-group">
-			<li class="list-group-item">
-				ユーザー名：<%= link_to current_user.user_name, user_path(current_user) %>
-			</li>
-			<li class="list-group-item">
-				目標：
-				<% if current_user.target == "" %>
-					<%= "まだ目標はありません。" %>
+	<div class="row">
+		<div class="panel-body">
+			<div class="col-md-4">
+				<% if current_user.image? %>
+					<image src=<%= current_user.image %> class = "icon_image">
 				<% else %>
-					<%= current_user.target %>
+					<image src="/assets/default_icon.png" class = "icon_image">
 				<% end %>
-			</li>
-		</ul>
+			</div>
+
+			<div class="col-md-8">
+				<ul class="list-group">
+					<li class="list-group-item">
+						<strong><%= User.human_attribute_name(:user_name) %>：<%= link_to current_user.user_name, user_path(current_user) %></strong>
+					</li>
+					<li class="list-group-item">
+						<strong><%= User.human_attribute_name(:self_introduction) %>：
+						<% if current_user.self_introduction == "" %>
+							<%= "まだ自己紹介はありません。" %>
+						<% else %>
+							<%= simple_format current_user.self_introduction %>
+						<% end %>
+						</strong>
+					</li>
+					<li class="list-group-item">
+						<strong><%= User.human_attribute_name(:target) %>：
+						<% if current_user.target == "" %>
+							<%= "まだ目標はありません。" %>
+						<% else %>
+							<%= simple_format current_user.target %>
+						<% end %>
+						</strong>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
 </div>
 
 <%= month_calendar(attribute: :practice_date, events: @practice_diaries)  do |date, practice_diaries| %>
   <%= date %>
 
-  <% practice_diaries.each do |practice_diary| %>
-    <div>
-			<span class="glyphicon glyphicon-fire"></span>
+  	<% practice_diaries.each do |practice_diary| %>
+		<div>
+			<span class="glyphicon glyphicon-fire fire-icon"></span>
       <%= link_to practice_diary.practice_title, practice_diary %>
 			<%= practice_diary.practice_distance %> km
-    </div>
-  <% end %>
+  	</div>
+  	<% end %>
 <% end %>
 
-
 <h2>練習記録一覧</h2>
+
 <% @practice_diaries.each do |practice_diary| %>
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<%= practice_diary.set_practice_date %>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<%= practice_diary.set_practice_date %>
+		</div>
+		<div class="panel-body">
+			<p><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></p>
+			<p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= practice_diary.practice_title %></p>
+			<p><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= practice_diary.practice_content %></p>
+			<p><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= practice_diary.practice_distance %>km</p>
+			<p><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= practice_diary.set_practice_time %></p>
+			<p><%= link_to '詳細を見る', practice_diary_path(practice_diary) %></p>
+			<p>
+				<div id="practice_favorites_buttons_<%= practice_diary.id %>">
+				<%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: practice_diary} %>
+				</div>
+			</p>
+		</div>
 	</div>
-	<div class="panel-body">
-		<ul>
-			<li><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></li>
-			<li><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= practice_diary.practice_title %></li>
-			<li><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= practice_diary.practice_content %></li>
-			<li><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= practice_diary.practice_distance %>km</li>
-			<li><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= practice_diary.set_practice_time %></li>
-			<%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
-		</ul>
-	</div>
-</div>
 <% end %>

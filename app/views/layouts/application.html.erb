@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
@@ -24,10 +24,10 @@
         <div class="collapse navbar-collapse" id="navbarEexample">
           <ul class="nav navbar-nav">
           <% if user_signed_in? %>
-            <li><%= link_to "練習記録を書く", new_practice_diary_path %></li>
             <li><%= link_to "練習記録を見る", practice_diaries_path %></li>
+            <li><%= link_to "練習記録を書く", new_practice_diary_path %></li>
             <li><%= link_to "みんなの練習記録", index_all_practice_diaries_path %></li>
-            <li><%= link_to "ユーザープロフィール", user_path(id: current_user.id) %></li>
+            <li><%= link_to "プロフィール", user_path(id: current_user.id) %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           </ul>
             <p class="navbar-text navbar-right">ようこそ、<%= current_user.user_name %>さん。目標達成に向けて頑張りましょう。</p>
@@ -42,7 +42,9 @@
       <p class="alert alert-<%= key %>">
         <%= value %>
       </p>
-    <% end %>    
-    <%= yield %>
+    <% end %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

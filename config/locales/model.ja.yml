@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       practice_diary: 練習記録
+      practice_comment: 練習記録コメント
     attributes:
       practice_diary:
         practice_date: 練習日
@@ -9,4 +10,6 @@ ja:
         practice_content: 詳細
         practice_distance: 走行距離
         practice_time: 走行時間
+      practice_comment:
+        practice_comment_content: コメント
 

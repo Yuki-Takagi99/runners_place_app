@@ -1,4 +1,4 @@
-<h1>みんなの練習記録</h1>
+<h1 class="text-center">〜みんなの練習記録〜</h1>
 
 <% @practice_diaries.each do |practice_diary| %>
 <div class="panel panel-primary">
@@ -6,13 +6,17 @@
 		<%= practice_diary.set_practice_date %>
 	</div>
 	<div class="panel-body">
-		<ul>
-			<li>ユーザー名：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></li>
-			<li>タイトル：<%= practice_diary.practice_title %></li>
-			<li>詳細：<%= practice_diary.practice_content %></li>
-			<li>走行距離：<%= practice_diary.practice_distance %>km</li>
-			<li>走行時間：<%= practice_diary.set_practice_time %></li>
-			<%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
+			<p><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></p>
+			<p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= practice_diary.practice_title %></p>
+			<p><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= practice_diary.practice_content %></p>
+			<p><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= practice_diary.practice_distance %>km</p>
+			<p><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= practice_diary.set_practice_time %></p>
+			<p><%= link_to '詳細を見る', practice_diary_path(practice_diary) %></p>
+			<p>
+				<div id="practice_favorites_buttons_<%= practice_diary.id %>">
+        <%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: practice_diary } %>
+    		</div>
+			</p>
 		</ul>
 	</div>
 </div>

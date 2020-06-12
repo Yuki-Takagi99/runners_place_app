@@ -4,14 +4,14 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :users, only: [:show]
+
   resources :practice_diaries do
+    resources :practice_comments, only: [:create, :destroy, :edit, :update]
+    resource :practice_favorites, only: [:create, :destroy]
     collection do
       get 'index_all'
     end
   end
-
-
-  resources :practice_favorites, only: [:create, :destroy]
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

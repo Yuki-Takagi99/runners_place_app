@@ -1,0 +1,16 @@
+<%= render 'layouts/flash' %>
+
+<div id="comment_edit_form">
+  <%= form_with(model: [practice_diary, practice_comment]) do |form| %>
+    <div class="input-field">
+      <p><%= form.label 'コメント編集', class: "active" %></p>
+      <%= form.text_area :practice_comment_content, class: "materialize-textarea", id: "practice_comment_content_#{practice_diary.id}" %>
+      <%= button_tag :type => "submit", :class =>"btn waves-effect waves-light" do %>
+        送信
+      <% end %>
+      <%= link_to :back, class: "btn white black-text waves-effect waves-light" do %>
+        戻る
+      <% end %>
+    </div>
+  <% end %>
+</div>

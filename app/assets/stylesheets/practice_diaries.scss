@@ -1,3 +1,33 @@
 // Place all the styles related to the PracticeDiaries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  padding-top: 70px;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+.fav-btn {
+  width: 25px;
+  height: 30px;
+  font-size: 25px;
+  color: #808080;
+}
+
+.fav-btn-on {
+  width: 25px;
+  height: 30px;
+  font-size: 25px;
+  color: #e54747;
+}
+
+.fire-icon {
+  color: #fc0330;
+}

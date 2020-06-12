@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_055916) do
+ActiveRecord::Schema.define(version: 2020_06_11_055735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "practice_comments", force: :cascade do |t|
+    t.text "practice_comment_content"
+    t.bigint "practice_diary_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["practice_diary_id"], name: "index_practice_comments_on_practice_diary_id"
+    t.index ["user_id"], name: "index_practice_comments_on_user_id"
+  end
 
   create_table "practice_diaries", force: :cascade do |t|
     t.date "practice_date"
@@ -54,6 +64,8 @@ ActiveRecord::Schema.define(version: 2020_06_08_055916) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "practice_comments", "practice_diaries"
+  add_foreign_key "practice_comments", "users"
   add_foreign_key "practice_diaries", "users"
   add_foreign_key "practice_favorites", "practice_diaries"
   add_foreign_key "practice_favorites", "users"
