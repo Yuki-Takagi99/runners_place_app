@@ -1,0 +1,11 @@
+<% if @practice_comment.errors.any? %>
+  <div id="error_explanation">
+    <%= render 'layouts/flash' %>
+    <h5><%= @practice_comment.errors.count %>件のエラーがあります。</h5>
+    <ul>
+      <% @practice_comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,26 +1,18 @@
-<%= form_with(model: [practice_diary, practice_comment]) do |form| %>
-  <% if practice_comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(comment.errors.count, "error" ) %> prohibited this comment from being saved:</h2>
-      <ul>
-      <% practice_comment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="comment-form">
+  <%= form_with(model: [practice_diary, practice_comment]) do |form| %>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <p>コメントを投稿する</p>
+      </div>
+      <div class="panel-body">
+        <div class="input-field">
+          <p><%= form.label :practice_comment_content, class: "active" %></p>
+          <%= form.text_area :practice_comment_content, class: "aterialize-textarea", placeholder: "150文字以内で入力して下さい。" %>
+        </div>
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+      </div>
     </div>
   <% end %>
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <p>コメントを投稿する</p>
-    </div>
-    <div class="panel-body">
-      <div class="field">
-        <%= form.label :practice_comment_content %>
-        <%= form.text_area :practice_comment_content %>
-      </div>
-      <div class="actions">
-        <%= form.submit %>
-      </div>
-    </div>
-  </div>
-<% end %>
+</div>

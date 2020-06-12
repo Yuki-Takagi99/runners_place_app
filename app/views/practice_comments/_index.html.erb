@@ -4,23 +4,32 @@
   <h4 class="text-center">まだコメントはありません！</h4>
 <% end %>
 
-
-  <% practice_comments.each do |practice_comment| %>
-    <% if practice_comment.id.present? %>
-      <div class="panel panel-primary">
-        <li>
+<% practice_comments.order(created_at: :asc).each do |practice_comment| %>
+  <% if practice_comment.id.present? %>
+  <div id="comment_<%= practice_comment.id %>">
+    <div class="panel panel-primary">
+      <li>
           <div class="panel-heading">
             <p><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_comment.user.user_name, user_path(practice_comment.user_id) %>さん</p>
           </div>
           <div class="panel-body">
-            <div class="practice_comment-content" id ="this_comment_<%= practice_comment.id %>"></div>
-            <p><%= simple_format practice_comment.practice_comment_content %></p>
-            <p><%= link_to "コメント編集", edit_practice_diary_practice_comment_path(practice_diary, practice_comment), remote: true %> | <%= link_to "コメント削除", practice_diary_practice_comment_path(practice_comment.practice_diary_id, practice_comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?"} %></p>
+            <div id="errors_area_<%= practice_comment.id %>">
+              <%= render partial: 'practice_comments/edit_error' %>
+            </div>
+            <div class="comment-content" id ="this_comment_<%= practice_comment.id %>">
+              <%= simple_format(practice_comment.practice_comment_content) %>
+            </div>
+            <% if practice_comment.user_id == current_user.id %>
+              <p><%= link_to "コメント編集", edit_practice_diary_practice_comment_path(practice_diary, practice_comment), remote: true %> | <%= link_to "コメント削除", practice_diary_practice_comment_path(practice_comment.practice_diary_id, practice_comment.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?"} %></p>
+            <% end %>
           </div>
           <div class="panel-footer">
-            <p>投稿日時：<%= l practice_comment.created_at, format: :default %></p>
+            <p>投稿日時：<%= l practice_comment.updated_at, format: :default %></p>
           </div>
         </li>
       </div>
-    <% end %>
+    </div>
   <% end %>
+<% end %>
+
+<%= render 'layouts/flash' %>

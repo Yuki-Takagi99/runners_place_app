@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   resources :practice_diaries do
-    resources :practice_comments
+    resources :practice_comments, only: [:create, :destroy, :edit, :update]
     resource :practice_favorites, only: [:create, :destroy]
     collection do
       get 'index_all'

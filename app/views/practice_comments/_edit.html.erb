@@ -1,19 +1,16 @@
-<%= form_with(model: [practice_diary, practice_comment]) do |form| %>
-  <% if practice_comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(practice_comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-      <ul>
-        <% practice_comment.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= render 'layouts/flash' %>
+
+<div id="comment_edit_form">
+  <%= form_with(model: [practice_diary, practice_comment]) do |form| %>
+    <div class="input-field">
+      <p><%= form.label 'コメント編集', class: "active" %></p>
+      <%= form.text_area :practice_comment_content, class: "materialize-textarea", id: "practice_comment_content_#{practice_diary.id}" %>
+      <%= button_tag :type => "submit", :class =>"btn waves-effect waves-light" do %>
+        送信
+      <% end %>
+      <%= link_to :back, class: "btn white black-text waves-effect waves-light" do %>
+        戻る
+      <% end %>
     </div>
   <% end %>
-  <div class="field">
-    <%= form.label 'コメント編集' %><br>
-    <%= form.text_area :practice_comment_content, id: "practice_comment_content_#{practice_diary.id}" %>
-  </div>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
