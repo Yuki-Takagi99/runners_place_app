@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :practice_comment do
-    practice_comment_content { "MyText" }
-    practice_diary { nil }
+    practice_comment_content { "comment_test" }
   end
 end
