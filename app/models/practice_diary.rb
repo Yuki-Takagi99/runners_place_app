@@ -29,4 +29,16 @@ class PracticeDiary < ApplicationRecord
 	# 当月の走行距離を取得
 	scope :this_month_distance, -> { where(practice_date: Time.current.all_month).sum(:practice_distance).round(2) }
 
+	# 現在のユーザの練習記録を取得
+	scope :login_user_diary, -> (user) { where(user_id: "#{user}") }
+
+	# 最近の練習記録を降順に表示
+	scope :recent, -> { order(practice_date: :desc) }
+
+	# タイトルで検索
+	scope :search_title, -> (title) { where("practice_title LIKE ?", "%#{title}%") }
+
+	# 詳細で検索
+	scope :search_content, -> (content) { where("practice_content LIKE ?", "%#{content}%") }
+
 end

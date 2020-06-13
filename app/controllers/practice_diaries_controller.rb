@@ -3,7 +3,12 @@ class PracticeDiariesController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@practice_diaries = PracticeDiary.where(user_id: current_user.id).order(practice_date: :desc)
+		@practice_diaries_all = PracticeDiary.login_user_diary(current_user.id)
+		if params[:search].present?
+			@practice_diaries = PracticeDiary.login_user_diary(current_user.id).recent.search_title(params[:practice_title]).search_content(params[:practice_content])
+		else
+			@practice_diaries = PracticeDiary.login_user_diary(current_user.id).recent
+		end
 	end
 
 	def index_all

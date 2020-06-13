@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		今月の走行距離は<strong><%= @practice_diaries.this_month_distance %>km</strong>です！
+		今月の走行距離は<strong><%= @practice_diaries_all.this_month_distance %>km</strong>です！
 	</div>
 	<div class="row">
 		<div class="panel-body">
@@ -55,7 +55,7 @@
 	</div>
 </div>
 
-<%= month_calendar(attribute: :practice_date, events: @practice_diaries)  do |date, practice_diaries| %>
+<%= month_calendar(attribute: :practice_date, events: @practice_diaries_all)  do |date, practice_diaries| %>
   <%= date %>
 
   	<% practice_diaries.each do |practice_diary| %>
@@ -68,6 +68,18 @@
 <% end %>
 
 <h2>練習記録一覧</h2>
+
+<h3>検索<small> ※複数条件や部分一致での検索も可能です。</small></h3>
+<%= form_with class: "form_inline", url: practice_diaries_path, method: :get, local: true do |form| %>
+		<div class="form-group">
+			<%= form.label :practice_title, PracticeDiary.human_attribute_name(:practice_title) %>
+			<%= form.text_field :practice_title, class: 'form-control', placeholder: "タイトルを入力してください。" %>
+			<%= form.label :practice_content, PracticeDiary.human_attribute_name(:practice_content) %>
+			<%= form.text_field :practice_content, class: 'form-control', placeholder: "詳細を入力してください。" %>
+			<%= form.hidden_field :search, value: 'true' %>
+			<%= form.submit '検索', class: 'btn btn-primary'%><%= link_to 'クリア', practice_diaries_path, class: 'btn btn-danger' %>
+		</div>
+<% end %>
 
 <% @practice_diaries.each do |practice_diary| %>
 	<div class="panel panel-primary">
