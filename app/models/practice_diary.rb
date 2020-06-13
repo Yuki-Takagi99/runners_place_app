@@ -47,7 +47,8 @@ class PracticeDiary < ApplicationRecord
 		practice_title(search_params[:practice_title])
 			.practice_content(search_params[:practice_content])
       .practice_date_from(search_params[:practice_date_from])
-      .practice_date_to(search_params[:practice_date_to])
+			.practice_date_to(search_params[:practice_date_to])
+			.user_name(search_params[:user_name])
 	end
 
 	# practice_titleが存在する場合、like検索する
@@ -56,5 +57,8 @@ class PracticeDiary < ApplicationRecord
 	scope :practice_content, -> (practice_content) { where('practice_content LIKE ?', "%#{practice_content}%") if practice_content.present? }
 	# practice_dateが存在する場合、範囲検索する
   scope :practice_date_from, -> (from) { where('? <= practice_date', from) if from.present? }
-  scope :practice_date_to, -> (to) { where('practice_date <= ?', to) if to.present? }
+	scope :practice_date_to, -> (to) { where('practice_date <= ?', to) if to.present? }
+	
+	# ユーザー名で検索する
+	scope :user_name, -> (user_name) { where('users.user_name LIKE ?', "%#{user_name}%").references(:users) if user_name.present? }
 end

@@ -3,6 +3,7 @@ class PracticeDiariesController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
+		# 練習記録一覧ページ
 		@search_params = practice_diary_search_params
 		@practice_diaries = PracticeDiary.login_user_diary(current_user.id).includes(:user).recent.search(@search_params)
 
@@ -11,7 +12,7 @@ class PracticeDiariesController < ApplicationController
 	end
 
 	def index_all
-		# ログインしているユーザ以外の練習記録を取得
+		# みんなの練習記録ページ
 		@search_params = practice_diary_search_params
 		@practice_diaries = PracticeDiary.other_user_diary(current_user.id).includes(:user).recent.search(@search_params)
 	end
@@ -54,7 +55,7 @@ class PracticeDiariesController < ApplicationController
 
 	private
 	def practice_diary_params
-		params.require(:practice_diary).permit(:practice_date, :practice_title, :practice_content, :practice_distance, :practice_time)
+		params.require(:practice_diary).permit(:practice_date, :practice_title, :practice_content, :practice_distance, :practice_time, :user_name)
 	end
 
 	def set_practice_diary
@@ -62,6 +63,6 @@ class PracticeDiariesController < ApplicationController
 	end
 
 	def practice_diary_search_params
-		params.fetch(:search, {}).permit(:practice_title, :practice_content, :practice_date_from, :practice_date_to)
+		params.fetch(:search, {}).permit(:practice_title, :practice_content, :practice_date_from, :practice_date_to, :user_name)
 	end
 end
