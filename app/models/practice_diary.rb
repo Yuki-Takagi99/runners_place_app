@@ -35,10 +35,23 @@ class PracticeDiary < ApplicationRecord
 	# 最近の練習記録を降順に表示
 	scope :recent, -> { order(practice_date: :desc) }
 
-	# タイトルで検索
-	scope :search_title, -> (title) { where("practice_title LIKE ?", "%#{title}%") }
+	# 練習記録の検索
+	scope :search, -> (search_params) do
+		# search_paramsが空の場合、以降の処理を行わない
+    return if search_params.blank?
 
-	# 詳細で検索
-	scope :search_content, -> (content) { where("practice_content LIKE ?", "%#{content}%") }
+		# 検索パラメータを指定する
+		practice_title(search_params[:practice_title])
+			.practice_content(search_params[:practice_content])
+      .practice_date_from(search_params[:practice_date_from])
+      .practice_date_to(search_params[:practice_date_to])
+	end
 
+	# practice_titleが存在する場合、like検索する
+	scope :practice_title, -> (practice_title) { where('practice_title LIKE ?', "%#{practice_title}%") if practice_title.present? }
+	# practice_contentが存在する場合、like検索する
+	scope :practice_content, -> (practice_content) { where('practice_content LIKE ?', "%#{practice_content}%") if practice_content.present? }
+	# practice_dateが存在する場合、範囲検索する
+  scope :practice_date_from, -> (from) { where('? <= practice_date', from) if from.present? }
+  scope :practice_date_to, -> (to) { where('practice_date <= ?', to) if to.present? }
 end

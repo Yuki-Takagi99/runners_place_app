@@ -3,12 +3,11 @@ class PracticeDiariesController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@practice_diaries_all = PracticeDiary.login_user_diary(current_user.id)
-		if params[:search].present?
-			@practice_diaries = PracticeDiary.login_user_diary(current_user.id).recent.search_title(params[:practice_title]).search_content(params[:practice_content])
-		else
-			@practice_diaries = PracticeDiary.login_user_diary(current_user.id).recent
-		end
+		@search_params = practice_diary_search_params
+		@practice_diaries = PracticeDiary.login_user_diary(current_user.id).includes(:user).recent.search(@search_params)
+
+		# 月間走行距離の取得
+		@practice_diaries_all = PracticeDiary.login_user_diary(current_user.id).includes(:user)
 	end
 
 	def index_all
@@ -60,4 +59,9 @@ class PracticeDiariesController < ApplicationController
 	def set_practice_diary
 		@practice_diary = PracticeDiary.find(params[:id])
 	end
+
+	def practice_diary_search_params
+		params.fetch(:search, {}).permit(:practice_title, :practice_content, :practice_date_from, :practice_date_to)
+	end
+	
 end
