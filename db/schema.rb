@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_055735) do
+ActiveRecord::Schema.define(version: 2020_06_12_064907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "following_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follower_id", "following_id"], name: "index_friendships_on_follower_id_and_following_id", unique: true
+  end
 
   create_table "practice_comments", force: :cascade do |t|
     t.text "practice_comment_content"

@@ -48,7 +48,7 @@ class PracticeCommentsController < ApplicationController
 
   private
   def practice_comment_params
-    params.require(:practice_comment).permit(:practice_diary_id, :practice_comment_content)
+    params.require(:practice_comment).permit(:practice_diary_id, :practice_comment_content, :user_id)
   end
 
   def set_practice_diary

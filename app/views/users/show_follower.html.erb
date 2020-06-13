@@ -1,0 +1,26 @@
+<h2><%= @user.user_name %>さんのフォロワー</h2>
+
+<% if @user.followers.present? %>
+  <table class="table table-bordered table-hover table-responsive">
+    <thead>
+      <tr class="info">
+        <th><%= User.human_attribute_name(:user_name) %></th>
+        <th><%= User.human_attribute_name(:self_introduction) %></th>
+        <th><%= User.human_attribute_name(:target) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.followers.each do |user| %>
+        <tr>
+          <td><%= link_to user.user_name.truncate(24), user_path(user) %></td>
+          <td><%= user.self_introduction.truncate(24) %></td>
+          <td><%= user.target.truncate(24) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>まだフォロワーがいません！</h3>
+<% end %>
+
+<h5><%= link_to 'プロフィールに戻る', user_path(@user) %></h5>

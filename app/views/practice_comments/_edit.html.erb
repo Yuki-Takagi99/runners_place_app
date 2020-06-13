@@ -4,7 +4,7 @@
   <%= form_with(model: [practice_diary, practice_comment]) do |form| %>
     <div class="input-field">
       <p><%= form.label 'コメント編集', class: "active" %></p>
-      <%= form.text_area :practice_comment_content, class: "materialize-textarea", id: "practice_comment_content_#{practice_diary.id}" %>
+      <%= form.text_area :practice_comment_content, size: "100x10", class: "materialize-textarea", id: "practice_comment_content_#{practice_diary.id}" %>
       <%= button_tag :type => "submit", :class =>"btn waves-effect waves-light" do %>
         送信
       <% end %>

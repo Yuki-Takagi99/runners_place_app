@@ -35,6 +35,20 @@
 						<% end %>
 						</strong>
 					</li>
+					<li class="list-group-item">
+						<strong>
+							<div class="follower">
+								<%= link_to followers_user_path(current_user) do %>
+									フォローされている人数：<%= current_user.followers.count %>人
+								<% end %>
+							</div>
+							<div class="following">
+								<%= link_to following_user_path(current_user) do %>
+									フォローしている人数：<%= current_user.following.count %>人
+								<% end %>
+							</div>
+						</strong>
+					</li>
 				</ul>
 			</div>
 		</div>
