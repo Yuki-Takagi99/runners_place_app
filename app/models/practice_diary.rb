@@ -32,6 +32,9 @@ class PracticeDiary < ApplicationRecord
 	# 現在のユーザの練習記録を取得
 	scope :login_user_diary, -> (user) { where(user_id: "#{user}") }
 
+	# ログインユーザ以外の練習記録を取得
+	scope :other_user_diary, -> (user) { where.not(user_id: "#{user}") }
+
 	# 最近の練習記録を降順に表示
 	scope :recent, -> { order(practice_date: :desc) }
 

@@ -88,7 +88,7 @@
       <%= f.date_field :practice_date_from, value: @search_params[:practice_date_from], class: "form-control" %> ~ <%= f.date_field :practice_date_to, value: @search_params[:practice_date_to], class: "form-control" %>
     </div>
 		<div class="actions">
-      <%= f.submit '検索', class: "btn btn-info" %><%= link_to 'クリア', practice_diaries_path, class: "btn btn-danger"%>
+      <br><%= f.submit '検索', class: "btn btn-info" %><%= link_to 'クリア', practice_diaries_path, class: "btn btn-danger"%>
     </div>
 	</div>
   <% end %>

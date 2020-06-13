@@ -12,7 +12,8 @@ class PracticeDiariesController < ApplicationController
 
 	def index_all
 		# ログインしているユーザ以外の練習記録を取得
-		@practice_diaries = PracticeDiary.where.not(user_id: current_user.id).order(practice_date: :desc)
+		@search_params = practice_diary_search_params
+		@practice_diaries = PracticeDiary.other_user_diary(current_user.id).includes(:user).recent.search(@search_params)
 	end
 
 	def new
@@ -63,5 +64,4 @@ class PracticeDiariesController < ApplicationController
 	def practice_diary_search_params
 		params.fetch(:search, {}).permit(:practice_title, :practice_content, :practice_date_from, :practice_date_to)
 	end
-	
 end
