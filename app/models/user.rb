@@ -19,6 +19,9 @@ class User < ApplicationRecord
   has_many :follower_friendships, foreign_key: "following_id", class_name: "Friendship", dependent: :destroy
   has_many :followers, through: :follower_friendships
 
+  # イベント機能のアソシエーション
+  has_many :events, dependent: :destroy
+
   #フォローしているかを確認するメソッド
   def following?(user)
     following_friendships.find_by(following_id: user.id)

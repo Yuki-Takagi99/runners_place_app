@@ -1,2 +1,18 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+<h1 class="text-center">イベント一覧</h1>
+
+<%= link_to 'イベントを登録する', new_event_path %>
+
+<% @events.each do |event| %>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+		</div>
+		<div class="panel-body">
+      <p>イベント開催日時：<%= event.event_date %></p>
+			<p>イベントタイトル：<%= event.event_title %></p>
+			<p>イベント詳細：<%= event.event_content %></p>
+			<p>最小催行人数：<%= event.minimum_number_of_participant %>人</p>
+			<p>場所：<%= event.address %></p>
+			<%= link_to '詳細を見る', event_path(event) %>
+		</div>
+	</div>
+<% end %>
