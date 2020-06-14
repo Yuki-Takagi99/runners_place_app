@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :events
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
