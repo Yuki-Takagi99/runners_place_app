@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		今月の走行距離は<strong><%= @practice_diaries.this_month_distance %>km</strong>です！
+		今月の走行距離は<strong><%= @practice_diaries_all.this_month_distance %>km</strong>です！
 	</div>
 	<div class="row">
 		<div class="panel-body">
@@ -55,7 +55,7 @@
 	</div>
 </div>
 
-<%= month_calendar(attribute: :practice_date, events: @practice_diaries)  do |date, practice_diaries| %>
+<%= month_calendar(attribute: :practice_date, events: @practice_diaries_all)  do |date, practice_diaries| %>
   <%= date %>
 
   	<% practice_diaries.each do |practice_diary| %>
@@ -69,10 +69,36 @@
 
 <h2>練習記録一覧</h2>
 
+<h3>検索<small> ※複数条件や部分一致での検索も可能です。</small></h3>
+<div class="search-form">
+  <%= form_with(scope: :search, url: practice_diaries_path, method: :get, local: true) do |f| %>
+    <div class="field">
+      <%= f.label(:practice_title, PracticeDiary.human_attribute_name(:practice_title)) %>
+      <%= f.text_field :practice_title, value: @search_params[:practice_title], class: "form-control", placeholder: "タイトルを入力してください" %>
+    </div>
+
+		<div class="field">
+      <%= f.label(:practice_content, PracticeDiary.human_attribute_name(:practice_content)) %>
+      <%= f.text_field :practice_content, value: @search_params[:practice_content], class: "form-control", placeholder: "詳細を入力してください" %>
+    </div>
+
+		<div class="form-inline">
+			<div class="field">
+				<%= f.label(:practice_date, PracticeDiary.human_attribute_name(:practice_date)) %><br>
+				<%= f.date_field :practice_date_from, value: @search_params[:practice_date_from], class: "form-control" %> ~ <%= f.date_field :practice_date_to, value: @search_params[:practice_date_to], class: "form-control" %>
+			</div>
+		</div>
+		<div class="actions">
+      <br><%= f.submit '検索', class: "btn btn-info" %><%= link_to 'クリア', practice_diaries_path, class: "btn btn-danger"%>
+    </div>
+  <% end %>
+</div>
+
+<br>
 <% @practice_diaries.each do |practice_diary| %>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<%= practice_diary.set_practice_date %>
+			<%= practice_diary.practice_date %>
 		</div>
 		<div class="panel-body">
 			<p><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></p>
