@@ -14,12 +14,16 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
-		if @event.save
-			redirect_to @event, success: "イベントを作成しました!"
-		else
-			flash.now[:danger] = "イベントの投稿に失敗しました。"
-			render :new
-		end
+
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to @event, success: "イベントを作成しました!" }
+        format.js { render :show, status: :created, location: @event }
+      else
+        flash.now[:danger] = 'イベントの投稿に失敗しました。。。'
+        format.html { render :new }
+      end
+    end
   end
 
   def edit

@@ -5,3 +5,40 @@
 <p>イベント詳細：<%= @event.event_content %></p>
 <p>最小催行人数：<%= @event.minimum_number_of_participant %>人</p>
 <p>場所：<%= @event.address %></p>
+
+<script type="text/javascript">
+  function initMap() {
+    var test ={lat: <%= @event.latitude %>, lng: <%= @event.longitude %>};
+    var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 15,
+              center: test
+              });
+    var transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
+
+    var contentString = '場所：<%= @event.address %>';
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    var marker = new google.maps.Marker({
+                  position:test,
+                  map: map,
+                  title: contentString,
+                  animation: google.maps.Animation.DROP,
+                });
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
+</script>
+
+<style type="text/css">
+  #map { height: 300px; width: 800px;}
+</style>
+
+<div id="map"></div>
