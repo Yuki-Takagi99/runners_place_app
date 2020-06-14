@@ -2,17 +2,25 @@
 
 <%= link_to 'イベントを登録する', new_event_path %>
 
-<% @events.each do |event| %>
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-		</div>
-		<div class="panel-body">
-      <p>イベント開催日時：<%= event.event_date %></p>
-			<p>イベントタイトル：<%= event.event_title %></p>
-			<p>イベント詳細：<%= event.event_content %></p>
-			<p>最小催行人数：<%= event.minimum_number_of_participant %>人</p>
-			<p>場所：<%= event.address %></p>
-			<%= link_to '詳細を見る', event_path(event) %>
-		</div>
-	</div>
-<% end %>
+<h3>これから開催されるイベントは<strong><%= @events.count %>件</strong>です！</h3>
+
+<table class="table table-bordered table-hover table-responsive">
+	<thead>
+		<tr class="info">
+			<th><%= Event.human_attribute_name(:event_date) %></th>
+			<th><%= Event.human_attribute_name(:event_title) %></th>
+			<th><%= Event.human_attribute_name(:address) %></th>
+			<th><%= '主催者' %></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @events.each do |event| %>
+			<tr>
+				<td><%= event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %> から開始</td>
+				<td><%= link_to event.event_title, event_path(event) %></td>
+				<td><%= event.address %></td>
+				<td><%= link_to event.user.user_name, user_path(event.user_id) %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

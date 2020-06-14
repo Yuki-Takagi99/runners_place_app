@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = Event.all
+    @events = Event.all.recent
   end
 
   def show
@@ -14,15 +14,10 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
-
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, success: "イベントを作成しました!" }
-        format.js { render :show, status: :created, location: @event }
-      else
-        format.html { render :new }
-        format.js { render :new }
-      end
+    if @event.save
+      redirect_to @event, success: 'イベントを作成しました!'
+    else
+      render :new, notice: 'イベントが作成できませんでした'
     end
   end
 
@@ -30,17 +25,16 @@ class EventsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'イベントを編集しました' }
-        format.js { render :show, status: :ok, location: @event }
-      else
-        format.html { render :edit, notice: 'イベントが編集できませんでした' }
-      end
+    if @event.update(event_params)
+      redirect_to @event, notice: 'イベントを編集しました'
+    else
+      render :edit, notice: 'イベントが編集できませんでした'
     end
   end
 
   def destroy
+    @event.destroy
+    redirect_to events_path, success: 'イベントを削除しました'
   end
 
   private

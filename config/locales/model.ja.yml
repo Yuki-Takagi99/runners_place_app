@@ -12,4 +12,10 @@ ja:
         practice_time: 走行時間
       practice_comment:
         practice_comment_content: コメント
+      event:
+        event_date: 開催日時
+        event_title: イベント名
+        event_content: イベント内容
+        minimum_number_of_participant: 最小催行人数
+        address: 開催場所
 

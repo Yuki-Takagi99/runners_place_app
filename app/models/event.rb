@@ -7,4 +7,8 @@ class Event < ApplicationRecord
   # ジオコーディング用
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
+
+  # 開催日時が近いイベント順に表示
+  scope :recent, -> { order(event_date: :asc) }
+  
 end

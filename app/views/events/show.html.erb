@@ -1,18 +1,39 @@
 <h1>イベント詳細</h1>
 
-<p>イベント開催日時：<%= @event.event_date %></p>
-<p>イベントタイトル：<%= @event.event_title %></p>
-<p>イベント詳細：<%= @event.event_content %></p>
-<p>主催者：<%= link_to @event.user.user_name, user_path(@event.user_id) %> さん</p>
-<p>最小催行人数：<%= @event.minimum_number_of_participant %>人</p>
-<p>場所：<%= @event.address %></p>
+<table class="table table-borderd">
+  <tr>
+    <th><%= Event.human_attribute_name(:event_date) %></th>
+    <td><%= @event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %></td>
+  </tr>
+  <tr>
+    <th><%= Event.human_attribute_name(:event_title) %></th>
+    <td><%= simple_format @event.event_title %></td>
+  </tr>
+  <tr>
+    <th><%= Event.human_attribute_name(:event_content) %></th>
+    <td><%= simple_format @event.event_content %></td>
+  </tr>
+  <tr>
+    <th>主催者</th>
+    <td><%= link_to @event.user.user_name, user_path(@event.user_id) %> さん</td>
+  </tr>
+  <tr>
+    <th>最小催行人数</th>
+    <td><%= @event.minimum_number_of_participant %>人</td>
+  </tr>
+  <tr>
+    <th><%= Event.human_attribute_name(:address) %></th>
+    <td><%= @event.address %></td>
+  </tr>
+</table>
 
 <script type="text/javascript">
   function initMap() {
     var test ={lat: <%= @event.latitude %>, lng: <%= @event.longitude %>};
     var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 15, 
-              center: test
+              zoom: 18,
+              center: test,
+              scaleControl: true,
               });
     var transitLayer = new google.maps.TransitLayer();
     transitLayer.setMap(map);
@@ -25,7 +46,8 @@
     var marker = new google.maps.Marker({
                   position:test,
                   map: map,
-                  title: contentString
+                  title: contentString,
+                  animation: google.maps.Animation.DROP,
                  });
 
      marker.addListener('click', function() {
@@ -40,12 +62,16 @@
 </script>
 
 <style type="text/css">
-  #map { height: 200px;
-         width: 70%;}
+  #map { height: 450px;
+         width: 100%;}
 </style>
 
 <div id="map"></div>
 
+<% if @event.user_id == current_user.id %>
+  <%= link_to '編集', edit_event_path(@event) %> |
+  <%= link_to '削除', @event, method: :delete, data: { confirm: 'イベントを削除します。よろしいですか?' } %>
+<% end %>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<br>
+<%= link_to 'イベント一覧に戻る', events_path %>
