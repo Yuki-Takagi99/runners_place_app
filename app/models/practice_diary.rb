@@ -17,9 +17,9 @@ class PracticeDiary < ApplicationRecord
 	end
 
 	# 練習日表示の成型
-	def set_practice_date
-		practice_date.strftime("%Y年%m月%d日")
-	end
+	# def set_practice_date
+	# 	practice_date.strftime("%Y年%m月%d日")
+	# end
 
 	# いいね！しているかどうかを判断
 	def favorited_by?(user)
