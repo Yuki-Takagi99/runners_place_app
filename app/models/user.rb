@@ -21,6 +21,8 @@ class User < ApplicationRecord
 
   # イベント機能のアソシエーション
   has_many :events, dependent: :destroy
+  # イベント参加機能のアソシエーション
+  has_many :participant_managements, dependent: :destroy
 
   #フォローしているかを確認するメソッド
   def following?(user)
