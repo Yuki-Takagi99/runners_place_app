@@ -1,7 +1,8 @@
 class PracticeDiary < ApplicationRecord
-	validates :practice_title, presence: true
-	validates :practice_content, presence: true
-	validates :practice_distance, presence: true
+	validates :practice_date, presence: true
+	validates :practice_title, presence: true, length: { maximum: 100 }
+	validates :practice_content, presence: true, length: { maximum: 1000 }
+	validates :practice_distance, presence: true, numericality: { greater_than: 0.1 }
 	validates :practice_time, presence: true
 	belongs_to :user
 	# お気に入り機能のアソシエーション
