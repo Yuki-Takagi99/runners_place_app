@@ -18,7 +18,7 @@
     <td><%= link_to @event.user.user_name, user_path(@event.user_id) %> さん</td>
   </tr>
   <tr>
-    <th>最小催行人数</th>
+    <th><%= Event.human_attribute_name(:minimum_number_of_participant) %></th>
     <td><%= @event.minimum_number_of_participant %>人</td>
   </tr>
   <tr>
@@ -38,7 +38,7 @@
     var transitLayer = new google.maps.TransitLayer();
     transitLayer.setMap(map);
 
-    var contentString = '住所：<%= @event.address %>';
+    var contentString = '場所：<%= @event.address %>';
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
