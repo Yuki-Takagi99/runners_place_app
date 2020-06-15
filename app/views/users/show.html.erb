@@ -61,3 +61,27 @@
 <% if current_user.id == @user.id %>
 	<%= link_to "編集", edit_user_registration_path(current_user.id) %>
 <% end %>
+
+<% if @participant_events.present? %>
+	<h3>参加予定のイベント</h3>
+  <table class="table table-bordered table-hover table-responsive">
+    <thead>
+      <tr class="info">
+        <th><%= Event.human_attribute_name(:event_date) %></th>
+        <th><%= Event.human_attribute_name(:event_title) %></th>
+        <th><%= Event.human_attribute_name(:address) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @participant_events.each do |event| %>
+        <tr>
+          <td><%= event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %></td>
+          <td><%= link_to event.event_title, event_path(event) %></td>
+          <td><%= event.address %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>参加予定のイベントはありません！</h3>
+<% end %>
