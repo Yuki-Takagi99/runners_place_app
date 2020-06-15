@@ -18,4 +18,6 @@ ja:
         event_content: イベント内容
         minimum_number_of_participant: 最小催行人数
         address: 開催場所
+      event_comment:
+        event_comment_content: コメント
 

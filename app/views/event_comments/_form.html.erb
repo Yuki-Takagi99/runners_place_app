@@ -1,0 +1,18 @@
+<div class="comment-form">
+  <%= form_with(model: [event, event_comment]) do |form| %>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <p>コメントを投稿する</p>
+      </div>
+      <div class="panel-body">
+        <div class="input-field">
+          <p><%= form.label :event_comment_content, class: "active" %></p>
+          <%= form.text_area :event_comment_content, class: "aterialize-textarea", size: "100x10", placeholder: "150文字以内で入力して下さい。" %>
+        </div>
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

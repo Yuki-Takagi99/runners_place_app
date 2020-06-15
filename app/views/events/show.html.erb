@@ -81,3 +81,16 @@
 
 <br>
 <%= link_to 'イベント一覧に戻る', events_path %>
+
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+    <h3 class="text-center">みんなのコメント</h3>
+
+    <div id="comments_area">
+      <%= render partial: 'event_comments/index', locals: { event_comments: @event_comments, event: @event } %>
+    </div>
+
+    <%= render partial: 'event_comments/form', locals: { event_comment: @event_comment, event: @event } %>
+  </div>
+</div>
