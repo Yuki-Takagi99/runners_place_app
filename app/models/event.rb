@@ -1,6 +1,5 @@
 class Event < ApplicationRecord
   belongs_to :user
-
   validates :event_title, presence: true
 	validates :event_content, presence: true
   validates :minimum_number_of_participant, presence: true

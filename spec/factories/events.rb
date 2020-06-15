@@ -4,9 +4,9 @@ FactoryBot.define do
     event_title { "MyString" }
     event_content { "MyText" }
     minimum_number_of_participant { 1 }
-    address { "MyString" }
+    address { "国立競技場" }
     latitude { 1.5 }
     longitude { 1.5 }
-    user { nil }
+    user_id { 1 }
   end
 end
