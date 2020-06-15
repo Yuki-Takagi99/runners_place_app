@@ -1,7 +1,8 @@
 class PracticeDiary < ApplicationRecord
-	validates :practice_title, presence: true
-	validates :practice_content, presence: true
-	validates :practice_distance, presence: true
+	validates :practice_date, presence: true
+	validates :practice_title, presence: true, length: { maximum: 100 }
+	validates :practice_content, presence: true, length: { maximum: 1000 }
+	validates :practice_distance, presence: true, numericality: { greater_than: 0.1 }
 	validates :practice_time, presence: true
 	belongs_to :user
 	# お気に入り機能のアソシエーション
@@ -17,9 +18,9 @@ class PracticeDiary < ApplicationRecord
 	end
 
 	# 練習日表示の成型
-	# def set_practice_date
-	# 	practice_date.strftime("%Y年%m月%d日")
-	# end
+	def set_practice_date
+		practice_date.strftime("%Y年%m月%d日")
+	end
 
 	# いいね！しているかどうかを判断
 	def favorited_by?(user)

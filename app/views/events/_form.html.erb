@@ -1,0 +1,39 @@
+<div class="raw">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with(model: @event, local: true) do |f| %>
+      <% if @event.errors.present? %>
+          <div id="error_explanation">
+            <h2><%= @event.errors.count %>件のエラーがあります。</h2>
+              <ul>
+                <% @event.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+          </div>
+      <% end %>
+      <div class="form-group">
+        <%= f.label :event_date %><br>
+        <%= f.datetime_field :event_date, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :event_title %>
+        <%= f.text_field :event_title, class: 'form-control', placeholder: "イベントのタイトルを入力してください。（100文字以内）" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :event_content %>
+        <%= f.text_area :event_content, class: 'form-control', placeholder: "イベントの詳細内容を入力してください。（1000文字以内）", size: "10x10" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :minimum_number_of_participant %>
+        <%= f.number_field :minimum_number_of_participant, class: 'form-control', placeholder: "最小催行人数を入力してください。", min: 1 %> 人
+      </div>
+      <div class="form-group">
+        <%= f.label :address %>
+        <%= f.text_field :address, class: 'form-control', placeholder: "住所や場所を入力してください。（50文字以内）" %>
+      </div>
+      <div class="form-group">
+          <%= f.submit class: 'btn btn-info' %>
+      </div>
+    <% end %>
+  </div>
+</div>
