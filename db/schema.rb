@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_022902) do
+ActiveRecord::Schema.define(version: 2020_06_15_044513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(version: 2020_06_14_022902) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["follower_id", "following_id"], name: "index_friendships_on_follower_id_and_following_id", unique: true
+  end
+
+  create_table "participant_managements", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_participant_managements_on_event_id"
+    t.index ["user_id", "event_id"], name: "index_participant_managements_on_user_id_and_event_id", unique: true
+    t.index ["user_id"], name: "index_participant_managements_on_user_id"
   end
 
   create_table "practice_comments", force: :cascade do |t|
@@ -87,6 +97,8 @@ ActiveRecord::Schema.define(version: 2020_06_14_022902) do
   end
 
   add_foreign_key "events", "users"
+  add_foreign_key "participant_managements", "events"
+  add_foreign_key "participant_managements", "users"
   add_foreign_key "practice_comments", "practice_diaries"
   add_foreign_key "practice_comments", "users"
   add_foreign_key "practice_diaries", "users"
