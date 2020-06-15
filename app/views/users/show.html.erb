@@ -35,23 +35,23 @@
 						<% end %>
 						</strong>
 					</li>
-					<li class="list-group-item">
-						<strong>
-							<div class="follower">
-								<%= link_to followers_user_path(@user) do %>
-									フォローされている人数：<%= @user.followers.count %>人
-								<% end %>
-							</div>
-							<div class="following">
-								<%= link_to following_user_path(@user) do %>
-									フォローしている人数：<%= @user.following.count %>人
-								<% end %>
-							</div>
-						</strong>
-					</li>
+						<% if @user.id != current_user.id %>
+							<%= render "follow_form" %>
+						<% else %>
+							<li class="list-group-item">
+								<strong>
+									<%= link_to followers_user_path(@user) do %>
+										フォロワー：<%= @user.followers.count %>人
+									<% end %>
+
+									<%= link_to following_user_path(@user) do %>
+										フォロー：<%= @user.following.count %>人
+									<% end %>
+									</strong>
+							</li>
+						<% end %>
 				</ul>
 				<div>
-						<%= render "follow_form" %>
 				</div>
 			</div>
 		</div>
