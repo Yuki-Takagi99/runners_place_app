@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :events do
+    resources :event_comments, only: [:create, :destroy, :edit, :update]
     resource :participant_managements, only: [:create, :destroy]
   end
 

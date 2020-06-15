@@ -2,7 +2,9 @@ class Event < ApplicationRecord
   belongs_to :user
   # イベント参加機能のアソシエーション
 	has_many :participant_managements, dependent: :destroy
-	has_many :participant_users, through: :participant_managements, source: :user
+  has_many :participant_users, through: :participant_managements, source: :user
+  # コメント機能のアソシエーション
+	has_many :event_comments, dependent: :destroy
 
   validates :event_date, presence: true
   # event_dateに本日以前の日程を選択できないようにするバリデーション
