@@ -98,7 +98,7 @@
 <% @practice_diaries.each do |practice_diary| %>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<%= practice_diary.practice_date %>
+			<%= practice_diary.set_practice_date %>
 		</div>
 		<div class="panel-body">
 			<p><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></p>
