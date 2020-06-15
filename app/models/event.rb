@@ -6,7 +6,7 @@ class Event < ApplicationRecord
   validate :date_not_before_today
   validates :event_title, presence: true, length: { maximum: 100 }
 	validates :event_content, presence: true, length: { maximum: 1000 }
-  validates :minimum_number_of_participant, presence: true, numericality: { greater_than: 1 }
+  validates :minimum_number_of_participant, presence: true, numericality: { greater_than: 0 }
   validates :address, presence: true, length: { maximum: 50 }
 
   # ジオコーディング用
