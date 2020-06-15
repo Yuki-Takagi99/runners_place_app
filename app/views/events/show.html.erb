@@ -1,5 +1,11 @@
 <h1>イベント詳細</h1>
 
+<p>
+  <div id="participant_managements_buttons_<%= @event.id %>">
+    <%= render partial: 'participant_managements/participant_management', locals: { event: @event} %>
+  </div>
+</p>
+
 <table class="table table-borderd">
   <tr>
     <th><%= Event.human_attribute_name(:event_date) %></th>

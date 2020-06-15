@@ -1,5 +1,8 @@
 class Event < ApplicationRecord
   belongs_to :user
+  # イベント参加機能のアソシエーション
+	has_many :participant_managements, dependent: :destroy
+	has_many :participant_users, through: :participant_managements, source: :user
 
   validates :event_date, presence: true
   # event_dateに本日以前の日程を選択できないようにするバリデーション
@@ -17,5 +20,9 @@ class Event < ApplicationRecord
   # 本日以前の日程を選択させないようにバリデーションを追加
   def date_not_before_today
     errors.add(:event_date, "は本日以降の日付を選択してください") if event_date.nil? || event_date < Date.today
+  end
+  # イベント参加しているかどうかの判断
+  def participated_by?(user)
+    participant_managements.where(user_id: user.id).exists?
   end
 end
