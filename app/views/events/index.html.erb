@@ -1,8 +1,21 @@
 <h1 class="text-center">イベント一覧</h1>
 
-<%= link_to 'イベントを登録する', new_event_path %>
+<h3 class="text-center">これから開催されるイベントは<strong><%= @events.count %>件</strong>です！</h3>
 
-<h3>これから開催されるイベントは<strong><%= @events.count %>件</strong>です！</h3>
+<h4 class="text-center"><%= link_to 'イベントを登録する', new_event_path %></h4>
+
+<%= paginate @events %>
+
+<% if @events.present? %>
+	<p>
+	<%= @events.total_count %>件中<%= @events.offset_value + 1 %>
+	〜<%= @events.offset_value + @events.length %>件を表示しています。
+	</p>
+<% else %>
+	<h3>まだイベントが投稿されていません。</h3>
+<% end %>
+
+
 
 <table class="table table-bordered table-hover table-responsive">
 	<thead>
