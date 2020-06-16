@@ -1,5 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe EventComment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'バリデーションテスト' do
+		before do
+			@user = create(:user)
+			@event = create(:event, user_id: @user.id)
+			@event_comment = create(:event_comment, user_id: @user.id, event_id: @event.id)
+		end
+		it 'データがあれば有効であること' do
+			expect(@event_comment).to be_valid
+    end
+
+    it 'event_comment_contentがなければ無効であること' do
+      @event_comment.event_comment_content = nil
+      expect(@event_comment).not_to be_valid
+    end
+
+    it 'event_comment_contentが151文字以上なら無効であること' do
+      @event_comment.event_comment_content = "a" * 151
+      expect(@event_comment).not_to be_valid
+    end
+
+    it 'user_idがなければ無効であること' do
+      @event_comment.user_id = nil
+      expect(@event_comment).not_to be_valid
+    end
+
+    it 'event_idがなければ無効であること' do
+      @event_comment.event_id = nil
+      expect(@event_comment).not_to be_valid
+    end
+  end
 end
