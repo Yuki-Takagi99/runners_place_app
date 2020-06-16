@@ -5,7 +5,7 @@ class PracticeDiariesController < ApplicationController
 	def index
 		# 練習記録一覧ページ
 		@search_params = practice_diary_search_params
-		@practice_diaries = PracticeDiary.login_user_diary(current_user.id).includes(:user).recent.search(@search_params)
+		@practice_diaries = PracticeDiary.login_user_diary(current_user.id).includes(:user).recent.search(@search_params).page(params[:page]).per(10)
 
 		# 月間走行距離の取得
 		@practice_diaries_all = PracticeDiary.login_user_diary(current_user.id).includes(:user)
@@ -14,7 +14,7 @@ class PracticeDiariesController < ApplicationController
 	def index_all
 		# みんなの練習記録ページ
 		@search_params = practice_diary_search_params
-		@practice_diaries = PracticeDiary.other_user_diary(current_user.id).includes(:user).recent.search(@search_params)
+		@practice_diaries = PracticeDiary.other_user_diary(current_user.id).includes(:user).recent.search(@search_params).page(params[:page]).per(10)
 	end
 
 	def new
