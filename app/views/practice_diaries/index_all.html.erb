@@ -48,7 +48,13 @@
 		<%= practice_diary.set_practice_date %>
 	</div>
 	<div class="panel-body">
-			<p><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></p>
+			<p>
+				<% if practice_diary.user.image? %>
+					<image src=<%= practice_diary.user.image %> class = "sm_icon_image"><%= link_to practice_diary.user.user_name, user_path(practice_diary.user_id) %>さん
+				<% else %>
+					<image src="/assets/default_icon.png" class = "sm_icon_image"><%= link_to practice_diary.user.user_name, user_path(practice_diary.user_id) %>さん
+				<% end %>
+      </p>
 			<p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= practice_diary.practice_title %></p>
 			<p><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= practice_diary.practice_content %></p>
 			<p><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= practice_diary.practice_distance %>km</p>
