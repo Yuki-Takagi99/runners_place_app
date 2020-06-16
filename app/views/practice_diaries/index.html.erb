@@ -55,11 +55,11 @@
   <%= date %>
 
   	<% practice_diaries.each do |practice_diary| %>
-		<div>
-			<span class="glyphicon glyphicon-fire fire-icon"></span>
-      <%= link_to practice_diary.practice_title, practice_diary %>
-			<%= practice_diary.practice_distance %> km
-  	</div>
+			<div>
+				<span class="glyphicon glyphicon-fire fire-icon"></span>
+				<%= link_to practice_diary.practice_title, practice_diary %>
+				<%= practice_diary.practice_distance %> km
+			</div>
   	<% end %>
 <% end %>
 
