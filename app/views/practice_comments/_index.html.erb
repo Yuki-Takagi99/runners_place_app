@@ -10,7 +10,13 @@
     <div class="panel panel-primary">
       <li>
           <div class="panel-heading">
-            <p><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_comment.user.user_name, user_path(practice_comment.user_id) %>さん</p>
+            <p>
+              <% if practice_comment.user.image? %>
+                <image src=<%= practice_comment.user.image %> class = "sm_icon_image"><%= link_to practice_comment.user.user_name, user_path(practice_comment.user_id) %>さん
+              <% else %>
+                <image src="/assets/default_icon.png" class = "sm_icon_image"><%= link_to practice_comment.user.user_name, user_path(practice_comment.user_id) %>さん
+              <% end %>
+            </p>
           </div>
           <div class="panel-body">
             <div id="errors_area_<%= practice_comment.id %>">
