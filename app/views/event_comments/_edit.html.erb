@@ -1,0 +1,16 @@
+<%= render 'layouts/flash' %>
+
+<div id="comment_edit_form">
+  <%= form_with(model: [event, event_comment]) do |form| %>
+    <div class="input-field">
+      <p><%= form.label 'コメント編集', class: "active" %></p>
+      <%= form.text_area :event_comment_content, size: "100x10", class: "materialize-textarea", id: "event_comment_content_#{event.id}" %>
+      <%= button_tag :type => "submit", :class =>"btn waves-effect waves-light" do %>
+        送信
+      <% end %>
+      <%= link_to :back, class: "btn white black-text waves-effect waves-light" do %>
+        戻る
+      <% end %>
+    </div>
+  <% end %>
+</div>

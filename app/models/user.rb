@@ -7,8 +7,10 @@ class User < ApplicationRecord
   has_many :practice_diaries
   # お気に入り機能のアソシエーション
   has_many :practice_favorites, dependent: :destroy
-  # コメント機能のアソシエーション
+  # 練習記録コメント機能のアソシエーション
   has_many :practice_comments, dependent: :destroy
+  # イベントコメント機能のアソシエーション
+  has_many :events_comments, dependent: :destroy
   # Userモデルのバリデーション
   validates :user_name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, length: { maximum: 255 }, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true
@@ -23,6 +25,7 @@ class User < ApplicationRecord
   has_many :events, dependent: :destroy
   # イベント参加機能のアソシエーション
   has_many :participant_managements, dependent: :destroy
+  has_many :participant_events, through: :participant_managements, source: :event
 
   #フォローしているかを確認するメソッド
   def following?(user)

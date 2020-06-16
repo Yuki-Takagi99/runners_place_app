@@ -6,6 +6,10 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event_comments = @event.event_comments
+    @event_comment = @event.event_comments.build
+    # イベント参加者の一覧を取得
+    @participant_users = @event.participant_users
   end
 
   def new

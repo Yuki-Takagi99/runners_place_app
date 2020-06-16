@@ -1,4 +1,15 @@
 <!-- フォローボタン ------------------------------------------------------------------>
+<li class="list-group-item">
+  <%= link_to followers_user_path(@user) do %>
+    フォロワー：<%= @user.followers.count %>人
+  <% end %>
+
+  <%= link_to following_user_path(@user) do %>
+    フォロー：<%= @user.following.count %>人
+  <% end %>
+</li>
+
+<br>
 <%= form_for(current_user, url: friendships_path, method: :post, remote: true) do |f| %>
   <%= hidden_field_tag :following_id, @user.id %>
   <%= f.submit "フォローする", class: "btn btn-primary" %>

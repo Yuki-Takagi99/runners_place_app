@@ -24,6 +24,18 @@
     <td><%= link_to @event.user.user_name, user_path(@event.user_id) %> さん</td>
   </tr>
   <tr>
+    <th>現在の参加者</th>
+    <td>
+    <% if @participant_users.present? %>
+      <% @participant_users.each do |participant_user| %>
+        <%= link_to participant_user.user_name, user_path(participant_user) %>さん
+      <% end %>
+    <% else %>
+      まだ参加者はいません
+    <% end %>
+    </td>
+  </tr>
+  <tr>
     <th><%= Event.human_attribute_name(:minimum_number_of_participant) %></th>
     <td><%= @event.minimum_number_of_participant %>人</td>
   </tr>
@@ -81,3 +93,16 @@
 
 <br>
 <%= link_to 'イベント一覧に戻る', events_path %>
+
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+    <h3 class="text-center">みんなのコメント</h3>
+
+    <div id="comments_area">
+      <%= render partial: 'event_comments/index', locals: { event_comments: @event_comments, event: @event } %>
+    </div>
+
+    <%= render partial: 'event_comments/form', locals: { event_comment: @event_comment, event: @event } %>
+  </div>
+</div>

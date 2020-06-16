@@ -35,23 +35,23 @@
 						<% end %>
 						</strong>
 					</li>
-					<li class="list-group-item">
-						<strong>
-							<div class="follower">
-								<%= link_to followers_user_path(@user) do %>
-									フォローされている人数：<%= @user.followers.count %>人
-								<% end %>
-							</div>
-							<div class="following">
-								<%= link_to following_user_path(@user) do %>
-									フォローしている人数：<%= @user.following.count %>人
-								<% end %>
-							</div>
-						</strong>
-					</li>
+						<% if @user.id != current_user.id %>
+							<%= render "follow_form" %>
+						<% else %>
+							<li class="list-group-item">
+								<strong>
+									<%= link_to followers_user_path(@user) do %>
+										フォロワー：<%= @user.followers.count %>人
+									<% end %>
+
+									<%= link_to following_user_path(@user) do %>
+										フォロー：<%= @user.following.count %>人
+									<% end %>
+									</strong>
+							</li>
+						<% end %>
 				</ul>
 				<div>
-						<%= render "follow_form" %>
 				</div>
 			</div>
 		</div>
@@ -60,4 +60,28 @@
 
 <% if current_user.id == @user.id %>
 	<%= link_to "編集", edit_user_registration_path(current_user.id) %>
+<% end %>
+
+<% if @participant_events.present? %>
+	<h3>参加予定のイベント</h3>
+  <table class="table table-bordered table-hover table-responsive">
+    <thead>
+      <tr class="info">
+        <th><%= Event.human_attribute_name(:event_date) %></th>
+        <th><%= Event.human_attribute_name(:event_title) %></th>
+        <th><%= Event.human_attribute_name(:address) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @participant_events.each do |event| %>
+        <tr>
+          <td><%= event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %></td>
+          <td><%= link_to event.event_title, event_path(event) %></td>
+          <td><%= event.address %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>参加予定のイベントはありません！</h3>
 <% end %>
