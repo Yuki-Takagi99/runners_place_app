@@ -19,3 +19,26 @@
  textarea {
    resize: none;
  }
+
+ #footer {
+   padding: 4em 0;
+   margin-top: 100px;
+   background: #333333;
+   color: #9D9D9D;
+   bottom: 0;
+   font-weight: 300;
+ }
+
+ #footer .footer-logo a {
+   font-size: 20px;
+   letter-spacing: 2px;
+   color: #ccc;
+   float: left;
+   padding: 7px 10px 7px 12px;
+ }
+
+ .footer-logo p {
+   font-size: 15px;
+   float: left;
+   padding: 7px 10px 7px 12px;
+ }

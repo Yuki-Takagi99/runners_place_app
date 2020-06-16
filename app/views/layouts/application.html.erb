@@ -49,4 +49,38 @@
       <%= yield %>
     </div>
   </body>
+  <footer id="footer">
+    <div class="footer-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-4 col-md-push-3">
+            <ul>
+              <li><%= link_to 'トップページ', practice_diaries_path, :style=>"color: #9D9D9D;" %></li>
+              <li>利用規約</li>
+              <li>プライバシーポリシー</li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-4 col-md-push-3">
+            <ul>
+              <li><%= link_to "記録を見る", practice_diaries_path, :style=>"color: #9D9D9D;" %></li>
+              <li><%= link_to "記録をつける", new_practice_diary_path, :style=>"color: #9D9D9D;" %></li>
+              <li><%= link_to "みんなの記録", index_all_practice_diaries_path, :style=>"color: #9D9D9D;" %></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-4 col-md-push-3">
+            <ul>
+              <li><%= link_to "イベントを登録する", new_event_path, :style=>"color: #9D9D9D;" %></li>
+              <li><%= link_to "イベントを探す", events_path, :style=>"color: #9D9D9D;" %></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-12 col-md-pull-9">
+            <div class="footer-logo">
+              <a href="">RUNNER'S PLACE</a>
+              <p><small>©2020 Yuki Takgai</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </html>
