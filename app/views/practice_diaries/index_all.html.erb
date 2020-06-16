@@ -55,9 +55,9 @@
 			<p><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= practice_diary.set_practice_time %></p>
 			<p><%= link_to '詳細を見る', practice_diary_path(practice_diary) %></p>
 			<p>
-				<div id="practice_favorites_buttons_<%= practice_diary.id %>">
+				<h3 id="practice_favorites_buttons_<%= practice_diary.id %>">
         <%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: practice_diary } %>
-    		</div>
+    		</h3>
 			</p>
 		</ul>
 	</div>
