@@ -14,10 +14,10 @@
 
 			<div class="col-md-8">
 				<ul class="list-group">
-					<li class="list-group-item">
+					<li class="list-group-practice_diaries">
 						<strong><%= User.human_attribute_name(:user_name) %>：<%= link_to current_user.user_name, user_path(current_user) %></strong>
 					</li>
-					<li class="list-group-item">
+					<li class="list-group-practice_diaries">
 						<strong><%= User.human_attribute_name(:self_introduction) %>：
 						<% if current_user.self_introduction == "" %>
 							<%= "まだ自己紹介はありません。" %>
@@ -26,7 +26,7 @@
 						<% end %>
 						</strong>
 					</li>
-					<li class="list-group-item">
+					<li class="list-group-practice_diaries">
 						<strong><%= User.human_attribute_name(:target) %>：
 						<% if current_user.target == "" %>
 							<%= "まだ目標はありません。" %>
@@ -35,7 +35,7 @@
 						<% end %>
 						</strong>
 					</li>
-					<li class="list-group-item">
+					<li class="list-group-practice_diaries">
 						<strong>
 							<%= link_to followers_user_path(current_user) do %>
 								フォロー：<%= current_user.followers.count %>人
@@ -92,7 +92,15 @@
 
 <%= paginate @practice_diaries %>
 
-<br>
+<% if @practice_diaries.present? %>
+	<p>
+	<%= @practice_diaries.total_count %>件中<%= @practice_diaries.offset_value + 1 %>
+	〜<%= @practice_diaries.offset_value + @practice_diaries.length %>件を表示しています。
+	</p>
+<% else %>
+	<h3>まだ練習記録が投稿されていません。</h3>
+<% end %>
+
 <% @practice_diaries.each do |practice_diary| %>
 	<div class="panel panel-primary">
 		<div class="panel-heading">

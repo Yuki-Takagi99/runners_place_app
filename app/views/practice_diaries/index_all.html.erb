@@ -7,7 +7,7 @@
       <%= f.label(:user_name, User.human_attribute_name(:user_name)) %>
       <%= f.text_field :user_name, value: @search_params[:user_name], class: "form-control", placeholder: "ユーザー名を入力してください" %>
     </div>
-		
+
 		<div class="form-group">
       <%= f.label(:practice_title, PracticeDiary.human_attribute_name(:practice_title)) %>
       <%= f.text_field :practice_title, value: @search_params[:practice_title], class: "form-control", placeholder: "タイトルを入力してください" %>
@@ -31,6 +31,15 @@
 </div>
 
 <%= paginate @practice_diaries %>
+
+<% if @practice_diaries.present? %>
+	<p>
+	<%= @practice_diaries.total_count %>件中<%= @practice_diaries.offset_value + 1 %>
+	〜<%= @practice_diaries.offset_value + @practice_diaries.length %>件を表示しています。
+	</p>
+<% else %>
+	<h3>まだ練習記録が投稿されていません。</h3>
+<% end %>
 
 <br>
 <% @practice_diaries.each do |practice_diary| %>
