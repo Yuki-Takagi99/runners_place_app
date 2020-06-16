@@ -14,10 +14,10 @@
 
 			<div class="col-md-8">
 				<ul class="list-group">
-					<li class="list-group-practice_diaries">
+					<li class="list-group-item">
 						<strong><%= User.human_attribute_name(:user_name) %>：<%= link_to current_user.user_name, user_path(current_user) %></strong>
 					</li>
-					<li class="list-group-practice_diaries">
+					<li class="list-group-item">
 						<strong><%= User.human_attribute_name(:self_introduction) %>：
 						<% if current_user.self_introduction == "" %>
 							<%= "まだ自己紹介はありません。" %>
@@ -26,7 +26,7 @@
 						<% end %>
 						</strong>
 					</li>
-					<li class="list-group-practice_diaries">
+					<li class="list-group-item">
 						<strong><%= User.human_attribute_name(:target) %>：
 						<% if current_user.target == "" %>
 							<%= "まだ目標はありません。" %>
@@ -35,7 +35,7 @@
 						<% end %>
 						</strong>
 					</li>
-					<li class="list-group-practice_diaries">
+					<li class="list-group-item">
 						<strong>
 							<%= link_to followers_user_path(current_user) do %>
 								フォロー：<%= current_user.followers.count %>人
@@ -109,9 +109,7 @@
 		<div class="panel-body">
 			<p><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></p>
 			<p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= practice_diary.practice_title %></p>
-			<p><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= practice_diary.practice_content %></p>
 			<p><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= practice_diary.practice_distance %>km</p>
-			<p><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= practice_diary.set_practice_time %></p>
 			<p><%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
 				<div id="practice_favorites_buttons_<%= practice_diary.id %>">
 				<%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: practice_diary} %>
