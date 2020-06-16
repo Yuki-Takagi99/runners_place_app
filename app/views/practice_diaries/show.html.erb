@@ -1,31 +1,46 @@
+<h1>練習記録詳細</h1>
 
-<div class="panel panel-primary">
-  <div class="panel-heading">
-  <%= @practice_diary.set_practice_date %>
-  </div>
-  <div class="panel-body">
-    <p><%= User.human_attribute_name(:user_name) %>：<%= link_to @practice_diary.user.user_name, user_path(@practice_diary.user) %></p>
-    <p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= @practice_diary.practice_title %></p>
-    <p><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= simple_format @practice_diary.practice_content %></p>
-    <p><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= @practice_diary.practice_distance %>km</p>
-    <p><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= @practice_diary.set_practice_time %></p>
-    <% if @practice_diary.user_id == current_user.id %>
-    <p>
-      <%= link_to edit_practice_diary_path(@practice_diary) do %>
-        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-      <% end %> |
-      <%= link_to practice_diary_path(@practice_diary), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' } do %>
-        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-      <% end %>
-    </p>
+<% if @practice_diary.user_id == current_user.id %>
+  <p>
+    <%= link_to edit_practice_diary_path(@practice_diary) do %>
+      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+    <% end %> |
+    <%= link_to practice_diary_path(@practice_diary), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' } do %>
+      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
     <% end %>
-    <p>
-      <div id="practice_favorites_buttons_<%= @practice_diary.id %>">
-        <%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: @practice_diary} %>
-      </div>
-    </p>
-  </div>
-</div>
+  </p>
+<% end %>
+
+<h3 id="practice_favorites_buttons_<%= @practice_diary.id %>">
+  <%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: @practice_diary} %>
+</h3>
+
+<table class="table table-borderd">
+  <tr>
+    <th><%= User.human_attribute_name(:user_name) %></th>
+    <td><%= link_to @practice_diary.user.user_name, user_path(@practice_diary.user) %></td>
+  </tr>
+  <tr>
+    <th><%= PracticeDiary.human_attribute_name(:practice_date) %></th>
+    <td><%= @practice_diary.set_practice_date %></td>
+  </tr>
+  <tr>
+    <th><%= PracticeDiary.human_attribute_name(:practice_title) %></th>
+    <td><%= simple_format @practice_diary.practice_title %></td>
+  </tr>
+  <tr>
+    <th><%= PracticeDiary.human_attribute_name(:practice_content) %></th>
+    <td><%= simple_format @practice_diary.practice_content %></td>
+  </tr>
+  <tr>
+    <th><%= PracticeDiary.human_attribute_name(:practice_distance) %></th>
+    <td><%= @practice_diary.practice_distance %>km</td>
+  </tr>
+  <tr>
+    <th><%= PracticeDiary.human_attribute_name(:practice_time) %></th>
+    <td><%= @practice_diary.set_practice_time %></td>
+  </tr>
+</table>
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">

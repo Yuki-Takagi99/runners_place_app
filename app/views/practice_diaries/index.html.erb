@@ -55,11 +55,11 @@
   <%= date %>
 
   	<% practice_diaries.each do |practice_diary| %>
-		<div>
-			<span class="glyphicon glyphicon-fire fire-icon"></span>
-      <%= link_to practice_diary.practice_title, practice_diary %>
-			<%= practice_diary.practice_distance %> km
-  	</div>
+			<div>
+				<span class="glyphicon glyphicon-fire fire-icon"></span>
+				<%= link_to practice_diary.practice_title, practice_diary %>
+				<%= practice_diary.practice_distance %> km
+			</div>
   	<% end %>
 <% end %>
 
@@ -90,7 +90,17 @@
   <% end %>
 </div>
 
-<br>
+<%= paginate @practice_diaries %>
+
+<% if @practice_diaries.present? %>
+	<p>
+	<%= @practice_diaries.total_count %>件中<%= @practice_diaries.offset_value + 1 %>
+	〜<%= @practice_diaries.offset_value + @practice_diaries.length %>件を表示しています。
+	</p>
+<% else %>
+	<h3>まだ練習記録が投稿されていません。</h3>
+<% end %>
+
 <% @practice_diaries.each do |practice_diary| %>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -99,13 +109,11 @@
 		<div class="panel-body">
 			<p><%= User.human_attribute_name(:user_name) %>：<%= link_to practice_diary.user.user_name, user_path(practice_diary.user) %></p>
 			<p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= practice_diary.practice_title %></p>
-			<p><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= practice_diary.practice_content %></p>
 			<p><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= practice_diary.practice_distance %>km</p>
-			<p><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= practice_diary.set_practice_time %></p>
 			<p><%= link_to '詳細を見る', practice_diary_path(practice_diary) %>
-				<div id="practice_favorites_buttons_<%= practice_diary.id %>">
+				<h3 id="practice_favorites_buttons_<%= practice_diary.id %>">
 				<%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: practice_diary} %>
-				</div>
+				</h3>
 			</p>
 		</div>
 	</div>

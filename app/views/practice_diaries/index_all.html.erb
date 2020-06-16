@@ -7,7 +7,7 @@
       <%= f.label(:user_name, User.human_attribute_name(:user_name)) %>
       <%= f.text_field :user_name, value: @search_params[:user_name], class: "form-control", placeholder: "ユーザー名を入力してください" %>
     </div>
-		
+
 		<div class="form-group">
       <%= f.label(:practice_title, PracticeDiary.human_attribute_name(:practice_title)) %>
       <%= f.text_field :practice_title, value: @search_params[:practice_title], class: "form-control", placeholder: "タイトルを入力してください" %>
@@ -30,6 +30,17 @@
   <% end %>
 </div>
 
+<%= paginate @practice_diaries %>
+
+<% if @practice_diaries.present? %>
+	<p>
+	<%= @practice_diaries.total_count %>件中<%= @practice_diaries.offset_value + 1 %>
+	〜<%= @practice_diaries.offset_value + @practice_diaries.length %>件を表示しています。
+	</p>
+<% else %>
+	<h3>まだ練習記録が投稿されていません。</h3>
+<% end %>
+
 <br>
 <% @practice_diaries.each do |practice_diary| %>
 <div class="panel panel-primary">
@@ -44,9 +55,9 @@
 			<p><%= PracticeDiary.human_attribute_name(:practice_time) %>：<%= practice_diary.set_practice_time %></p>
 			<p><%= link_to '詳細を見る', practice_diary_path(practice_diary) %></p>
 			<p>
-				<div id="practice_favorites_buttons_<%= practice_diary.id %>">
+				<h3 id="practice_favorites_buttons_<%= practice_diary.id %>">
         <%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: practice_diary } %>
-    		</div>
+    		</h3>
 			</p>
 		</ul>
 	</div>
