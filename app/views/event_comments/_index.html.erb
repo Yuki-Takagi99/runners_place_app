@@ -24,7 +24,7 @@
             <% end %>
           </div>
           <div class="panel-footer">
-            <p>投稿日時：<%= l event_comment.updated_at, format: :default %></p>
+            <p>投稿日時：<%= localize(event_comment.updated_at, 'Asia/Tokyo') %></p>
           </div>
         </li>
       </div>
