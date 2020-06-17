@@ -1,18 +1,17 @@
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<strong><%= @user.user_name %>さんのプロフィール</strong>
-	</div>
-	<div class="row">
+<div class="row">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<%= @user.user_name %>さんのプロフィール
+		</div>
 		<div class="panel-body">
-			<div class="col-md-4">
+			<div class="col-md-4 col-sm-12 col-xs-12">
 				<% if @user.image? %>
 					<image src=<%= @user.image %> class = "icon_image">
 				<% else %>
 					<image src="/assets/default_icon.png" class = "icon_image">
 				<% end %>
 			</div>
-
-			<div class="col-md-8">
+			<div class="col-md-8 col-sm-12 col-xs-12">
 				<ul class="list-group">
 					<li class="list-group-item">
 						<strong><%= User.human_attribute_name(:user_name) %>：<%= @user.user_name %></strong>
@@ -43,7 +42,6 @@
 									<%= link_to followers_user_path(@user) do %>
 										フォロワー：<%= @user.followers.count %>人
 									<% end %>
-
 									<%= link_to following_user_path(@user) do %>
 										フォロー：<%= @user.following.count %>人
 									<% end %>
@@ -51,8 +49,6 @@
 							</li>
 						<% end %>
 				</ul>
-				<div>
-				</div>
 			</div>
 		</div>
 	</div>

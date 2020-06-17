@@ -16,6 +16,11 @@
  *= require_self
  */
 
+#header {
+  margin-bottom: 70px;
+}
+
+
 textarea {
   resize: none;
 }

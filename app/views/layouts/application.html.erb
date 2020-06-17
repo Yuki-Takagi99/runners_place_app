@@ -33,7 +33,7 @@
               <li><%= link_to "プロフィール", user_path(id: current_user.id) %></li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
             </ul>
-              <p class="navbar-text navbar-right">ようこそ、<%= current_user.user_name %>さん。目標達成に向けて頑張りましょう。</p>
+              <p class="navbar-text navbar-right">ようこそ、<%= current_user.user_name %>さん！　</p>
             <% else %>
               <li><%= link_to "新規登録", new_user_registration_path %></li>
               <li><%= link_to "ログイン", new_user_session_path %></li>
@@ -43,11 +43,15 @@
       </nav>
     </header>
 
-    <% flash.each do |key, value| %>
-      <p class="alert alert-<%= key %>">
-        <%= value %>
-      </p>
-    <% end %>
+    <div class="container">
+      <div class="row">
+        <% flash.each do |key, value| %>
+          <p class="alert alert-<%= key %>">
+            <%= value %>
+          </p>
+        <% end %>
+      </div>
+    </div>
 
     <div class="container">
       <%= yield %>

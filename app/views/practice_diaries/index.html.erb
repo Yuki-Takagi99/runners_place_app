@@ -1,10 +1,10 @@
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		今月の走行距離は<strong><%= @practice_diaries_all.this_month_distance %>km</strong>です！
-	</div>
-	<div class="row">
+<div class="row">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			今月の走行距離は<strong><%= @practice_diaries_all.this_month_distance %>km</strong>です！目標達成に向けて頑張りましょう。
+		</div>
 		<div class="panel-body">
-			<div class="col-md-4">
+			<div class="col-md-4 col-sm-12 col-xs-12">
 				<% if current_user.image? %>
 					<image src=<%= current_user.image %> class = "icon_image">
 				<% else %>
@@ -12,7 +12,7 @@
 				<% end %>
 			</div>
 
-			<div class="col-md-8">
+			<div class="col-md-8 col-sm-12 col-xs-12">
 				<ul class="list-group">
 					<li class="list-group-item">
 						<strong><%= User.human_attribute_name(:user_name) %>：<%= link_to current_user.user_name, user_path(current_user) %></strong>
@@ -50,8 +50,9 @@
 		</div>
 	</div>
 </div>
+<br>
 
-<h2>マイカレンダー</h2>
+<h2 class="text-center">マイカレンダー</h2>
 <%= month_calendar(attribute: :practice_date, events: @practice_diaries_all)  do |date, practice_diaries| %>
   <%= date %>
 
@@ -64,8 +65,8 @@
   	<% end %>
 <% end %>
 
-<h2>練習記録一覧</h2>
-
+<br>
+<h2 class="text-center"><%= current_user.user_name %>さんの練習記録</h2>
 <div class="row">
 	<div class="search-form col-md-6 col-sm-8 col-xs-12">
 		<h3>検索<small> ※複数条件や部分一致での検索も可能です。</small></h3>
@@ -129,8 +130,9 @@
 		</div>
 	<% end %>
 </div>
+<br>
 
-<h3 class="text-center">フォローしているユーザーの最新投稿</h3><br>
+<h2 class="text-center">フォローしているユーザーの最新記録</h2><br>
 <div class="row">
 	<% @users.each do |user| %>
 		<% @following_users_diaries = PracticeDiary.limit(1).where(user_id: user.id).order("created_at DESC") %>
