@@ -47,7 +47,7 @@
 
 <script type="text/javascript">
   function initMap() {
-    var test ={lat: <%= @event.latitude %>, lng: <%= @event.longitude %>};
+    var test = {lat: <%= @event.latitude %>, lng: <%= @event.longitude %>};
     var map = new google.maps.Map(document.getElementById('map'), {
               zoom: 18,
               center: test,
@@ -67,11 +67,11 @@
                   title: contentString,
                   animation: google.maps.Animation.BOUNCE,
                   visible: true,
-                 });
+                });
 
-     marker.addListener('click', function() {
-       infowindow.open(map, marker);
-     });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
   }
 </script>
 
@@ -82,7 +82,7 @@
 
 <style type="text/css">
   #map { height: 450px;
-         width: 100%;}
+        width: 100%;}
 </style>
 
 <div id="map"></div>

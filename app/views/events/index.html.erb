@@ -1,5 +1,53 @@
 <h1 class="text-center">イベント一覧</h1>
 
+<script type="text/javascript">
+  function initMap() {
+    var latlng = new google.maps.LatLng(35.6803997, 139.7690174);
+    var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+					center: latlng,
+					scaleControl: true,
+      });
+    var transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
+
+    //複数のマーカー
+    <% @events.each do |event| %>
+				(function(){
+      var contentString = '<%= link_to event.event_title, event_path(event) %>';
+			var infowindow = new google.maps.InfoWindow({
+            content: contentString
+      });
+
+      var marker = new google.maps.Marker({
+          position:{lat: <%= event.latitude %>, lng: <%= event.longitude %>},
+          map: map,
+					title: contentString,
+					animation: google.maps.Animation.DROP,
+          visible: true,
+			});
+      marker.addListener('click', function() {
+          infowindow.open(map, marker);
+      });
+			})();
+			<% end %>
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+
+<script async defer
+              src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
+</script>
+
+<style type="text/css">
+  #map { height: 450px; width: 100%;}
+</style>
+
+<div id="map"></div>
+
 <h3 class="text-center">これから開催されるイベントは<strong><%= @events.count %>件</strong>です！</h3>
 
 <h4 class="text-center"><%= link_to 'イベントを登録する', new_event_path %></h4>
