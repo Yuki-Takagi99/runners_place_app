@@ -9,6 +9,10 @@ class PracticeDiariesController < ApplicationController
 
 		# 月間走行距離の取得
 		@practice_diaries_all = PracticeDiary.login_user_diary(current_user.id).includes(user: :practice_favorites, user: :practice_comments)
+
+		# フォロー中のユーザの投稿の取得
+		@user = current_user
+		@users = @user.following.order("created_at DESC").limit(4)
 	end
 
 	def index_all
