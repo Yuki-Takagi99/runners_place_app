@@ -2,11 +2,11 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = Event.all.recent.page(params[:page]).per(30)
+    @events = Event.all.includes(:event_comments).recent.page(params[:page]).per(30)
   end
 
   def show
-    @event_comments = @event.event_comments
+    @event_comments = @event.event_comments.includes(:user, :event)
     @event_comment = @event.event_comments.build
     # イベント参加者の一覧を取得
     @participant_users = @event.participant_users
