@@ -8,7 +8,7 @@ class PracticeDiariesController < ApplicationController
 		@practice_diaries = PracticeDiary.login_user_diary(current_user.id).includes(user: :practice_favorites, user: :practice_comments).recent.search(@search_params).page(params[:page]).per(10)
 
 		# 月間走行距離の取得
-		@practice_diaries_all = PracticeDiary.login_user_diary(current_user.id).includes(user: :practice_favorites, user: :practice_comments)
+		@practice_diaries_all = PracticeDiary.login_user_diary(current_user.id).includes(:user)
 
 		# フォロー中のユーザの投稿の取得
 		@user = current_user
