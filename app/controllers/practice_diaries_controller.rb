@@ -28,7 +28,8 @@ class PracticeDiariesController < ApplicationController
 	def create
 		@practice_diary = current_user.practice_diaries.build(practice_diary_params)
 		if @practice_diary.save
-			redirect_to @practice_diary, success: "練習記録を作成しました!"
+			redirect_to @practice_diary
+			flash[:success] = "練習記録を作成しました!"
 		else
 			flash.now[:danger] = "練習記録の投稿に失敗しました。"
 			render :new
@@ -45,7 +46,8 @@ class PracticeDiariesController < ApplicationController
 
 	def update
 		if @practice_diary.update(practice_diary_params)
-			redirect_to practice_diary_path, success: "練習記録を編集しました！"
+			redirect_to practice_diary_path
+			flash[:success] = "練習記録を編集しました！"
 		else
 			flash.now[:danger] = "練習記録の編集に失敗しました。"
 			render :edit
@@ -54,7 +56,8 @@ class PracticeDiariesController < ApplicationController
 
 	def destroy
 		@practice_diary.destroy
-		redirect_to practice_diaries_path, success: "練習記録を削除しました！"
+		redirect_to practice_diaries_path
+		flash[:success] = "練習記録を削除しました！"
 	end
 
 	private

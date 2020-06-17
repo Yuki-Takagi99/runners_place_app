@@ -45,11 +45,7 @@
 
     <div class="container">
       <div class="row">
-        <% flash.each do |key, value| %>
-          <p class="alert alert-<%= key %>">
-            <%= value %>
-          </p>
-        <% end %>
+        <%= render 'layouts/flash' %>
       </div>
     </div>
 
