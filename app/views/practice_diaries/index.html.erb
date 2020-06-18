@@ -3,7 +3,7 @@
 		<div class="panel-heading">
 			今月の走行距離は<strong><%= @practice_diaries_all.this_month_distance %>km</strong>です！目標達成に向けて頑張りましょう。
 		</div>
-		<div class="panel-body">
+		<div class="panel-body user-panel-body">
 			<div class="col-md-4 col-sm-12 col-xs-12">
 				<% if current_user.image? %>
 					<image src=<%= current_user.image %> class = "icon_image">
