@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <h2>ユーザー管理</h2>
+      <table class="table table-bordered table-hover table-responsive">
+        <thead>
+          <tr class="info">
+            <th><%= User.human_attribute_name(:user_name) %></th>
+            <th>メールアドレス</th>
+            <th>フォロー</th>
+            <th>フォロワー</th>
+            <th>記録投稿数</th>
+            <th>編集</th>
+            <th>削除</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= link_to user.user_name.truncate(24), user_path(user) %></td>
+              <td><%= user.email %></td>
+              <td><%= user.following.count %></td>
+              <td><%= user.followers.count %></td>
+              <td><%= user.practice_diaries.count %></td>
+              <td><%= link_to '編集', edit_user_registration_path(user.id) %></td>
+              <td><%= link_to '削除', user_registration_path(user), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>

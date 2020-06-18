@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
+  before_action :authenticate_user!
+
+  def index
+    @users = User.all.includes(:practice_diaries).order(created_at: :DESC)
+  end
 
   def show
     # 参加予定のイベントを取得

@@ -37,6 +37,7 @@
               <li><%= link_to "イベントを登録する", new_event_path %></li>
               <li><%= link_to "イベントを探す", events_path %></li>
               <li><%= link_to "プロフィール", user_path(id: current_user.id) %></li>
+              <li><%= link_to "ユーザー管理", users_path %></li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
             </ul>
               <p class="navbar-text navbar-right">ようこそ、<%= current_user.user_name %>さん！　</p>
