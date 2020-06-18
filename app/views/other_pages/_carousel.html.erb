@@ -2,7 +2,7 @@
 
 <% images = Dir.glob("app/assets/images/*#{suffix}*") %>
 <% id = "carousel-images#{suffix}" %>
-<div id=<%= id %> class="carousel slide" data-ride="carousel">
+<div id=<%= id %> class="carousel slide" data-ride="carousel" data-interval="3000">
     <ol class="carousel-indicators">
         <% images.count.times do |index| %>
             <li data-target=<%= id %> data-slide-to=<%= index %> <%= 'class=active' if index == 0 %>></li>

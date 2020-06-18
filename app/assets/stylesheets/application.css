@@ -16,10 +16,13 @@
  *= require_self
  */
 
-#header {
-  margin-bottom: 70px;
+ul {
+  list-style: none;
 }
 
+li {
+  list-style: none;
+}
 
 textarea {
   resize: none;
@@ -27,7 +30,7 @@ textarea {
 
 #footer {
   padding: 4em 0;
-  margin-top: 100px;
+  /* margin-top: 100px; */
   background: #101010;
   color: #9D9D9D;
   bottom: 0;
