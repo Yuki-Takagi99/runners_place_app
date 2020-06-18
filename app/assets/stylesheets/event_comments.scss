@@ -1,3 +1,11 @@
 // Place all the styles related to the EventComments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  padding: 1em;
+  margin: 0;
+}
