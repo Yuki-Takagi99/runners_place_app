@@ -1,109 +1,110 @@
-<h1>イベント詳細</h1>
+<div class="container">
+  <h1>イベント詳細</h1>
 
-<p>
-  <div id="participant_managements_buttons_<%= @event.id %>">
-    <%= render partial: 'participant_managements/participant_management', locals: { event: @event} %>
-  </div>
-</p>
-
-<table class="table table-borderd">
-  <tr>
-    <th><%= Event.human_attribute_name(:event_date) %></th>
-    <td><%= @event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %></td>
-  </tr>
-  <tr>
-    <th><%= Event.human_attribute_name(:event_title) %></th>
-    <td><%= simple_format @event.event_title %></td>
-  </tr>
-  <tr>
-    <th><%= Event.human_attribute_name(:event_content) %></th>
-    <td><%= simple_format @event.event_content %></td>
-  </tr>
-  <tr>
-    <th>主催者</th>
-    <td><%= link_to @event.user.user_name, user_path(@event.user_id) %> さん</td>
-  </tr>
-  <tr>
-    <th>現在の参加者</th>
-    <td>
-    <% if @participant_users.present? %>
-      <% @participant_users.each do |participant_user| %>
-        <%= link_to participant_user.user_name, user_path(participant_user) %>さん
-      <% end %>
-    <% else %>
-      まだ参加者はいません
-    <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th><%= Event.human_attribute_name(:minimum_number_of_participant) %></th>
-    <td><%= @event.minimum_number_of_participant %>人</td>
-  </tr>
-  <tr>
-    <th><%= Event.human_attribute_name(:address) %></th>
-    <td><%= @event.address %></td>
-  </tr>
-</table>
-
-<script type="text/javascript">
-  function initMap() {
-    var test = {lat: <%= @event.latitude %>, lng: <%= @event.longitude %>};
-    var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 18,
-              center: test,
-              scaleControl: true,
-              });
-    var transitLayer = new google.maps.TransitLayer();
-    transitLayer.setMap(map);
-
-    var contentString = '場所：<%= @event.address %>';
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-
-    var marker = new google.maps.Marker({
-                  position:test,
-                  map: map,
-                  title: contentString,
-                  animation: google.maps.Animation.BOUNCE,
-                  visible: true,
-                });
-
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-  }
-</script>
-
-
-<script async defer
-              src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
-</script>
-
-<style type="text/css">
-  #map { height: 450px;
-        width: 100%;}
-</style>
-
-<div id="map"></div>
-
-<% if @event.user_id == current_user.id %>
-  <%= link_to '編集', edit_event_path(@event) %> |
-  <%= link_to '削除', @event, method: :delete, data: { confirm: 'イベントを削除します。よろしいですか?' } %>
-<% end %>
-
-<br>
-<%= link_to 'イベント一覧に戻る', events_path %>
-
-
-<div class="row">
-  <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-    <h3 class="text-center">みんなのコメント</h3>
-
-    <div id="comments_area">
-      <%= render partial: 'event_comments/index', locals: { event_comments: @event_comments, event: @event } %>
+  <p>
+    <div id="participant_managements_buttons_<%= @event.id %>">
+      <%= render partial: 'participant_managements/participant_management', locals: { event: @event} %>
     </div>
+  </p>
 
-    <%= render partial: 'event_comments/form', locals: { event_comment: @event_comment, event: @event } %>
+  <table class="table table-borderd">
+    <tr>
+      <th><%= Event.human_attribute_name(:event_date) %></th>
+      <td><%= @event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %></td>
+    </tr>
+    <tr>
+      <th><%= Event.human_attribute_name(:event_title) %></th>
+      <td><%= simple_format @event.event_title %></td>
+    </tr>
+    <tr>
+      <th><%= Event.human_attribute_name(:event_content) %></th>
+      <td><%= simple_format @event.event_content %></td>
+    </tr>
+    <tr>
+      <th>主催者</th>
+      <td><%= link_to @event.user.user_name, user_path(@event.user_id) %> さん</td>
+    </tr>
+    <tr>
+      <th>現在の参加者</th>
+      <td>
+      <% if @participant_users.present? %>
+        <% @participant_users.each do |participant_user| %>
+          <%= link_to participant_user.user_name, user_path(participant_user) %>さん
+        <% end %>
+      <% else %>
+        まだ参加者はいません
+      <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= Event.human_attribute_name(:minimum_number_of_participant) %></th>
+      <td><%= @event.minimum_number_of_participant %>人</td>
+    </tr>
+    <tr>
+      <th><%= Event.human_attribute_name(:address) %></th>
+      <td><%= @event.address %></td>
+    </tr>
+  </table>
+
+  <script type="text/javascript">
+    function initMap() {
+      var test = {lat: <%= @event.latitude %>, lng: <%= @event.longitude %>};
+      var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 18,
+                center: test,
+                scaleControl: true,
+                });
+      var transitLayer = new google.maps.TransitLayer();
+      transitLayer.setMap(map);
+
+      var contentString = '場所：<%= @event.address %>';
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      var marker = new google.maps.Marker({
+                    position:test,
+                    map: map,
+                    title: contentString,
+                    animation: google.maps.Animation.BOUNCE,
+                    visible: true,
+                  });
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+    }
+  </script>
+
+
+  <script async defer
+                src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
+  </script>
+
+  <style type="text/css">
+    #map { height: 450px;
+          width: 100%;}
+  </style>
+
+  <div id="map"></div>
+
+  <% if @event.user_id == current_user.id %>
+    <%= link_to '編集', edit_event_path(@event) %> |
+    <%= link_to '削除', @event, method: :delete, data: { confirm: 'イベントを削除します。よろしいですか?' } %>
+  <% end %>
+
+  <br>
+  <%= link_to 'イベント一覧に戻る', events_path %>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+      <h3 class="text-center">みんなのコメント</h3>
+
+      <div id="comments_area">
+        <%= render partial: 'event_comments/index', locals: { event_comments: @event_comments, event: @event } %>
+      </div>
+
+      <%= render partial: 'event_comments/form', locals: { event_comment: @event_comment, event: @event } %>
+    </div>
   </div>
 </div>

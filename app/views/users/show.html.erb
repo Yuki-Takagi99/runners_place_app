@@ -1,83 +1,85 @@
-<div class="row">
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<%= @user.user_name %>さんのプロフィール
-		</div>
-		<div class="panel-body user-panel-body">
-			<div class="col-md-4 col-sm-12 col-xs-12">
-				<% if @user.image? %>
-					<image src=<%= @user.image %> class = "icon_image">
-				<% else %>
-					<image src="/assets/default_icon.png" class = "icon_image">
-				<% end %>
+<div class="container">
+	<div class="row">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<%= @user.user_name %>さんのプロフィール
 			</div>
-			<div class="col-md-8 col-sm-12 col-xs-12">
-				<ul class="list-group">
-					<li class="list-group-item">
-						<strong><%= User.human_attribute_name(:user_name) %>：<%= @user.user_name %></strong>
-					</li>
-					<li class="list-group-item">
-						<strong><%= User.human_attribute_name(:self_introduction) %>：
-						<% if @user.self_introduction == "" %>
-							<%= "まだ自己紹介はありません。" %>
-						<% else %>
-							<%= simple_format @user.self_introduction %>
-						<% end %>
-						</strong>
-					</li>
-					<li class="list-group-item">
-						<strong><%= User.human_attribute_name(:target) %>：
-						<% if @user.target == "" %>
-							<%= "まだ目標はありません。" %>
-						<% else %>
-							<%= simple_format @user.target %>
-						<% end %>
-						</strong>
-					</li>
-						<% if @user.id != current_user.id %>
-							<%= render "follow_form" %>
-						<% else %>
-							<li class="list-group-item">
-								<strong>
-									<%= link_to followers_user_path(@user) do %>
-										フォロワー：<%= @user.followers.count %>人
-									<% end %>
-									<%= link_to following_user_path(@user) do %>
-										フォロー：<%= @user.following.count %>人
-									<% end %>
-								</strong>
-							</li>
-						<% end %>
-				</ul>
+			<div class="panel-body user-panel-body">
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<% if @user.image? %>
+						<image src=<%= @user.image %> class = "icon_image">
+					<% else %>
+						<image src="/assets/default_icon.png" class = "icon_image">
+					<% end %>
+				</div>
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<ul class="list-group">
+						<li class="list-group-item">
+							<strong><%= User.human_attribute_name(:user_name) %>：<%= @user.user_name %></strong>
+						</li>
+						<li class="list-group-item">
+							<strong><%= User.human_attribute_name(:self_introduction) %>：
+							<% if @user.self_introduction == "" %>
+								<%= "まだ自己紹介はありません。" %>
+							<% else %>
+								<%= simple_format @user.self_introduction %>
+							<% end %>
+							</strong>
+						</li>
+						<li class="list-group-item">
+							<strong><%= User.human_attribute_name(:target) %>：
+							<% if @user.target == "" %>
+								<%= "まだ目標はありません。" %>
+							<% else %>
+								<%= simple_format @user.target %>
+							<% end %>
+							</strong>
+						</li>
+							<% if @user.id != current_user.id %>
+								<%= render "follow_form" %>
+							<% else %>
+								<li class="list-group-item">
+									<strong>
+										<%= link_to followers_user_path(@user) do %>
+											フォロワー：<%= @user.followers.count %>人
+										<% end %>
+										<%= link_to following_user_path(@user) do %>
+											フォロー：<%= @user.following.count %>人
+										<% end %>
+									</strong>
+								</li>
+							<% end %>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
+
+	<% if current_user.id == @user.id %>
+		<%= link_to "編集", edit_user_registration_path(current_user.id) %>
+	<% end %>
+
+	<% if @participant_events.present? %>
+		<h3>参加予定のイベント</h3>
+		<table class="table table-bordered table-hover table-responsive">
+			<thead>
+				<tr class="info">
+					<th><%= Event.human_attribute_name(:event_date) %></th>
+					<th><%= Event.human_attribute_name(:event_title) %></th>
+					<th><%= Event.human_attribute_name(:address) %></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @participant_events.each do |event| %>
+					<tr>
+						<td><%= event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %></td>
+						<td><%= link_to event.event_title, event_path(event) %></td>
+						<td><%= event.address %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<% else %>
+		<h3>参加予定のイベントはありません！</h3>
+	<% end %>
 </div>
-
-<% if current_user.id == @user.id %>
-	<%= link_to "編集", edit_user_registration_path(current_user.id) %>
-<% end %>
-
-<% if @participant_events.present? %>
-	<h3>参加予定のイベント</h3>
-  <table class="table table-bordered table-hover table-responsive">
-    <thead>
-      <tr class="info">
-        <th><%= Event.human_attribute_name(:event_date) %></th>
-        <th><%= Event.human_attribute_name(:event_title) %></th>
-        <th><%= Event.human_attribute_name(:address) %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @participant_events.each do |event| %>
-        <tr>
-          <td><%= event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %></td>
-          <td><%= link_to event.event_title, event_path(event) %></td>
-          <td><%= event.address %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <h3>参加予定のイベントはありません！</h3>
-<% end %>

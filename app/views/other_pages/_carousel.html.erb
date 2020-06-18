@@ -14,7 +14,7 @@
             <%= content_tag(:div, :class => (index == 0 ? classes << 'active' : classes)) do %>
                 <%= image_tag(File.basename(image), :alt => 'header') %>
                 <div class="carousel-caption">
-                    <h3><%= caption %><h3>
+                    <h1><%= caption %></h1>
                 </div>
             <% end %>
         <% end %>
