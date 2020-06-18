@@ -16,6 +16,10 @@
  *= require_self
  */
 
+.flash {
+  margin: 30px;
+}
+
 ul {
   list-style: none;
 }

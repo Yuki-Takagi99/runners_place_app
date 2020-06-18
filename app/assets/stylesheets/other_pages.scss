@@ -12,8 +12,9 @@
   background-position: top;
   min-height: calc(100vh - 100px);
   width: 100%;
-  padding-top: 4rem;
   position: relative;
+  ///navbar以下の余白を削除
+  margin-top: -100px;
 }
 
 .app-title {

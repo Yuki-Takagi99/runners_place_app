@@ -28,10 +28,9 @@ class PracticeDiariesController < ApplicationController
 	def create
 		@practice_diary = current_user.practice_diaries.build(practice_diary_params)
 		if @practice_diary.save
-			redirect_to @practice_diary
-			flash[:success] = "練習記録を作成しました!"
+			redirect_to @practice_diary, flash: { success: "練習記録を作成しました!" }
 		else
-			flash.now[:danger] = "練習記録の投稿に失敗しました。"
+			flash.now[:alert] = "練習記録の投稿に失敗しました。"
 			render :new
 		end
 	end

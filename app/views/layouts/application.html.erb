@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+    /*ヘッダーとコンテンツの要素間でコンテンツが重複しないように設定するcss 固定ヘッダー処理とは関係ない*/
+    .m-100 {
+      margin-top: 100px;
+    }
+    </style>
   </head>
 
   <body>
@@ -43,13 +49,9 @@
       </nav>
     </header>
 
-    <div class="container">
-      <div class="row">
-        <%= render 'layouts/flash' %>
-      </div>
+    <div class="m-100">
+      <%= yield %>
     </div>
-
-    <%= yield %>
 
     <footer id="footer">
       <div class="footer-content">
