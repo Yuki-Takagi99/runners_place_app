@@ -1,41 +1,89 @@
-<h1 class="text-center">イベント一覧</h1>
+<div class="container">
+	<h1 class="text-center">イベント一覧</h1>
 
-<h3 class="text-center">これから開催されるイベントは<strong><%= @events.count %>件</strong>です！</h3>
+	<script type="text/javascript">
+		function initMap() {
+			var latlng = new google.maps.LatLng(35.6803997, 139.7690174);
+			var map = new google.maps.Map(document.getElementById('map'), {
+						zoom: 12,
+						center: latlng,
+						scaleControl: true,
+				});
+			var transitLayer = new google.maps.TransitLayer();
+			transitLayer.setMap(map);
 
-<h4 class="text-center"><%= link_to 'イベントを登録する', new_event_path %></h4>
+			//複数のマーカー
+			<% @events.each do |event| %>
+					(function(){
+				var contentString = '<%= link_to event.event_title, event_path(event) %>';
+				var infowindow = new google.maps.InfoWindow({
+							content: contentString
+				});
 
-<%= paginate @events %>
+				var marker = new google.maps.Marker({
+						position:{lat: <%= event.latitude %>, lng: <%= event.longitude %>},
+						map: map,
+						title: contentString,
+						animation: google.maps.Animation.DROP,
+						visible: true,
+				});
+				marker.addListener('click', function() {
+						infowindow.open(map, marker);
+				});
+				})();
+				<% end %>
 
-<% if @events.present? %>
-	<p>
-	<%= @events.total_count %>件中<%= @events.offset_value + 1 %>
-	〜<%= @events.offset_value + @events.length %>件を表示しています。
-	</p>
-<% else %>
-	<h3>まだイベントが投稿されていません。</h3>
-<% end %>
+			marker.addListener('click', function() {
+				infowindow.open(map, marker);
+			});
+		}
+	</script>
 
+	<script async defer
+								src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
+	</script>
 
+	<style type="text/css">
+		#map { height: 450px; width: 100%;}
+	</style>
 
-<table class="table table-bordered table-hover table-responsive">
-	<thead>
-		<tr class="info">
-			<th><%= Event.human_attribute_name(:event_date) %></th>
-			<th><%= Event.human_attribute_name(:event_title) %></th>
-			<th><%= Event.human_attribute_name(:address) %></th>
-			<th><%= '主催者' %></th>
-			<th><%= '現在の参加者数' %></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @events.each do |event| %>
-			<tr>
-				<td><%= event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %> から開始</td>
-				<td><%= link_to event.event_title, event_path(event) %></td>
-				<td><%= event.address %></td>
-				<td><%= link_to event.user.user_name, user_path(event.user_id) %></td>
-				<td><%= event.participant_managements.count %>人</td>
+	<div id="map"></div>
+
+	<h3 class="text-center">これから開催されるイベントは<strong><%= @events.count %>件</strong>です！</h3>
+
+	<h4 class="text-center"><%= link_to 'イベントを登録する', new_event_path %></h4>
+
+	<%= paginate @events %>
+
+	<% if @events.present? %>
+		<p>
+		<%= @events.total_count %>件中<%= @events.offset_value + 1 %>
+		〜<%= @events.offset_value + @events.length %>件を表示しています。
+		</p>
+	<% else %>
+		<h3>まだイベントが投稿されていません。</h3>
+	<% end %>
+
+	<table class="table table-bordered table-hover table-responsive">
+		<thead>
+			<tr class="info">
+				<th><%= Event.human_attribute_name(:event_date) %></th>
+				<th><%= Event.human_attribute_name(:event_title) %></th>
+				<th><%= Event.human_attribute_name(:address) %></th>
+				<th><%= '主催者' %></th>
+				<th><%= '現在の参加者数' %></th>
 			</tr>
-		<% end %>
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			<% @events.each do |event| %>
+				<tr>
+					<td><%= event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %> から開始</td>
+					<td><%= link_to event.event_title, event_path(event) %></td>
+					<td><%= event.address %></td>
+					<td><%= link_to event.user.user_name, user_path(event.user_id) %></td>
+					<td><%= event.participant_managements.count %>人</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

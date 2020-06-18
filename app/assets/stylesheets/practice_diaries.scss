@@ -2,18 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  padding-top: 70px;
-}
-
-ul {
-  list-style: none;
-}
-
-li {
-  list-style: none;
-}
-
 .fav-btn {
   width: 25px;
   height: 30px;
@@ -30,4 +18,13 @@ li {
 
 .fire-icon {
   color: #fc0330;
+}
+
+.comment-icon {
+  width: 25px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 3px;
+  font-size: 25px;
+  color: #8c95ad;
 }

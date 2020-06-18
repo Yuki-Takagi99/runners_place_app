@@ -5,16 +5,20 @@ class PracticeDiariesController < ApplicationController
 	def index
 		# 練習記録一覧ページ
 		@search_params = practice_diary_search_params
-		@practice_diaries = PracticeDiary.login_user_diary(current_user.id).includes(:user).recent.search(@search_params).page(params[:page]).per(10)
+		@practice_diaries = PracticeDiary.login_user_diary(current_user.id).includes(user: :practice_favorites, user: :practice_comments).recent.search(@search_params).page(params[:page]).per(10)
 
 		# 月間走行距離の取得
 		@practice_diaries_all = PracticeDiary.login_user_diary(current_user.id).includes(:user)
+
+		# フォロー中のユーザの投稿の取得
+		@user = current_user
+		@users = @user.following.order("created_at DESC").limit(4)
 	end
 
 	def index_all
 		# みんなの練習記録ページ
 		@search_params = practice_diary_search_params
-		@practice_diaries = PracticeDiary.other_user_diary(current_user.id).includes(:user).recent.search(@search_params).page(params[:page]).per(10)
+		@practice_diaries = PracticeDiary.other_user_diary(current_user.id).includes(user: :practice_favorites, user: :practice_comments).recent.search(@search_params).page(params[:page]).per(10)
 	end
 
 	def new
@@ -24,9 +28,9 @@ class PracticeDiariesController < ApplicationController
 	def create
 		@practice_diary = current_user.practice_diaries.build(practice_diary_params)
 		if @practice_diary.save
-			redirect_to @practice_diary, success: "練習記録を作成しました!"
+			redirect_to @practice_diary, flash: { success: "練習記録を作成しました!" }
 		else
-			flash.now[:danger] = "練習記録の投稿に失敗しました。"
+			flash.now[:alert] = "練習記録の投稿に失敗しました。"
 			render :new
 		end
 	end
@@ -41,7 +45,8 @@ class PracticeDiariesController < ApplicationController
 
 	def update
 		if @practice_diary.update(practice_diary_params)
-			redirect_to practice_diary_path, success: "練習記録を編集しました！"
+			redirect_to practice_diary_path
+			flash[:success] = "練習記録を編集しました！"
 		else
 			flash.now[:danger] = "練習記録の編集に失敗しました。"
 			render :edit
@@ -50,7 +55,8 @@ class PracticeDiariesController < ApplicationController
 
 	def destroy
 		@practice_diary.destroy
-		redirect_to practice_diaries_path, success: "練習記録を削除しました！"
+		redirect_to practice_diaries_path
+		flash[:success] = "練習記録を削除しました！"
 	end
 
 	private

@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+    /*ヘッダーとコンテンツの要素間でコンテンツが重複しないように設定するcss 固定ヘッダー処理とは関係ない*/
+    .m-100 {
+      margin-top: 100px;
+    }
+    </style>
   </head>
 
   <body>
@@ -33,7 +39,7 @@
               <li><%= link_to "プロフィール", user_path(id: current_user.id) %></li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
             </ul>
-              <p class="navbar-text navbar-right">ようこそ、<%= current_user.user_name %>さん。目標達成に向けて頑張りましょう。</p>
+              <p class="navbar-text navbar-right">ようこそ、<%= current_user.user_name %>さん！　</p>
             <% else %>
               <li><%= link_to "新規登録", new_user_registration_path %></li>
               <li><%= link_to "ログイン", new_user_session_path %></li>
@@ -43,15 +49,11 @@
       </nav>
     </header>
 
-    <% flash.each do |key, value| %>
-      <p class="alert alert-<%= key %>">
-        <%= value %>
-      </p>
-    <% end %>
-
-    <div class="container">
+    <main>
+      <div class="m-100">
       <%= yield %>
-    </div>
+      </div>
+    </main>
 
     <footer id="footer">
       <div class="footer-content">
@@ -60,8 +62,8 @@
             <div class="col-md-3 col-sm-4 col-md-push-3">
               <ul>
                 <li><%= link_to 'トップページ', practice_diaries_path, :style=>"color: #9D9D9D;" %></li>
-                <li>利用規約</li>
-                <li>プライバシーポリシー</li>
+                <li><%= link_to '利用規約', terms_of_service_path, :style=>"color: #9D9D9D;" %></li>
+                <li><%= link_to 'プライバシーポリシー', privacy_policy_path, :style=>"color: #9D9D9D;" %></li>
               </ul>
             </div>
             <div class="col-md-3 col-sm-4 col-md-push-3">
@@ -79,7 +81,7 @@
             </div>
             <div class="col-md-3 col-sm-12 col-md-pull-9">
               <div class="footer-logo">
-                <a href="">RUNNER'S PLACE</a>
+                <a href="/">RUNNER'S PLACE</a>
                 <p><small>©2020 Yuki Takgai</small></p>
               </div>
             </div>

@@ -1,0 +1,62 @@
+// Place all the styles related to the OtherPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// .carousel-inner {
+//   width: 100%;
+//   max-height: 700px !important;
+// }
+
+.top-image {
+  background-image: url(image-path('top_image.jpg'));
+  background-size: cover;
+  background-position: top;
+  min-height: calc(100vh - 100px);
+  width: 100%;
+  position: relative;
+  ///navbar以下の余白を削除
+  margin-top: -100px;
+}
+
+.app-title {
+  text-align: center;
+  position: relative;
+  font-size: 7rem;
+  padding-top: 25rem;
+  color: #fff;
+  text-shadow:1px 1px 0 #000000,
+              -1px -1px 0 #000000,
+              -1px 1px 0 #000000,
+              1px -1px 0 #000000,
+              0px 1px 0 #000000,
+              0-1px 0 #000000,
+}
+
+.copy {
+  text-align: center;
+  background: rgba(0, 0, 0, .3);
+  color: #ffffff;
+  font-size: 1.5rem;
+  padding: 2rem 0;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.topbtn {
+  position: relative;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  text-align: center;
+
+  .topbtn__item {
+    color: #ffffff;
+    background: rgba(0, 0, 0, .3);
+    border: 1px solid #fff;
+    padding: 0.5rem 2rem;
+    font-size: 1.5rem;
+  }
+
+  .topbtn__item+.topbtn__item {
+    margin-left: 1rem;
+  }
+}

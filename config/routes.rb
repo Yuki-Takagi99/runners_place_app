@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  root to: 'practice_diaries#index'
+  root to: 'other_pages#index'
+
+  get 'privacy_policy', to: 'other_pages#privacy_policy'
+  get 'terms_of_service', to: 'other_pages#terms_of_service'
+
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }

@@ -1,12 +1,13 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
-    @events = Event.all.recent.page(params[:page]).per(30)
+    @events = Event.all.includes(:event_comments).recent.page(params[:page]).per(30)
   end
 
   def show
-    @event_comments = @event.event_comments
+    @event_comments = @event.event_comments.includes(:user, :event)
     @event_comment = @event.event_comments.build
     # イベント参加者の一覧を取得
     @participant_users = @event.participant_users
@@ -19,7 +20,8 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build(event_params)
     if @event.save
-      redirect_to @event, success: 'イベントを作成しました!'
+      redirect_to @event
+      flash[:success] = 'イベントを作成しました!'
     else
       render :new, notice: 'イベントが作成できませんでした'
     end

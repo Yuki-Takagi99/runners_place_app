@@ -1,4 +1,4 @@
-<div class="raw">
+<div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_with(model: @event, local: true) do |f| %>
       <% if @event.errors.present? %>
@@ -25,7 +25,9 @@
       </div>
       <div class="form-group">
         <%= f.label :minimum_number_of_participant %>
-        <%= f.number_field :minimum_number_of_participant, class: 'form-control', placeholder: "最小催行人数を入力してください。", min: 1 %> 人
+        <div class="form-inline">
+          <%= f.number_field :minimum_number_of_participant, class: 'form-control', placeholder: "人数を入力してください。", min: 1, max: 100 %> 人
+        </div>
       </div>
       <div class="form-group">
         <%= f.label :address %>

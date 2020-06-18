@@ -1,0 +1,31 @@
+
+
+<% images = Dir.glob("app/assets/images/*#{suffix}*") %>
+<% id = "carousel-images#{suffix}" %>
+<div id=<%= id %> class="carousel slide" data-ride="carousel" data-interval="3000">
+    <ol class="carousel-indicators">
+        <% images.count.times do |index| %>
+            <li data-target=<%= id %> data-slide-to=<%= index %> <%= 'class=active' if index == 0 %>></li>
+        <% end %>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <% images.each_with_index do |image, index| %>
+            <% classes = ['item'] %>
+            <%= content_tag(:div, :class => (index == 0 ? classes << 'active' : classes)) do %>
+                <%= image_tag(File.basename(image), :alt => 'header') %>
+                <div class="carousel-caption">
+                    <h1><%= caption %></h1>
+                </div>
+            <% end %>
+        <% end %>
+        <a class="left carousel-control" href=<%= "##{id}" %> role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href=<%= "##{id}" %>  role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
