@@ -27,6 +27,10 @@ html {
   box-sizing: border-box;
 }
 
+main {
+  padding-bottom: 100px;
+}
+
 footer {
   position: absolute;
   left: 0;
