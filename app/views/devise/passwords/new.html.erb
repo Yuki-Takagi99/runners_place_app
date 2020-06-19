@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
+      <%= render partial: 'layouts/flash' %>
       <h2><%= t('.forgot_your_password') %></h2>
 
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
