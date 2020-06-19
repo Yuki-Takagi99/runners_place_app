@@ -36,9 +36,9 @@ RSpec.describe User, type: :model do
     end
 
     it '重複したemailの場合、無効であること' do
-      @user2 = create(:user_2)
-      @user3 = create(:user_3)
-      @user3.email = "unique@example.com"
+      @user2 = create(:jon)
+      @user3 = create(:bob)
+      @user3.email = "jon@example.com"
       expect(@user3).not_to be_valid
     end
 
