@@ -1,11 +1,12 @@
 require 'rails_helper'
-RSpec.describe PracticeDiary, type: :model do
-	before do
-		@user = create(:user)
-		@practice_diary = create(:practice_diary, user_id: @user.id)
-	end
 
+RSpec.describe PracticeDiary, type: :model do
 	describe 'バリデーションテスト' do
+		before do
+			@user = create(:user)
+			@practice_diary = create(:practice_diary, user_id: @user.id)
+		end
+
 		it 'すべてのデータがある場合、有効であること' do
 			expect(@practice_diary).to be_valid
 		end
