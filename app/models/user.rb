@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   mount_uploader :image, ImageUploader
   has_many :practice_diaries, dependent: :destroy
   # お気に入り機能のアソシエーション
@@ -40,5 +39,12 @@ class User < ApplicationRecord
   #フォローを外すときのメソッド
   def unfollow(user)
     following_friendships.find_by(following_id: user.id).destroy
+  end
+
+  #ゲストログイン用
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com', user_name: 'guest') do |user|
+      user.password = SecureRandom.urlsafe_base64
+    end
   end
 end
