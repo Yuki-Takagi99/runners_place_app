@@ -13,7 +13,7 @@
 			transitLayer.setMap(map);
 
 			//複数のマーカー
-			<% @events.each do |event| %>
+			<% @events_all.each do |event| %>
 					(function(){
 				var contentString = '<%= link_to event.event_title, event_path(event) %>';
 				var infowindow = new google.maps.InfoWindow({
@@ -49,7 +49,7 @@
 
 	<div id="map"></div>
 
-	<h3 class="text-center">これから開催されるイベントは<strong><%= @events.count %>件</strong>です！</h3>
+	<h3 class="text-center">これから開催されるイベントは<strong><%= @events_all.count %>件</strong>です！</h3>
 
 	<h4 class="text-center"><%= link_to 'イベントを登録する', new_event_path %></h4>
 

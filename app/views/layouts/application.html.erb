@@ -7,8 +7,13 @@
     <meta name="viewport" content="width=device-width">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script>
+      $(function(){
+        $(".alert").fadeOut(5000);
+      });
+    </script>
     <style>
-    /*ヘッダーとコンテンツの要素間でコンテンツが重複しないように設定するcss 固定ヘッダー処理とは関係ない*/
+    /*ヘッダーとコンテンツの要素間でコンテンツが重複しないように設定するcss*/
     .m-100 {
       margin-top: 100px;
     }
@@ -37,6 +42,9 @@
               <li><%= link_to "イベントを登録する", new_event_path %></li>
               <li><%= link_to "イベントを探す", events_path %></li>
               <li><%= link_to "プロフィール", user_path(id: current_user.id) %></li>
+              <% if current_user.admin? %>
+                <li><%= link_to "ユーザー管理", users_path %></li>
+              <% end %>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
             </ul>
               <p class="navbar-text navbar-right">ようこそ、<%= current_user.user_name %>さん！　</p>

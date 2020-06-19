@@ -7,10 +7,10 @@ class EventCommentsController < ApplicationController
 
     respond_to do |format|
       if @event_comment.save
-        flash.now[:success] = 'コメントが投稿されました！'
+        flash.now[:notice] = 'コメントを作成しました！'
         format.js { render :index }
       else
-        flash.now[:danger] = 'コメントの投稿に失敗しました。。。'
+        flash.now[:alert] = 'コメントの投稿に失敗しました'
         format.js { render :error }
       end
     end
@@ -19,7 +19,7 @@ class EventCommentsController < ApplicationController
   def edit
     @event_comment = @event.event_comments.find(params[:id])
     respond_to do |format|
-      flash.now[:warning] = '編集中...'
+      flash.now[:alert] = '編集中...'
       format.js { render :edit }
     end
   end
@@ -28,10 +28,10 @@ class EventCommentsController < ApplicationController
     @event_comment = @event.event_comments.find(params[:id])
     respond_to do |format|
       if @event_comment.update(event_comment_params)
-        flash.now[:success] = 'コメントが編集されました！'
+        flash.now[:notice] = 'コメントを編集しました！'
         format.js { render :index }
       else
-        flash.now[:danger] = 'コメントの編集に失敗しました。。。'
+        flash.now[:alert] = 'コメントの編集に失敗しました。'
         format.js { render :edit_error }
       end
     end
@@ -41,7 +41,7 @@ class EventCommentsController < ApplicationController
     @event_comment = EventComment.find(params[:id])
     @event_comment.destroy
     respond_to do |format|
-      flash.now[:success] = 'コメントが削除されました！'
+      flash.now[:notice] = 'コメントを削除しました！'
       format.js { render :index }
     end
   end

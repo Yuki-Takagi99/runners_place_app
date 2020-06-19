@@ -5,9 +5,16 @@ Rails.application.routes.draw do
   get 'terms_of_service', to: 'other_pages#terms_of_service'
 
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    sessions:      'users/sessions',
   }
-  resources :users, only: [:show] do
+
+  devise_scope :user do
+    get 'users/index', to: 'users/registrations#index'
+    get 'users/destroy', to: 'users/sessions#destroy'
+  end
+
+  resources :users, only: [:index, :show] do
     member do
       get :following, :followers
     end

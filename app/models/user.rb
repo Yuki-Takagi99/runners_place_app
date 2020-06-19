@@ -4,13 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   mount_uploader :image, ImageUploader
-  has_many :practice_diaries
+  has_many :practice_diaries, dependent: :destroy
   # お気に入り機能のアソシエーション
   has_many :practice_favorites, dependent: :destroy
   # 練習記録コメント機能のアソシエーション
   has_many :practice_comments, dependent: :destroy
   # イベントコメント機能のアソシエーション
-  has_many :events_comments, dependent: :destroy
+  has_many :event_comments, dependent: :destroy
   # Userモデルのバリデーション
   validates :user_name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, length: { maximum: 255 }, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true
