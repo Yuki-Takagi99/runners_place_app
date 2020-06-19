@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script>
+      $(function(){
+        $(".alert").fadeOut(5000);
+      });
+    </script>
     <style>
     /*ヘッダーとコンテンツの要素間でコンテンツが重複しないように設定するcss 固定ヘッダー処理とは関係ない*/
     .m-100 {

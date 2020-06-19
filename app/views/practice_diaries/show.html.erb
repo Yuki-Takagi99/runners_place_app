@@ -1,4 +1,5 @@
 <div class="container">
+  <%= render partial: 'layouts/flash' %>
   <h1>練習記録詳細</h1>
 
   <% if @practice_diary.user_id == current_user.id %>
