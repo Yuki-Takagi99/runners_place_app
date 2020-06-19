@@ -61,14 +61,18 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  
+
   # bin/rspecでFactoryBotの生成に失敗するため、以下記載
   config.before(:all) do
     FactoryBot.reload
   end
 
+  # FactotyBotの記述を省略
   config.include FactoryBot::Syntax::Methods
 
-  # 日付と時刻を入力するためのhelperをinclude
+  # 日付と時刻を入力するためのhelperを読み込み
   config.include SelectDateHelpers
+
+  # ログイン用のモジュール読み込み
+  config.include LoginModule
 end

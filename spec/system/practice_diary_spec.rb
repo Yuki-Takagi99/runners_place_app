@@ -1,11 +1,10 @@
 require 'rails_helper'
 RSpec.describe "練習記録管理機能", type: :system do
-
-	before do
-		@user = create(:user)
-	end
-
 	describe '練習記録管理' do
+		before do
+			@user = create(:user)
+		end
+
 		context '練習記録作成、編集、削除機能' do
 			it '練習記録が作成できること' do
 				visit new_user_session_path
