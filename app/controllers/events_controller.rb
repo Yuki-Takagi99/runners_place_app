@@ -4,6 +4,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all.includes(:event_comments).recent.page(params[:page]).per(30)
+    @events_all = Event.all.includes(:event_comments)
   end
 
   def show
@@ -20,10 +21,10 @@ class EventsController < ApplicationController
   def create
     @event = current_user.events.build(event_params)
     if @event.save
-      redirect_to @event
-      flash[:success] = 'イベントを作成しました!'
+      redirect_to @event, notice: "イベントを作成しました！"
     else
-      render :new, notice: 'イベントが作成できませんでした'
+      flash.now[:alert] = "イベントの投稿に失敗しました。エラーを確認してください。"
+      render :new
     end
   end
 
@@ -32,15 +33,16 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to @event, notice: 'イベントを編集しました'
+      redirect_to @event, notice: 'イベントを編集しました！'
     else
-      render :edit, notice: 'イベントが編集できませんでした'
+      flash.now[:alert] = "イベントの編集に失敗しました。エラーを確認してください。"
+      render :edit
     end
   end
 
   def destroy
     @event.destroy
-    redirect_to events_path, success: 'イベントを削除しました'
+    redirect_to events_path, notice: 'イベントを削除しました！'
   end
 
   private
