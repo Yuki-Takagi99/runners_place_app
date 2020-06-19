@@ -104,7 +104,7 @@
 		〜<%= @practice_diaries.offset_value + @practice_diaries.length %>件を表示しています。
 		</p>
 	<% else %>
-		<h3>まだ練習記録が投稿されていません。</h3>
+		<h3 class="text-center">まだ練習記録が投稿されていません！</h3>
 	<% end %>
 
 	<div class="row">
@@ -136,38 +136,42 @@
 
 	<h2 class="text-center">フォローしているユーザーの最新記録</h2><br>
 	<div class="row">
-		<% @users.each do |user| %>
-			<% @following_users_diaries = PracticeDiary.limit(1).where(user_id: user.id).order("created_at DESC") %>
-			<% @following_users_diaries.each do |following_users_diary| %>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<%= following_users_diary.set_practice_date %>
-						</div>
-						<div class="panel-body">
-							<p>
-								<% if following_users_diary.user.image? %>
-									<image src=<%= following_users_diary.user.image %> class = "sm_icon_image"><%= link_to following_users_diary.user.user_name, user_path(following_users_diary.user_id) %>さん
-								<% else %>
-									<image src="/assets/default_icon.png" class = "sm_icon_image"><%= link_to following_users_diary.user.user_name, user_path(following_users_diary.user_id) %>さん
-								<% end %>
-							</p>
-							<p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= following_users_diary.practice_title %></p>
-							<p><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= following_users_diary.practice_content.truncate(30) %></p>
-							<p><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= following_users_diary.practice_distance %>km</p>
-							<p><%= link_to '詳細を見る', practice_diary_path(following_users_diary) %></p>
-							<h3 id="practice_favorites_buttons_<%= following_users_diary.id %>" class="text-right">
-							<%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: following_users_diary} %>
-							</h3>
-						</div>
-						<div class="panel-footer">
-							<div class="text-right">
-								<p>投稿日時：<%= localize(following_users_diary.updated_at, 'Asia/Tokyo') %></p>
+		<% if current_user.following.present? %>
+			<% @users.each do |user| %>
+				<% @following_users_diaries = PracticeDiary.limit(1).where(user_id: user.id).order("created_at DESC") %>
+				<% @following_users_diaries.each do |following_users_diary| %>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<%= following_users_diary.set_practice_date %>
+							</div>
+							<div class="panel-body">
+								<p>
+									<% if following_users_diary.user.image? %>
+										<image src=<%= following_users_diary.user.image %> class = "sm_icon_image"><%= link_to following_users_diary.user.user_name, user_path(following_users_diary.user_id) %>さん
+									<% else %>
+										<image src="/assets/default_icon.png" class = "sm_icon_image"><%= link_to following_users_diary.user.user_name, user_path(following_users_diary.user_id) %>さん
+									<% end %>
+								</p>
+								<p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= following_users_diary.practice_title %></p>
+								<p><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= following_users_diary.practice_content.truncate(30) %></p>
+								<p><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= following_users_diary.practice_distance %>km</p>
+								<p><%= link_to '詳細を見る', practice_diary_path(following_users_diary) %></p>
+								<h3 id="practice_favorites_buttons_<%= following_users_diary.id %>" class="text-right">
+								<%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: following_users_diary} %>
+								</h3>
+							</div>
+							<div class="panel-footer">
+								<div class="text-right">
+									<p>投稿日時：<%= localize(following_users_diary.updated_at, 'Asia/Tokyo') %></p>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				<% end %>
 			<% end %>
+		<% else %>
+			<h3 class="text-center">まだフォローしているユーザがいません！</h3>
 		<% end %>
 	</div>
 </div>
