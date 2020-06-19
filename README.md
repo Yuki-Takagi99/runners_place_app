@@ -1,11 +1,12 @@
-# Runner's Place
+## アプリ名
+RUNNER'S PLACE
 
-## 概要
-- Runner's Placeはランナーのためのコミュニケーションサービスです。
-- 日々のランニング記録の管理に加え、練習会などのイベントの主催や参加も可能です。
-- あなたのランニングライフに寄り添い、新たな出会いをもたらします。
+## コンセプト
+- RUNNER'S PLACEはランナーのためのコミュニケーションサービスです。
+- 日々のランニング記録の管理・共有はもちろん、練習会などのイベント情報の投稿機能や参加申請が可能です。
+- あなたのランニングライフに寄り添い、新たな仲間との出会いをもたらします。
 
-## URL
+## デプロイ先
 - ※作成中
 
 ## バージョン情報、使用技術
@@ -25,7 +26,7 @@
 - ランニング記録のいいね！機能
 - ランニング記録のコメント機能
 - イベント情報の投稿/閲覧機能
-	- 場所はgooglemap上に表示
+	- 登録した場所は緯度・経度を検索し、googlemaps上にマーカーを描画
 - イベント情報の検索機能
 - イベントへのコメント機能
 - イベントへの参加申請機能
@@ -33,24 +34,11 @@
 - ゲストログイン機能
 - ユーザ情報閲覧機能
 - ユーザフォロー機能
-- 投稿/ユーザ管理機能
 
-## カタログ設計
+## カタログ設計、テーブル定義、ER図、画面遷移図、ワイヤーフレーム
 https://docs.google.com/spreadsheets/d/1g0jrGgkDyIFhDhInIooUPK04J--3VZkqhPxqTsfz1bc/edit?usp=sharing
 
-## テーブル定義
-https://docs.google.com/spreadsheets/d/1g0jrGgkDyIFhDhInIooUPK04J--3VZkqhPxqTsfz1bc/edit?usp=sharing
-
-## ER図
-https://docs.google.com/spreadsheets/d/1g0jrGgkDyIFhDhInIooUPK04J--3VZkqhPxqTsfz1bc/edit?usp=sharing
-
-## 画面遷移図
-https://docs.google.com/spreadsheets/d/1g0jrGgkDyIFhDhInIooUPK04J--3VZkqhPxqTsfz1bc/edit?usp=sharing
-
-## 画面ワイヤーフレーム
-https://docs.google.com/spreadsheets/d/1g0jrGgkDyIFhDhInIooUPK04J--3VZkqhPxqTsfz1bc/edit?usp=sharing
-
-## 使用予定gem
+## 使用gem
 - simple_calender
 - kaminari
 - carrierwave
@@ -60,5 +48,5 @@ https://docs.google.com/spreadsheets/d/1g0jrGgkDyIFhDhInIooUPK04J--3VZkqhPxqTsfz
 - devise_i18n
 - rspec-rails
 - capybara
-- ransack
+- geocoder
 
