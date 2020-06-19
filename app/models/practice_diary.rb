@@ -4,6 +4,7 @@ class PracticeDiary < ApplicationRecord
 	validates :practice_content, presence: true, length: { maximum: 1000 }
 	validates :practice_distance, presence: true, numericality: { greater_than: 0.1 }
 	validates :practice_time, presence: true
+	validate  :date_not_after_today
 	belongs_to :user
 	# お気に入り機能のアソシエーション
 	has_many :practice_favorites, dependent: :destroy
@@ -11,7 +12,7 @@ class PracticeDiary < ApplicationRecord
 
 	# コメント機能のアソシエーション
 	has_many :practice_comments, dependent: :destroy
-	
+
 	# 練習時間表示の成型
 	def set_practice_time
 		practice_time.strftime("%-H時間%M分%S秒")
@@ -59,7 +60,12 @@ class PracticeDiary < ApplicationRecord
 	# practice_dateが存在する場合、範囲検索する
   scope :practice_date_from, -> (from) { where('? <= practice_date', from) if from.present? }
 	scope :practice_date_to, -> (to) { where('practice_date <= ?', to) if to.present? }
-	
+
 	# ユーザー名で検索する
 	scope :user_name, -> (user_name) { where('users.user_name LIKE ?', "%#{user_name}%").references(:users) if user_name.present? }
+
+	# 本日以降の日程を選択させないようにバリデーションを追加
+  def date_not_after_today
+    errors.add(:practice_date, "は本日以前の日付を選択してください") if practice_date.nil? || practice_date.future?
+  end
 end
