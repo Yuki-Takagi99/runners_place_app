@@ -17,35 +17,39 @@
 				<div class="col-md-8 col-sm-12 col-xs-12">
 					<ul class="list-group">
 						<li class="list-group-item">
-							<strong><%= User.human_attribute_name(:user_name) %>：<%= link_to current_user.user_name, user_path(current_user) %></strong>
+							<h4 class="list-group-item-heading"><%= User.human_attribute_name(:user_name) %></h4>
+							<p class="list-group-item-text"><%= link_to current_user.user_name, user_path(current_user) %></p>
 						</li>
 						<li class="list-group-item">
-							<strong><%= User.human_attribute_name(:self_introduction) %>：
-							<% if current_user.self_introduction == "" %>
-								<%= "まだ自己紹介はありません。" %>
-							<% else %>
-								<%= simple_format current_user.self_introduction %>
-							<% end %>
-							</strong>
+							<h4 class="list-group-item-heading"><%= User.human_attribute_name(:self_introduction) %></h4>
+							<p class="list-group-item-text">
+								<% if current_user.self_introduction == "" %>
+									<%= "まだ自己紹介はありません。" %>
+								<% else %>
+									<%= simple_format current_user.self_introduction %>
+								<% end %>
+							</p>
 						</li>
 						<li class="list-group-item">
-							<strong><%= User.human_attribute_name(:target) %>：
-							<% if current_user.target == "" %>
-								<%= "まだ目標はありません。" %>
-							<% else %>
-								<%= simple_format current_user.target %>
-							<% end %>
-							</strong>
+							<h4 class="list-group-item-heading"><%= User.human_attribute_name(:target) %></h4>
+							<p class="list-group-item-text">
+								<% if current_user.target == "" %>
+									<%= "まだ目標はありません。" %>
+								<% else %>
+									<%= simple_format current_user.target %>
+								<% end %>
+							</p>
 						</li>
 						<li class="list-group-item">
-							<strong>
+							<h4 class="list-group-item-heading">他ユーザとのつながり</h4>
+							<p class="list-group-item-text">
+								<%= link_to following_user_path(current_user) do %>
+									フォロー：<%= current_user.following.count %>人
+								<% end %>/
 								<%= link_to followers_user_path(current_user) do %>
 									フォロワー：<%= current_user.followers.count %>人
 								<% end %>
-								<%= link_to following_user_path(current_user) do %>
-									フォロー：<%= current_user.following.count %>人
-								<% end %>
-							</strong>
+							</p>
 						</li>
 					</ul>
 				</div>
