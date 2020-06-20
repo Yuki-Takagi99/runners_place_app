@@ -29,7 +29,7 @@ RSpec.describe 'PracticeComment', type: :system do
 		end
   end
 
-  describe '練習記録の編集・削除', js: true do
+  describe 'コメントの編集・削除', js: true do
 		context 'コメントの編集画面でデータが正しく入力されている場合' do
 			it 'コメントが編集できること' do
 				login(other_user)
