@@ -54,10 +54,10 @@
 	</div>
 	<br>
 
+	<%# カレンダー部分 %>
 	<h2 class="text-center">マイカレンダー</h2>
 	<%= month_calendar(attribute: :practice_date, events: @practice_diaries_all)  do |date, practice_diaries| %>
-		<%= date %>
-
+		<%= date.strftime("%-m月%-d日") %>
 			<% practice_diaries.each do |practice_diary| %>
 				<div>
 					<span class="glyphicon glyphicon-fire fire-icon"></span>

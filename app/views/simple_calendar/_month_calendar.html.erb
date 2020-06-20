@@ -1,8 +1,8 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
-    <%= link_to '前月', calendar.url_for_previous_view %>
+    <strong><%= link_to '前月', calendar.url_for_previous_view %></strong>
     <span class="calendar-title"><%= start_date.year %>年<%= t('date.month_names')[start_date.month] %></span>
-    <%= link_to '次月', calendar.url_for_next_view %>
+    <strong><%= link_to '次月', calendar.url_for_next_view %></strong>
   </div>
 
   <table class="table table-striped">
