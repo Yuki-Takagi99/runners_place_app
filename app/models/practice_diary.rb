@@ -20,7 +20,7 @@ class PracticeDiary < ApplicationRecord
 
 	# 練習日表示の成型
 	def set_practice_date
-		practice_date.strftime("%Y年%m月%d日")
+		practice_date.strftime("%Y年%-m月%-d日(#{I18n.t('date.abbr_day_names')[practice_date.wday]})")
 	end
 
 	# いいね！しているかどうかを判断
