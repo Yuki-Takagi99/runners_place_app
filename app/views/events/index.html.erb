@@ -77,7 +77,7 @@
 		<tbody>
 			<% @events.each do |event| %>
 				<tr>
-					<td><%= event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %> から開始</td>
+					<td><%= event.set_event_date %> から</td>
 					<td><%= link_to event.event_title, event_path(event) %></td>
 					<td><%= event.address %></td>
 					<td><%= link_to event.user.user_name, user_path(event.user_id) %></td>

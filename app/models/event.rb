@@ -18,6 +18,11 @@ class Event < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
+  # event_dateの表示形式を変更
+  def set_event_date
+		event_date.strftime("%Y年%-m月%-d日(#{I18n.t('date.abbr_day_names')[event_date.wday]}) %H時%M分")
+	end
+
   # 開催日時が近いイベント順に表示
   scope :recent, -> { order(event_date: :asc) }
 
