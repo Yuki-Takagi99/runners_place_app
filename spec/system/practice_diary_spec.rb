@@ -22,7 +22,7 @@ RSpec.describe 'PracticeDiary', type: :system do
 		end
 
 		context '練習日が本日以降の日付の場合' do
-			it '練習記録が作成が失敗すること' do
+			it '練習記録の作成が失敗すること' do
 				login(user)
 				click_on '記録をつける', match: :first
 				fill_in '練習日', with: Date.today + 1
