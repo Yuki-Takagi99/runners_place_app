@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <%= render partial: 'layouts/flash' %>
-      <h2><%= t('.title', resource: resource.model_name.human) %></h2>
+      <h2 class="text-center"><%= t('.title', resource: resource.model_name.human) %></h2>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <div class="form-group">
@@ -54,14 +54,14 @@
 
           <br>
           <div class="actions">
-            <%= f.submit t('.update'), class: 'btn-success' %>
+            <%= f.submit t('.update'), class: 'btn btn-success btn-block' %>
           </div>
         </div>
       <% end %>
 
       <h3><%= t('.cancel_my_account') %></h3>
 
-      <p><%= t('.unhappy') %> <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %></p>
+      <p><%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %></p>
 
       <%= link_to t('devise.shared.links.back'), :back %>
     </div>
