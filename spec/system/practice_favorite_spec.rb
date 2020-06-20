@@ -1,35 +1,48 @@
 require 'rails_helper'
-RSpec.describe "お気に入り機能", type: :system do
 
-	before do
-		@user = create(:user)
-		@sample_user = create(:sample_user)
+RSpec.describe 'PracticeFavorite', type: :system do
+	let!(:user) { create(:user) }
+	let!(:other_user) { create(:jon) }
+	let!(:diary) { create(:practice_diary, user_id: user.id) }
 
-		@practice_diary = create(:practice_diary, user: @sample_user)
-	end
-
-	describe '練習記録のお気に入り機能' do
-		context 'まだお気に入りしていないとき' do
-			it '他人の練習記録をお気に入りできること' do
-				visit new_user_session_path
-				fill_in 'Eメール', with: 'test1@example.com'
-				fill_in 'パスワード', with: 'password'
-				click_button 'ログイン'
-				click_on 'test_title'
-				click_on 'お気に入りする'
-				expect(page).to have_content 'sample_userさんの練習記録をお気に入り登録しました！'
+	describe '練習記録のお気に入り', js: true do
+		context 'まだお気に入りしていないとき、練習記録詳細画面で灰色のお気に入りアイコンをクリックした場合' do
+			it 'お気に入りアイコンの表示が赤色に変わること' do
+				login(other_user)
+				click_on 'みんなの記録', match: :first
+				click_on '詳細を見る', match: :first
+				find('.fav-btn').click
+				expect(page).to have_css '.fav-btn-on'
 			end
+		end
 
-			it '他人の練習記録をお気に入り解除できること' do
-				visit new_user_session_path
-				fill_in 'Eメール', with: 'test2@example.com'
-				fill_in 'パスワード', with: 'password'
-				click_button 'ログイン'
-				click_on 'test_title'
-				click_on 'お気に入りする'
-				click_on 'test_title'
-				click_on 'お気に入り解除する'
-				expect(page).to have_content 'sample_userさんの練習記録をお気に入り解除しました！'
+		context 'お気に入り済みのとき、練習記録詳細画面で赤色のお気に入りアイコンをクリックした場合' do
+			it 'お気に入りアイコンの表示が灰色に変わること' do
+				login(other_user)
+				click_on 'みんなの記録', match: :first
+				click_on '詳細を見る', match: :first
+				find('.fav-btn').click
+				find('.fav-btn-on').click
+				expect(page).to have_css '.fav-btn'
+			end
+		end
+
+		context 'まだお気に入りしていないとき、みんなの記録画面で灰色のお気に入りアイコンをクリックした場合' do
+			it 'お気に入りアイコンの表示が赤色に変わること' do
+				login(other_user)
+				click_on 'みんなの記録', match: :first
+				find('.fav-btn').click
+				expect(page).to have_css '.fav-btn-on'
+			end
+		end
+
+		context 'お気に入り済みのとき、みんなの記録画面で赤色のお気に入りアイコンをクリックした場合' do
+			it 'お気に入りアイコンの表示が灰色に変わること' do
+				login(other_user)
+				click_on 'みんなの記録', match: :first
+				find('.fav-btn').click
+				find('.fav-btn-on').click
+				expect(page).to have_css '.fav-btn'
 			end
 		end
 	end

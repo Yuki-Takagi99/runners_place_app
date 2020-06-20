@@ -5,6 +5,7 @@ require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'rspec/retry'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -61,14 +62,29 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  
+
   # bin/rspecでFactoryBotの生成に失敗するため、以下記載
   config.before(:all) do
     FactoryBot.reload
   end
 
+  # FactotyBotの記述を省略
   config.include FactoryBot::Syntax::Methods
 
-  # 日付と時刻を入力するためのhelperをinclude
+  # 日付と時刻を入力するためのhelperを読み込み
   config.include SelectDateHelpers
+
+  # ログイン用のモジュール読み込み
+  config.include LoginModule
+
+  # rspec-retry
+  # 実行中にリトライのステータスを表示する
+  config.verbose_retry = true
+  # リトライの原因となった例外を表示する
+  config.display_try_failure_messages = true
+
+  # js: true のフィーチャスペックのみリトライを有効にする
+  config.around :each, :js do |ex|
+    ex.run_with_retry retry: 3
+  end
 end

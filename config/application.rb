@@ -29,5 +29,9 @@ module RunnersPlaceApp
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    # システムスペック時のエラー解消のため追記
+    config.assets.precompile += %w(*.eot *.svg *.ttf *.woff)
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
   end
 end

@@ -1,23 +1,21 @@
 FactoryBot.define do
   factory :user do
-    id { 1 }
     user_name { "test_1" }
     sequence(:email) { |n| "test#{n}@example.com" }
     password { "password" }
     password_confirmation { 'password' }
   end
 
-  factory :user_2, class: User do
-    id { 2 }
-    user_name { "test_2" }
-    email { "unique@example.com" }
+  factory :jon, class: User do
+    user_name { "jon" }
+    email { "jon@example.com" }
     password { "password" }
     password_confirmation { 'password' }
   end
 
-  factory :user_3, class: User do
-    user_name { "test_3" }
-    email { "uniquetest@example.com" }
+  factory :bob, class: User do
+    user_name { "bob" }
+    email { "bob@example.com" }
     password { "password" }
     password_confirmation { 'password' }
   end
