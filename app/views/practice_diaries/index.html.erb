@@ -118,6 +118,7 @@
 						<p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= practice_diary.practice_title %></p>
 						<p><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= practice_diary.practice_content.truncate(30) %></p>
 						<p><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= practice_diary.practice_distance %>km</p>
+						<p>平均ペース：<%= pace_cal(practice_diary.practice_time, practice_diary.practice_distance) %>/km</p>
 						<p><%= link_to '詳細を見る', practice_diary_path(practice_diary) %></p>
 						<h3 id="practice_favorites_buttons_<%= practice_diary.id %>" class="text-right">
 						<%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: practice_diary} %>
@@ -156,6 +157,7 @@
 								<p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= following_users_diary.practice_title %></p>
 								<p><%= PracticeDiary.human_attribute_name(:practice_content) %>：<%= following_users_diary.practice_content.truncate(30) %></p>
 								<p><%= PracticeDiary.human_attribute_name(:practice_distance) %>：<%= following_users_diary.practice_distance %>km</p>
+								<p>平均ペース：<%= pace_cal(following_users_diary.practice_time, following_users_diary.practice_distance) %>/km</p>
 								<p><%= link_to '詳細を見る', practice_diary_path(following_users_diary) %></p>
 								<h3 id="practice_favorites_buttons_<%= following_users_diary.id %>" class="text-right">
 								<%= render partial: 'practice_favorites/practice_favorite', locals: { practice_diary: following_users_diary} %>
