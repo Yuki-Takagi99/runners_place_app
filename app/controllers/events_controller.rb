@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.includes(:event_comments).recent.page(params[:page]).per(30)
-    @events_all = Event.all.includes(:event_comments).recent
+    @events_all = Event.includes(:event_comments).recent
   end
 
   def show
