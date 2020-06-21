@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # Userモデルのバリデーション
+  validates :user_name, presence: true, length: { maximum: 30 }
+  validates :email, presence: true, length: { maximum: 255 }, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
@@ -10,16 +13,11 @@ class User < ApplicationRecord
   has_many :practice_comments, dependent: :destroy
   # イベントコメント機能のアソシエーション
   has_many :event_comments, dependent: :destroy
-  # Userモデルのバリデーション
-  validates :user_name, presence: true, length: { maximum: 30 }
-  validates :email, presence: true, length: { maximum: 255 }, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true
-
   # フォロー機能のアソシエーション
   has_many :following_friendships, foreign_key: "follower_id", class_name: "Friendship",  dependent: :destroy
   has_many :following, through: :following_friendships
   has_many :follower_friendships, foreign_key: "following_id", class_name: "Friendship", dependent: :destroy
   has_many :followers, through: :follower_friendships
-
   # イベント機能のアソシエーション
   has_many :events, dependent: :destroy
   # イベント参加機能のアソシエーション

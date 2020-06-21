@@ -5,11 +5,11 @@ class PracticeDiary < ApplicationRecord
 	validates :practice_distance, presence: true, numericality: { greater_than: 0.1 }
 	validates :practice_time, presence: true
 	validate  :date_not_after_today
+
 	belongs_to :user
 	# お気に入り機能のアソシエーション
 	has_many :practice_favorites, dependent: :destroy
 	has_many :favorite_users, through: :practice_favorites, source: :user
-
 	# コメント機能のアソシエーション
 	has_many :practice_comments, dependent: :destroy
 
@@ -20,13 +20,18 @@ class PracticeDiary < ApplicationRecord
 
 	# 練習日表示の成型
 	def set_practice_date
-		practice_date.strftime("%Y年%m月%d日")
+		practice_date.strftime("%Y年%-m月%-d日(#{I18n.t('date.abbr_day_names')[practice_date.wday]})")
 	end
 
 	# いいね！しているかどうかを判断
 	def favorited_by?(user)
 		practice_favorites.where(user_id: user.id).exists?
 	end
+
+	# 本日以降の日程を選択させないようにバリデーションを追加
+  def date_not_after_today
+    errors.add(:practice_date, "は本日以前の日付を選択してください") if practice_date.nil? || practice_date.future?
+  end
 
 	# 当月の走行距離を取得
 	scope :this_month_distance, -> { where(practice_date: Time.current.all_month).sum(:practice_distance).round(2) }
@@ -63,9 +68,4 @@ class PracticeDiary < ApplicationRecord
 
 	# ユーザー名で検索する
 	scope :user_name, -> (user_name) { where('users.user_name LIKE ?', "%#{user_name}%").references(:users) if user_name.present? }
-
-	# 本日以降の日程を選択させないようにバリデーションを追加
-  def date_not_after_today
-    errors.add(:practice_date, "は本日以前の日付を選択してください") if practice_date.nil? || practice_date.future?
-  end
 end

@@ -1,12 +1,14 @@
 <!-- フォローボタン ------------------------------------------------------------------>
 <li class="list-group-item">
-  <%= link_to followers_user_path(@user) do %>
-    <strong>フォロワー：<%= @user.followers.count %>人</strong>
-  <% end %>
-
-  <%= link_to following_user_path(@user) do %>
-    <strong>フォロー：<%= @user.following.count %>人</strong>
-  <% end %>
+  <h4 class="list-group-item-heading">他ユーザとのつながり</h4>
+  <p class="list-group-item-text">
+    <%= link_to following_user_path(@user) do %>
+      <strong>フォロー：<%= @user.following.count %>人</strong>
+    <% end %>/
+    <%= link_to followers_user_path(@user) do %>
+      <strong>フォロワー：<%= @user.followers.count %>人</strong>
+    <% end %>
+  </p>
 </li>
 
 <br>

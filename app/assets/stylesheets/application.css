@@ -81,3 +81,7 @@ textarea {
   resize: none;
 }
 
+.list-group-item {
+  background-color: #130b0bdc;
+  color: #ffffff;
+}

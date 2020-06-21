@@ -1,5 +1,8 @@
 <div class="comment-form">
   <%= form_with(model: [practice_diary, practice_comment]) do |form| %>
+    <div id="errors_area">
+      <%= render partial: 'practice_comments/error' %>
+    </div>
     <div class="panel panel-info">
       <div class="panel-heading">
         <p>コメントを投稿する</p>

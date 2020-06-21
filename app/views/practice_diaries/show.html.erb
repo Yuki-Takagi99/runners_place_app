@@ -42,6 +42,10 @@
       <th><%= PracticeDiary.human_attribute_name(:practice_time) %></th>
       <td><%= @practice_diary.set_practice_time %></td>
     </tr>
+    <tr>
+      <th>平均ペース</th>
+      <td><%= pace_cal(@practice_diary.practice_time, @practice_diary.practice_distance) %>/km</td>
+    </tr>
   </table>
 
   <div class="row">

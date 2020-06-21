@@ -22,7 +22,7 @@
   <table class="table table-borderd">
     <tr>
       <th><%= Event.human_attribute_name(:event_date) %></th>
-      <td><%= @event.event_date.strftime("%Y年%-m月%-d日 %H時%M分") %></td>
+      <td><%= @event.set_event_date %> から</td>
     </tr>
     <tr>
       <th><%= Event.human_attribute_name(:event_title) %></th>

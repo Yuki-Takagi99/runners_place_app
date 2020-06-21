@@ -98,5 +98,13 @@ RSpec.describe 'User', type: :system do
 				expect(current_path).to eq root_path
 			end
 		end
+
+		context 'ゲストログインボタンをクリックした場合' do
+			it 'ゲストユーザーでログインし、練習記録一覧ページに遷移すること' do
+				visit root_path
+				click_on 'ゲストログイン', match: :first
+				expect(page).to have_content 'ようこそ、guestさん'
+			end
+		end
 	end
 end
