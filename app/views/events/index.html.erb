@@ -8,6 +8,7 @@
 						zoom: 12,
 						center: latlng,
 						scaleControl: true,
+						scrollwheel: true,
 				});
 			var transitLayer = new google.maps.TransitLayer();
 			transitLayer.setMap(map);
@@ -17,7 +18,8 @@
 					(function(){
 				var contentString = '<%= link_to event.event_title, event_path(event) %>';
 				var infowindow = new google.maps.InfoWindow({
-							content: contentString
+							content: contentString,
+							maxWidth: 200,
 				});
 
 				var marker = new google.maps.Marker({
@@ -29,6 +31,10 @@
 				});
 				marker.addListener('click', function() {
 						infowindow.open(map, marker);
+						map.setZoom(16);
+						/// centerをmarkerの位置に指定
+						var center = new google.maps.LatLng(<%= event.latitude %>, <%= event.longitude %>)
+						map.setCenter(center)
 				});
 				})();
 				<% end %>
