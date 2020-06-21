@@ -1,5 +1,8 @@
 <div class="comment-form">
   <%= form_with(model: [event, event_comment]) do |form| %>
+    <div id="errors_area">
+      <%= render partial: 'event_comments/error' %>
+    </div>
     <div class="panel panel-info">
       <div class="panel-heading">
         <p>コメントを投稿する</p>
