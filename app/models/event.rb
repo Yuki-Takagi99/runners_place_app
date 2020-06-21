@@ -23,8 +23,8 @@ class Event < ApplicationRecord
 		event_date.strftime("%Y年%-m月%-d日(#{I18n.t('date.abbr_day_names')[event_date.wday]}) %H時%M分")
 	end
 
-  # 開催日時が近いイベント順に表示
-  scope :recent, -> { order(event_date: :asc) }
+  # 本日以前のイベントは表示せず、開催日時が近いイベント順に表示
+  scope :recent, -> { where('event_date >= ?', Date.today ).order(event_date: :asc) }
 
   # 本日以前の日程を選択させないようにバリデーションを追加
   def date_not_before_today
