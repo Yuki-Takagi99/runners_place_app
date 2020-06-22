@@ -1,4 +1,4 @@
-5.times do |n|
+15.times do |n|
   User.create!(
     email: "run#{n + 1}@test.com",
     user_name: "ラン太郎#{n + 1}",
@@ -7,6 +7,14 @@
     password: "running#{n + 1}"
   )
 end
+
+User.create!(
+  email: "admin@test.com",
+  user_name: "管理者",
+  self_introduction: "管理者ユーザです。",
+  target: "管理者ユーザです。",
+  password: "adminadmin"
+)
 
 User.all.each do |user|
   user.practice_diaries.create!(
