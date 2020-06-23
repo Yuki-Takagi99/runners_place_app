@@ -64,7 +64,7 @@
 		<%= date.strftime("%-m月%-d日") %>
 			<% practice_diaries.each do |practice_diary| %>
 				<div>
-					<span class="glyphicon glyphicon-fire fire-icon"></span>
+					<span class="fas fa-award award-icon"></span>
 					<%= link_to practice_diary.practice_title, practice_diary %>
 					<%= practice_diary.practice_distance %> km
 				</div>
@@ -75,7 +75,7 @@
 	<h2 class="text-center"><%= current_user.user_name %>さんの練習記録</h2>
 	<div class="row">
 		<div class="search-form col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-			<h3 class="text-center">検索フォーム</h3>
+			<h3 class="text-center"><div class="fas fa-search"></div>検索フォーム</h3>
 			<h4 class="text-center"><small> ※複数条件や部分一致での検索も可能です。</small></h4>
 			<%= form_with(scope: :search, url: practice_diaries_path, method: :get, local: true) do |f| %>
 				<div class="form-group">

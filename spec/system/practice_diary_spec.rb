@@ -64,7 +64,7 @@ RSpec.describe 'PracticeDiary', type: :system do
 		context '練習記録の編集画面でデータが正しく入力されている場合' do
 			it '練習記録が編集され、練習記録詳細画面に遷移すること' do
 				# 編集アイコンをクリック
-				find('.glyphicon-pencil').click
+				find('.fa-edit').click
 				fill_in 'タイトル', with: 'ジョグ'
 				click_on '更新する'
 				practice_diary = PracticeDiary.find_by(practice_title: 'ジョグ')
@@ -77,7 +77,7 @@ RSpec.describe 'PracticeDiary', type: :system do
 		context '練習記録詳細画面で削除アイコンをクリックした場合' do
 			it '練習記録が削除され、練習記録一覧画面に遷移すること' do
 				# 削除アイコンをクリック
-				find('.glyphicon-trash').click
+				find('.fa-trash').click
 				page.driver.browser.switch_to.alert.accept
 				expect(page).to have_content '練習記録を削除しました！'
 				expect(current_path).to eq practice_diaries_path
