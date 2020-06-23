@@ -59,7 +59,7 @@
 								<% if practice_diary.user.image? %>
 									<image src=<%= practice_diary.user.image %> class = "sm_icon_image"><%= link_to practice_diary.user.user_name, user_path(practice_diary.user_id) %>さん
 								<% else %>
-									<image src="/assets/default_icon.png" class = "sm_icon_image"><%= link_to practice_diary.user.user_name, user_path(practice_diary.user_id) %>さん
+									<image src="<%= asset_path "default_icon.png" %>" class = "sm_icon_image"><%= link_to practice_diary.user.user_name, user_path(practice_diary.user_id) %>さん
 								<% end %>
 							</p>
 							<p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= practice_diary.practice_title %></p>

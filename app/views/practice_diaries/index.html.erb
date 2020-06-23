@@ -10,7 +10,7 @@
 					<% if current_user.image? %>
 						<image src=<%= current_user.image %> class = "icon_image">
 					<% else %>
-						<image src="/assets/default_icon.png" class = "icon_image">
+						<image src="<%= asset_path "default_icon.png" %>" class = "icon_image">
 					<% end %>
 				</div>
 
@@ -156,7 +156,7 @@
 									<% if following_users_diary.user.image? %>
 										<image src=<%= following_users_diary.user.image %> class = "sm_icon_image"><%= link_to following_users_diary.user.user_name, user_path(following_users_diary.user_id) %>さん
 									<% else %>
-										<image src="/assets/default_icon.png" class = "sm_icon_image"><%= link_to following_users_diary.user.user_name, user_path(following_users_diary.user_id) %>さん
+										<image src="<%= asset_path "default_icon.png" %>" class = "sm_icon_image"><%= link_to following_users_diary.user.user_name, user_path(following_users_diary.user_id) %>さん
 									<% end %>
 								</p>
 								<p><%= PracticeDiary.human_attribute_name(:practice_title) %>：<%= following_users_diary.practice_title %></p>
