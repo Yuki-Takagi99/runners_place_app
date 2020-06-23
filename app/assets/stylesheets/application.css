@@ -19,8 +19,8 @@
 /* テスト時のエラー解消のため */
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: image-url('/assets/glyphicons-halflings-regular.eot');
-  src: image-url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), image-url('/assets/glyphicons-halflings-regular.woff') format('woff'), image-url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), image-url('/assets/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+  src: url('/assets/glyphicons-halflings-regular.eot');
+  src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 
 .flash {
