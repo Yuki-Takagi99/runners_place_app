@@ -9,7 +9,7 @@
 					<% if @user.image? %>
 						<image src=<%= @user.image %> class = "icon_image">
 					<% else %>
-						<image src="/assets/default_icon.png" class = "icon_image">
+						<image src="<%= asset_path "default_icon.png" %>" class = "icon_image">
 					<% end %>
 				</div>
 				<div class="col-md-8 col-sm-12 col-xs-12">

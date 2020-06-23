@@ -14,7 +14,7 @@
               <% if event_comment.user.image? %>
                 <image src=<%= event_comment.user.image %> class = "sm_icon_image"><%= link_to event_comment.user.user_name, user_path(event_comment.user_id) %>さん
               <% else %>
-                <image src="/assets/default_icon.png" class = "sm_icon_image"><%= link_to event_comment.user.user_name, user_path(event_comment.user_id) %>さん
+                <image src="<%= asset_path "default_icon.png" %>" class = "sm_icon_image"><%= link_to event_comment.user.user_name, user_path(event_comment.user_id) %>さん
               <% end %>
             </p>
           </div>
