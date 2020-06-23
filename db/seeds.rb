@@ -13,7 +13,8 @@ User.create!(
   user_name: "管理者",
   self_introduction: "管理者ユーザです。",
   target: "管理者ユーザです。",
-  password: "adminadmin"
+  password: "adminadmin",
+  admin: 'true'
 )
 
 User.all.each do |user|
