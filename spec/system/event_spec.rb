@@ -65,7 +65,7 @@ RSpec.describe 'Event', type: :system do
 		context 'イベントの編集画面でデータが正しく入力されている場合' do
 			it 'イベントが編集され、イベント詳細画面に遷移すること' do
 				# 編集アイコンをクリック
-				find('.glyphicon-pencil').click
+				find('.fa-edit').click
 				fill_in 'イベント内容', with: '第2回定期練習会を開催します。'
 				click_on '更新する'
 				event = Event.find_by(event_content: '第2回定期練習会を開催します。')
@@ -78,7 +78,7 @@ RSpec.describe 'Event', type: :system do
 		context 'イベント詳細画面で削除アイコンをクリックした場合' do
 			it 'イベントが削除され、イベント一覧画面に遷移すること' do
 				# 削除アイコンをクリック
-				find('.glyphicon-trash').click
+				find('.fa-trash').click
 				page.driver.browser.switch_to.alert.accept
 				expect(page).to have_content 'これから開催されるイベントは0件です！'
 				expect(current_path).to eq events_path

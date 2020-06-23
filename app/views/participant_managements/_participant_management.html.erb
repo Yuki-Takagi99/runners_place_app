@@ -2,26 +2,26 @@
   <% if event.participated_by?(current_user) %>
     <%= link_to event_participant_managements_path(event.id), method: :delete, remote: true do %>
       <button type="button" class="btn btn-danger" aria-label="Left Align">
-        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+        <span class="fas fa-ban" aria-hidden="true"></span>
         キャンセル
       </button>
     <% end %>
     <h3>現在のイベント参加人数
-      <span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="badge"><%= event.participant_managements.count %></span>
+      <span class="fas fa-user-friends" aria-hidden="true"></span><span class="badge"><%= event.participant_managements.count %></span>
     </h3>
   <% else %>
     <%= link_to event_participant_managements_path(event.id), method: :post, remote: true do %>
       <button type="button" class="btn btn-info" aria-label="Left Align">
-        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+        <span class="fas fa-check-circle" aria-hidden="true"></span>
         参加する！
       </button>
     <% end %>
     <h3>現在のイベント参加人数
-      <span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="badge"><%= event.participant_managements.count %></span>
+      <span class="fas fa-user-friends" aria-hidden="true"></span><span class="badge"><%= event.participant_managements.count %></span>
     </h3>
   <% end %>
 <% else %>
   <h3>現在のイベント参加人数
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="badge"><%= event.participant_managements.count %></span>
+    <span class="fas fa-user-friends" aria-hidden="true"></span><span class="badge"><%= event.participant_managements.count %></span>
   </h3>
 <% end %>
