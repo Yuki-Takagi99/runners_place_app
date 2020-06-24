@@ -1,4 +1,5 @@
 <div class="container">
   <h1 class="text-center">イベント編集</h1>
   <%= render partial: 'form', locals: { event: @event } %>
+  <p class="text-center"><%= link_to '詳細に戻る', event_path(@event) %></p>
 </div>

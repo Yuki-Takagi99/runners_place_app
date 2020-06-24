@@ -31,6 +31,8 @@
 				});
 				marker.addListener('click', function() {
 						infowindow.open(map, marker);
+				});
+				marker.addListener('dblclick', function() {
 						map.setZoom(16);
 						/// centerをmarkerの位置に指定
 						var center = new google.maps.LatLng(<%= event.latitude %>, <%= event.longitude %>)
@@ -38,10 +40,6 @@
 				});
 				})();
 				<% end %>
-
-			marker.addListener('click', function() {
-				infowindow.open(map, marker);
-			});
 		}
 	</script>
 
