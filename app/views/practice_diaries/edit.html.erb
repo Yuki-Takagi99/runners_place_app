@@ -1,4 +1,5 @@
 <div class="container">
   <h1 class="text-center">記録を編集する</h1>
   <%= render partial: 'form', locals: { practice_diary: @practice_diary } %>
+  <p class="text-center"><%= link_to '詳細に戻る', practice_diary_path(@practice_diary) %></p>
 </div>
