@@ -65,6 +65,7 @@
                 zoom: 18,
                 center: test,
                 scaleControl: true,
+                scrollwheel: true,
                 });
       var transitLayer = new google.maps.TransitLayer();
       transitLayer.setMap(map);
@@ -98,7 +99,13 @@
           width: 100%;}
   </style>
 
-  <div id="map"></div>
+  <%# ジオコーディングが失敗した場合はメッセージを表示 %>
+  <% if @event.latitude.present? || @event.longitude.present? %>
+    <div id="map"></div>
+  <% else %>
+    <h2 class="text-center">緯度・経度情報を取得できないためマップを表示できません。<br>
+    開催場所を正確に入力してください。</h2><br>
+  <% end %>
 
   <br>
   <%= link_to 'イベント一覧に戻る', events_path %>
