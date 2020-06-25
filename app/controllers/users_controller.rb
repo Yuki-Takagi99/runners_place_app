@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def show
     # 参加予定のイベントを取得
-    @participant_events = @user.participant_events.order(event_date: :asc)
+    @participant_events = @user.participant_events.recent
   end
 
   def following

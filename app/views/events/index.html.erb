@@ -14,7 +14,8 @@
 			transitLayer.setMap(map);
 
 			//複数のマーカー
-			<% @events_all.each do |event| %>
+			//ジオコーディングに成功したもののみマーカーで表示させる
+			<% @events_all.where.not(longitude: nil, latitude: nil).each do |event| %>
 					(function(){
 				var contentString = '<%= link_to event.event_title, event_path(event) %>';
 				var infowindow = new google.maps.InfoWindow({
@@ -31,9 +32,10 @@
 				});
 				marker.addListener('click', function() {
 						infowindow.open(map, marker);
+
 				});
 				marker.addListener('dblclick', function() {
-						map.setZoom(16);
+						map.setZoom(14);
 						/// centerをmarkerの位置に指定
 						var center = new google.maps.LatLng(<%= event.latitude %>, <%= event.longitude %>)
 						map.setCenter(center)
