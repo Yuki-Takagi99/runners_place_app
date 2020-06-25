@@ -45,4 +45,7 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
     end
   end
+
+  # 本日以前のイベントは表示せず、開催日時が近いイベント順に表示
+  scope :recent, -> { where('event_date >= ?', Date.today ).order(event_date: :asc) }
 end
