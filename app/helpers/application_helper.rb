@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   # 1kmあたりのペースを計算
-	def pace_cal(practice_time, practice_distance)
+	def pace_cal_helper(practice_time, practice_distance)
 		# practice_timeを配列に変換。秒 分 時 日 月 年 曜日 年内通算日 夏時間? タイムゾーンの順
 		time_arr = practice_time.to_a
 		# practice_distanceを変数に代入
