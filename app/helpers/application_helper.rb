@@ -1,12 +1,12 @@
 module ApplicationHelper
   # practice_timeがtime型のため、下記メソッド定義
-  # 基本はUTC,投稿日時などを表示する際にlocalizeメソッドでtime_zone設定を'Asia,Tokyo'に変更する
-  def localize(time, zone)
+  # タイムゾーン設定はUTCのため,投稿日時などを表示する際にlocalize_helperでtime_zone設定を'Asia,Tokyo'に変更する
+  def localize_helper(time, zone)
     I18n.l time.in_time_zone(zone)
   end
 
   # 1kmあたりのペースを計算
-	def pace_cal(practice_time, practice_distance)
+	def pace_cal_helper(practice_time, practice_distance)
 		# practice_timeを配列に変換。秒 分 時 日 月 年 曜日 年内通算日 夏時間? タイムゾーンの順
 		time_arr = practice_time.to_a
 		# practice_distanceを変数に代入

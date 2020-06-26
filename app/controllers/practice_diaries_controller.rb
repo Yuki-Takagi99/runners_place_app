@@ -2,8 +2,8 @@ class PracticeDiariesController < ApplicationController
 	before_action :set_practice_diary, only: [:show, :edit, :update, :destroy]
 	before_action :authenticate_user!
 
+	# 練習記録一覧ページ
 	def index
-		# 練習記録一覧ページ
 		@search_params = practice_diary_search_params
 		@practice_diaries = PracticeDiary.login_user_diary(current_user.id).includes(user: :practice_favorites, user: :practice_comments).recent.search(@search_params).page(params[:page]).per(10)
 
@@ -15,8 +15,8 @@ class PracticeDiariesController < ApplicationController
 		@users = @user.following.order("created_at DESC").limit(4)
 	end
 
+	# みんなの練習記録ページ
 	def index_all
-		# みんなの練習記録ページ
 		@search_params = practice_diary_search_params
 		@practice_diaries = PracticeDiary.other_user_diary(current_user.id).includes(user: :practice_favorites, user: :practice_comments).recent.search(@search_params).page(params[:page]).per(10)
 	end
