@@ -83,10 +83,10 @@
 		<tbody>
 			<% @events.each do |event| %>
 				<tr>
-					<td><%= event.set_event_date %> から</td>
-					<td><%= link_to event.event_title, event_path(event) %></td>
-					<td><%= event.address %></td>
-					<td><%= link_to event.user.user_name, user_path(event.user_id) %></td>
+					<td><%= event.set_event_date %> 開始</td>
+					<td><%= link_to event.event_title.truncate(25), event_path(event) %></td>
+					<td><%= event.address.truncate(25) %></td>
+					<td><%= link_to event.user.user_name.truncate(10), user_path(event.user_id) %></td>
 					<td><%= event.participant_managements.count %>人</td>
 				</tr>
 			<% end %>
