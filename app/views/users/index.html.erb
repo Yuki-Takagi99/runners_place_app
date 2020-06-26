@@ -20,7 +20,7 @@
               <td><%= user.following.count %>人</td>
               <td><%= user.followers.count %>人</td>
               <td><%= user.practice_diaries.count %>件</td>
-              <td><%= localize(user.created_at, 'Asia/Tokyo') %></td>
+              <td><%= localize_helper(user.created_at, 'Asia/Tokyo') %></td>
             </tr>
           <% end %>
         </tbody>
