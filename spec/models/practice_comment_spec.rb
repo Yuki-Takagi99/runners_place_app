@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe PracticeComment, type: :model do
-	describe 'バリデーションテスト' do
-		before do
-			@user = create(:user)
-			@practice_diary = create(:practice_diary, user_id: @user.id)
-			@practice_comment = create(:practice_comment, user_id: @user.id, practice_diary_id: @practice_diary.id)
+  describe 'バリデーションテスト' do
+    before do
+      @user = create(:user)
+      @practice_diary = create(:practice_diary, user_id: @user.id)
+      @practice_comment = create(:practice_comment, user_id: @user.id, practice_diary_id: @practice_diary.id)
     end
 
-		it 'すべてのデータがある場合、有効であること' do
-			expect(@practice_comment).to be_valid
+    it 'すべてのデータがある場合、有効であること' do
+      expect(@practice_comment).to be_valid
     end
 
     it 'practice_comment_contentがない場合、無効であること' do

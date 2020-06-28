@@ -9,17 +9,17 @@ RSpec.describe ParticipantManagement, type: :model do
     end
 
     it 'すべてのデータがある場合、有効であること' do
-			expect(@participant_management).to be_valid
-		end
+      expect(@participant_management).to be_valid
+    end
 
-		it 'user_idがない場合、無効であること' do
-			@participant_management.user_id = nil
-			expect(@participant_management).not_to be_valid
-		end
+    it 'user_idがない場合、無効であること' do
+      @participant_management.user_id = nil
+      expect(@participant_management).not_to be_valid
+    end
 
-		it 'event_idがない場合、無効であること' do
-			@participant_management.event_id = nil
-			expect(@participant_management).not_to be_valid
-		end
+    it 'event_idがない場合、無効であること' do
+      @participant_management.event_id = nil
+      expect(@participant_management).not_to be_valid
+    end
   end
 end

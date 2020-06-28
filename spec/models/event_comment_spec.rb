@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe EventComment, type: :model do
   describe 'バリデーションテスト' do
-		before do
-			@user = create(:user)
-			@event = create(:event, user_id: @user.id)
-			@event_comment = create(:event_comment, user_id: @user.id, event_id: @event.id)
+    before do
+      @user = create(:user)
+      @event = create(:event, user_id: @user.id)
+      @event_comment = create(:event_comment, user_id: @user.id, event_id: @event.id)
     end
 
-		it 'すべてのデータがある場合、有効であること' do
-			expect(@event_comment).to be_valid
+    it 'すべてのデータがある場合、有効であること' do
+      expect(@event_comment).to be_valid
     end
 
     it 'event_comment_contentがない場合、無効であること' do
