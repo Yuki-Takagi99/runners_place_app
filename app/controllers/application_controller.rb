@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
-	protect_from_forgery with: :exception
+  protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
-	add_flash_types :success, :info, :warning, :danger # フラッシュメッセージの追加
+  add_flash_types :success, :info, :warning, :danger # フラッシュメッセージの追加
 
-	# 例外ハンドル
+  # 例外ハンドル
   unless Rails.env.development?
     rescue_from Exception,                        with: :render_500
     rescue_from ActiveRecord::RecordNotFound,     with: :render_404
@@ -12,22 +12,22 @@ class ApplicationController < ActionController::Base
 
   def routing_error
     raise ActionController::RoutingError, params[:path]
-	end
+  end
 
   protected
 
-	def configure_permitted_parameters
-		added_attrs = [ :user_name, :self_introduction, :target, :image]
-		devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
-		devise_parameter_sanitizer.permit :account_update, keys: added_attrs
-	end
+  def configure_permitted_parameters
+    added_attrs = [ :user_name, :self_introduction, :target, :image]
+    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
+    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
+  end
 
-	# アカウント登録後、練習日記一覧画面に遷移
-	def after_sign_in_path_for(resource)
-		practice_diaries_path
-	end
+  # アカウント登録後、練習日記一覧画面に遷移
+  def after_sign_in_path_for(resource)
+    practice_diaries_path
+  end
 
-	private
+  private
   def render_404(e = nil)
     logger.info "Rendering 404 with exception: #{e.message}" if e
 
