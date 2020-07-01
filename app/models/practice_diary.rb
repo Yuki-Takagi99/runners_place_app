@@ -71,13 +71,13 @@ class PracticeDiary < ApplicationRecord
   scope :user_name, -> (user_name) { where('users.user_name LIKE ?', "%#{user_name}%").references(:users) if user_name.present? }
 
   # いいね通知機能
-  def create_notification_like!(current_user)
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and practice_diary_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
+  def create_notification_favorite!(current_user)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and practice_diary_id = ? and action = ? ", current_user.id, user_id, id, 'favorite'])
     if temp.blank?
       notification = current_user.active_notifications.new(
         practice_diary_id: id,
         visited_id: user_id,
-        action: 'like'
+        action: 'favorite'
       )
 
       if notification.visitor_id == notification.visited_id

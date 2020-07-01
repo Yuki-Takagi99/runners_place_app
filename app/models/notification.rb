@@ -6,7 +6,7 @@ class Notification < ApplicationRecord
   belongs_to :practice_comment, optional: true
   validates :visitor_id, presence: true
   validates :visited_id, presence: true
-  ACTION_VALUES = ["like", "follow", "comment"]
+  ACTION_VALUES = ["favorite", "follow", "comment"]
   # inclusionで保存できる値を制限
   validates :action,  presence: true, inclusion: {in:ACTION_VALUES}
   validates :checked, inclusion: {in: [true,false]}

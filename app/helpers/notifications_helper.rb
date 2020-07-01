@@ -5,12 +5,12 @@ module NotificationsHelper
     #コメントの内容を通知に表示する
     @practice_comment = nil
     @visitor_comment = notification.practice_comment_id
-    # notification.actionがfollowかlikeかcommentかで処理を変える
+    # notification.actionがfollowかfavoriteかcommentかで処理を変える
     case notification.action
     when 'follow'
       #aタグで通知を作成したユーザーshowのリンクを作成
       tag.a(notification.visitor.user_name, href: user_path(@visitor)) + 'さんがあなたをフォローしました！'
-    when 'like'
+    when 'favorite'
       tag.a(notification.visitor.user_name, href: user_path(@visitor)) + 'さんが' + tag.a("#{notification.practice_diary.practice_title}", href: practice_diary_path(notification.practice_diary_id)) + 'にいいね！しました！'
     when 'comment' then
       #コメントの内容と投稿のタイトルを取得
