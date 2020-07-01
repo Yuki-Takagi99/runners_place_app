@@ -3,6 +3,12 @@ class PracticeFavoritesController < ApplicationController
     @practice_diary = PracticeDiary.find(params[:practice_diary_id])
     practice_favorite = current_user.practice_favorites.build(practice_diary_id: params[:practice_diary_id])
     practice_favorite.save
+    # 通知機能用
+    @practice_diary.create_notification_like!(current_user)
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_url) }
+      format.js
+    end
   end
 
   def destroy

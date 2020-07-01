@@ -12,6 +12,8 @@ class PracticeDiary < ApplicationRecord
   has_many :favorite_users, through: :practice_favorites, source: :user
   # コメント機能のアソシエーション
   has_many :practice_comments, dependent: :destroy
+  # 通知機能のアソシエーション
+  has_many :notifications, dependent: :destroy
 
   # 練習時間表示の成型
   def set_practice_time
@@ -67,4 +69,46 @@ class PracticeDiary < ApplicationRecord
   scope :practice_date_to, -> (to) { where('practice_date <= ?', to) if to.present? }
   # ユーザー名で検索する
   scope :user_name, -> (user_name) { where('users.user_name LIKE ?', "%#{user_name}%").references(:users) if user_name.present? }
+
+  # いいね通知機能
+  def create_notification_like!(current_user)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and practice_diary_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        practice_diary_id: id,
+        visited_id: user_id,
+        action: 'like'
+      )
+
+      if notification.visitor_id == notification.visited_id
+        notification.checked = true
+      end
+      notification.save if notification.valid?
+    end
+  end
+
+  # 練習記録コメント通知機能
+  def create_notification_comment!(current_user, practice_comment_id)
+    #同じ投稿にコメントしているユーザーに通知を送る。（current_userと投稿ユーザーのぞく）
+    temp_ids = PracticeComment.where(practice_diary_id: id).where.not("user_id = ? or user_id = ?", current_user.id, user_id).select(:user_id).distinct
+    #取得したユーザー達へ通知を作成（user_idのみ繰り返し取得）
+    temp_ids.each do |temp_id|
+      save_notification_comment!(current_user, practice_comment_id, temp_id['user_id'])
+    end
+    #投稿者へ通知を作成
+    save_notification_comment!(current_user, practice_comment_id, user_id)
+  end
+
+  def save_notification_comment!(current_user, practice_comment_id, visited_id)
+    notification = current_user.active_notifications.new(
+      practice_diary_id: id,
+      practice_comment_id: practice_comment_id,
+      visited_id: visited_id,
+      action: 'comment'
+    )
+    if notification.visitor_id == notification.visited_id
+      notification.checked = true
+    end
+    notification.save if notification.valid?
+  end
 end

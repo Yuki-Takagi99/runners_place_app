@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     resource :participant_managements, only: [:create, :destroy]
   end
 
+  resources :notifications, only: [:index, :destroy]
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

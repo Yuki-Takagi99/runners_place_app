@@ -1,0 +1,8 @@
+<div class="notification-view">
+  <div class="panel">
+      <%= notification_form(notification) %><span class="moderate-font"><%= "（#{time_ago_in_words(notification.created_at)}前）" %></span>
+      <% if !@practice_comment.nil? %>
+        <p><small class="notification-comment"><%= @practice_comment_content %></small></p>
+      <% end %>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_15_082622) do
+ActiveRecord::Schema.define(version: 2020_07_01_050426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,21 @@ ActiveRecord::Schema.define(version: 2020_06_15_082622) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["follower_id", "following_id"], name: "index_friendships_on_follower_id_and_following_id", unique: true
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "visitor_id", null: false
+    t.bigint "visited_id", null: false
+    t.bigint "practice_diary_id"
+    t.bigint "practice_comment_id"
+    t.string "action", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["practice_comment_id"], name: "index_notifications_on_practice_comment_id"
+    t.index ["practice_diary_id"], name: "index_notifications_on_practice_diary_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
 
   create_table "participant_managements", force: :cascade do |t|
@@ -109,6 +124,10 @@ ActiveRecord::Schema.define(version: 2020_06_15_082622) do
   add_foreign_key "event_comments", "events"
   add_foreign_key "event_comments", "users"
   add_foreign_key "events", "users"
+  add_foreign_key "notifications", "practice_comments"
+  add_foreign_key "notifications", "practice_diaries"
+  add_foreign_key "notifications", "users", column: "visited_id"
+  add_foreign_key "notifications", "users", column: "visitor_id"
   add_foreign_key "participant_managements", "events"
   add_foreign_key "participant_managements", "users"
   add_foreign_key "practice_comments", "practice_diaries"

@@ -9,6 +9,9 @@ class PracticeCommentsController < ApplicationController
       if @practice_comment.save
         flash.now[:notice] = 'コメントを作成しました！'
         format.js { render :index }
+        # 通知機能用
+        @practice_diary = @practice_comment.practice_diary
+        @practice_diary.create_notification_comment!(current_user, @practice_comment.id)
       else
         flash.now[:alert] = 'コメントの投稿に失敗しました。'
         format.js { render :error }
