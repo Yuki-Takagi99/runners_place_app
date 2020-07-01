@@ -4,5 +4,8 @@
       <% if !@practice_comment.nil? %>
         <p><small class="notification-comment"><%= @practice_comment_content %></small></p>
       <% end %>
+      <% if !@event_comment.nil? %>
+        <p><small class="notification-comment"><%= @event_comment_content %></small></p>
+      <% end %>
   </div>
 </div>

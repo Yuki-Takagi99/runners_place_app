@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_01_050426) do
+ActiveRecord::Schema.define(version: 2020_07_01_084015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,10 @@ ActiveRecord::Schema.define(version: 2020_07_01_050426) do
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "event_id"
+    t.bigint "event_comment_id"
+    t.index ["event_comment_id"], name: "index_notifications_on_event_comment_id"
+    t.index ["event_id"], name: "index_notifications_on_event_id"
     t.index ["practice_comment_id"], name: "index_notifications_on_practice_comment_id"
     t.index ["practice_diary_id"], name: "index_notifications_on_practice_diary_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"
@@ -124,6 +128,8 @@ ActiveRecord::Schema.define(version: 2020_07_01_050426) do
   add_foreign_key "event_comments", "events"
   add_foreign_key "event_comments", "users"
   add_foreign_key "events", "users"
+  add_foreign_key "notifications", "event_comments"
+  add_foreign_key "notifications", "events"
   add_foreign_key "notifications", "practice_comments"
   add_foreign_key "notifications", "practice_diaries"
   add_foreign_key "notifications", "users", column: "visited_id"
