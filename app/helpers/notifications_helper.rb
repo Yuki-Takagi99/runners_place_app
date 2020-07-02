@@ -13,19 +13,23 @@ module NotificationsHelper
       #aタグで通知を作成したユーザーshowのリンクを作成
       tag.a(notification.visitor.user_name, href: user_path(@visitor)) + 'さんがあなたをフォローしました！'
     when 'favorite'
-      tag.a(notification.visitor.user_name, href: user_path(@visitor)) + 'さんが' + tag.a("#{notification.practice_diary.practice_title}", href: practice_diary_path(notification.practice_diary_id)) + 'にいいね！しました！'
+      # 練習記録のいいね通知
+      tag.a(notification.visitor.user_name, href: user_path(@visitor)) + 'さんが練習記録「' + tag.a("#{notification.practice_diary.practice_title}", href: practice_diary_path(notification.practice_diary_id)) + '」にいいね！しました！'
     when 'comment' then
       #練習記録コメントの内容と投稿のタイトルを取得
       @practice_comment = PracticeComment.find_by(id: @visitor_practice_comment)
       @practice_comment_content = @practice_comment.practice_comment_content
       @practice_diary_title = @practice_comment.practice_diary.practice_title
-      tag.a(@visitor.user_name, href: user_path(@visitor)) + 'さんが' + tag.a("#{@practice_diary_title}", href: practice_diary_path(notification.practice_diary_id)) + 'にコメントしました！'
+      tag.a(@visitor.user_name, href: user_path(@visitor)) + 'さんが練習記録「' + tag.a("#{@practice_diary_title}", href: practice_diary_path(notification.practice_diary_id)) + '」にコメントしました！'
     when "event_comment" then
       #イベントコメントの内容と投稿のタイトルを取得
       @event_comment = EventComment.find_by(id: @visitor_event_comment)
       @event_comment_content = @event_comment.event_comment_content
       @event_title = @event_comment.event.event_title
-      tag.a(@visitor.user_name, href: user_path(@visitor)) + 'さんが' + tag.a("#{@event_title}", href: event_path(notification.event_id)) + 'にコメントしました！'
+      tag.a(@visitor.user_name, href: user_path(@visitor)) + 'さんがイベント「' + tag.a("#{@event_title}", href: event_path(notification.event_id)) + '」にコメントしました！'
+    when 'paticipant_management'
+      # イベント参加通知
+      tag.a(notification.visitor.user_name, href: user_path(@visitor)) + 'さんがイベント「' + tag.a("#{notification.event.event_title}", href: event_path(notification.event_id)) + '」に参加予定です！'
     end
   end
   # 未確認の通知がある場合に通知の文字を変えるためにチェック

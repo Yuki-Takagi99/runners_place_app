@@ -62,4 +62,21 @@ class Event < ApplicationRecord
       end
       notification.save if notification.valid?
   end
+
+  # イベント参加通知機能
+  def create_notification_paticipant!(current_user)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and event_id = ? and action = ? ", current_user.id, user_id, id, 'paticipant_management'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        event_id: id,
+        visited_id: user_id,
+        action: 'paticipant_management'
+      )
+
+      if notification.visitor_id == notification.visited_id
+        notification.checked = true
+      end
+      notification.save if notification.valid?
+    end
+  end
 end
