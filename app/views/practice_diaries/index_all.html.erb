@@ -34,8 +34,6 @@
     </div>
   </div>
 
-  <%= paginate @practice_diaries %>
-
   <% if @practice_diaries.present? %>
     <p>
     <%= @practice_diaries.total_count %>件中<%= @practice_diaries.offset_value + 1 %>
@@ -81,4 +79,5 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @practice_diaries %>
 </div>
