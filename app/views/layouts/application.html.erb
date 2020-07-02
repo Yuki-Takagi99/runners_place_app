@@ -43,6 +43,13 @@
               <li><%= link_to "イベントを登録する", new_event_path %></li>
               <li><%= link_to "イベントを探す", events_path %></li>
               <li><%= link_to "プロフィール", user_path(id: current_user.id) %></li>
+              <li>
+                <% if unchecked_notifications.any? %>
+                  <%= link_to "通知", notifications_path, {style: "color: gold;"} %>
+                <% else %>
+                  <%= link_to "通知", notifications_path %>
+                <% end %>
+              </li>
               <% if current_user.admin? %>
                 <li><%= link_to "ユーザー管理", users_path %></li>
               <% end %>

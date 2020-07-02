@@ -23,6 +23,9 @@ class User < ApplicationRecord
   # イベント参加機能のアソシエーション
   has_many :participant_managements, dependent: :destroy
   has_many :participant_events, through: :participant_managements, source: :event
+  # 通知機能のアソシエーション
+  has_many :active_notifications, foreign_key: "visitor_id", class_name: "Notification", dependent: :destroy
+  has_many :passive_notifications, foreign_key: "visited_id", class_name: "Notification", dependent: :destroy
 
   #フォローしているかを確認するメソッド
   def following?(user)
@@ -48,4 +51,17 @@ class User < ApplicationRecord
 
   # 本日以前のイベントは表示せず、開催日時が近いイベント順に表示
   scope :recent, -> { where('event_date >= ?', Date.today ).order(event_date: :asc) }
+
+  # フォロー通知機能
+  def create_notification_follow!(current_user)
+    #すでに通知が作成されているか確認
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
+    end
+end
 end

@@ -9,6 +9,9 @@ class EventCommentsController < ApplicationController
       if @event_comment.save
         flash.now[:notice] = 'コメントを作成しました！'
         format.js { render :index }
+        # 通知機能用
+        @event = @event_comment.event
+        @event.create_notification_event_comment!(current_user, @event_comment.id)
       else
         flash.now[:alert] = 'コメントの投稿に失敗しました'
         format.js { render :error }
